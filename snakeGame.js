@@ -73,14 +73,12 @@ window.onload = function() {
     highScore.innerHTML = highestScore;
 
     //Randomly place the food and obstacle somehwere
-    placeFood();
-    placeObst();
+    updateFoodObst();
 
     //Will wait for you to press an arrow key so as soon as you let go, snake will change direction
     document.addEventListener("keyup", changeDirection);
 
-    //Calling the update function 10 times a second
-    //every 100 milliseconds (1000/10) it will run the update function
+    //Calling the update function 10 times a second; every 100 milliseconds (1000/10) it will run the update function
     setInterval(update, 1000/10); 
 }
 
@@ -106,6 +104,7 @@ function changeDirection(e) {
         velocityX = 1;
         velocityY = 0;
     }
+    //Restart the game if it's a game over and the space bar is pressed
     else if (e.code == "Space" && gameOver == true)
     {
         currentScore = 0;
@@ -116,8 +115,7 @@ function changeDirection(e) {
         snakeY = blockSize * 5;
         velocityX = 0;
         velocityY = 0;
-        placeFood();
-        placeObst();
+        updateFoodObst();
     }
 }
 
@@ -137,17 +135,22 @@ function update() {
     context.fillStyle = "red";
     context.fillRect(foodX, foodY, blockSize, blockSize);
 
-    //Painting the obstacle under all of this
+    //Painting the obstacle
     context.fillStyle = "white";
     context.fillRect(obstX, obstY, blockSize, blockSize);
+
+    if (currentScore % 10 == 0 && currentScore != 0)
+    {
+        context.fillStyle = "white";
+        context.fillRect(obstX, obstY, blockSize, blockSize);
+    }
 
     //Snake eating food
     if (snakeX == foodX && snakeY == foodY){
         snakeBody.push([foodX, foodY]); //grow segment where food was
         currentScore += 1;
         score.innerHTML = currentScore;
-        placeFood();
-        placeObst();
+        updateFoodObst();
     }
 
     /*moving the body - starting at the end of the body (the tail) and 
@@ -218,26 +221,21 @@ function update() {
     }
 }
 
-//Randomly place food
-function placeFood(){
+function updateFoodObst(){
+    //Randomly place food
     //Math.random returns a number from 0-1 
     //Multiplying by cols/rows to get a number from 0-19.99999 so doing floor to get rid of floor to get (0-19)
     //We then multiply it by blockSize so that it can appear
     foodX = Math.floor(Math.random() * cols) * blockSize;
     foodY = Math.floor(Math.random() * rows) * blockSize;
-}
 
-//Randomly place an obstacle 
-function placeObst(){
+    //Randomly place an obstacle 
     obstX = Math.floor(Math.random() * cols) * blockSize;
     obstY = Math.floor(Math.random() * rows) * blockSize;
 
-    if (obstX == foodX){
-        obstX = Math.floor(Math.random() * cols) * blockSize;
+    //Make sure the obstacle is not in the same position as the food
+    if(foodX == obstX && foodY == obstY)
+    {
+        placeObst();
     }
-
-    if (obstY == foodY){
-        obstY = Math.floor(Math.random() * cols) * blockSize;
-    }
-
 }
