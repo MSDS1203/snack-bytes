@@ -72,15 +72,9 @@ window.onload = function() {
     highScore = document.getElementById("highScore");
     highScore.innerHTML = highestScore;
 
-    //Randomly place the food somehwere
+    //Randomly place the food and obstacle somehwere
     placeFood();
-
-    snakeHeadImg = new Image();
-    snakeHeadImg.src = "./snakeHead.png";
-    snakeHeadImg.onload = function()
-    {
-        context.drawImage(snakeHeadImg, snakeX, snakeY, snakeWidth, snakeHeight);
-    }
+    placeObst();
 
     //Will wait for you to press an arrow key so as soon as you let go, snake will change direction
     document.addEventListener("keyup", changeDirection);
@@ -123,6 +117,7 @@ function changeDirection(e) {
         velocityX = 0;
         velocityY = 0;
         placeFood();
+        placeObst();
     }
 }
 
@@ -142,20 +137,18 @@ function update() {
     context.fillStyle = "red";
     context.fillRect(foodX, foodY, blockSize, blockSize);
 
+    //Painting the obstacle under all of this
+    context.fillStyle = "white";
+    context.fillRect(obstX, obstY, blockSize, blockSize);
+
     //Snake eating food
     if (snakeX == foodX && snakeY == foodY){
         snakeBody.push([foodX, foodY]); //grow segment where food was
         currentScore += 1;
         score.innerHTML = currentScore;
         placeFood();
-    }
-
-    /*if(currentScore % 5 == 0 && currentScore != 0)
-    {
-        context.fillStyle = "white";
-        context.fillRect(obstX, obstY, blockSize, blockSize);
         placeObst();
-    }*/
+    }
 
     /*moving the body - starting at the end of the body (the tail) and 
     before we update the x and y coordinate, we want the tail to get
@@ -202,9 +195,26 @@ function update() {
     for (let i =0; i < snakeBody.length; i++) {
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
             gameOver = true;
+            if (currentScore > highestScore)
+            {
+                highestScore = currentScore;
+                highScore.innerHTML = highestScore;
+            }
             context.fillStyle = "white";
             context.fillText("GAME OVER", 100, 250);
         }
+    }
+
+    //the snake bumps into an obstacle
+    if (snakeX == obstX && snakeY == obstY){
+        gameOver = true;
+        if (currentScore > highestScore)
+        {
+            highestScore = currentScore;
+            highScore.innerHTML = highestScore;
+        }
+        context.fillStyle = "white";
+        context.fillText("GAME OVER", 100, 250);
     }
 }
 
@@ -221,4 +231,13 @@ function placeFood(){
 function placeObst(){
     obstX = Math.floor(Math.random() * cols) * blockSize;
     obstY = Math.floor(Math.random() * rows) * blockSize;
+
+    if (obstX == foodX){
+        obstX = Math.floor(Math.random() * cols) * blockSize;
+    }
+
+    if (obstY == foodY){
+        obstY = Math.floor(Math.random() * cols) * blockSize;
+    }
+
 }
