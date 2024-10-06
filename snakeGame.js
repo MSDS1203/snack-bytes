@@ -56,6 +56,7 @@ var obstY = [];
 
 //Game variables
 var gameOver = false;
+var start = true;
 var currentScore = 0;
 var highestScore = 0;
 
@@ -65,7 +66,6 @@ window.onload = function() {
     board.height = rows * blockSize;
     board.width = cols * blockSize;
     context = board.getContext("2d"); //used for drawing on the board
-    context.font = '100px Courier New';
 
     //The score
     score = document.getElementById("score");
@@ -75,6 +75,8 @@ window.onload = function() {
 
     //Randomly place the food and obstacle somehwere
     updateFoodObst();
+
+    //Will wait for a key to be pressed to make the start screen go away
 
     //Will wait for you to press an arrow key so as soon as you let go, snake will change direction
     document.addEventListener("keyup", changeDirection);
@@ -116,21 +118,40 @@ function changeDirection(e) {
         snakeY = blockSize * 5;
         velocityX = 0;
         velocityY = 0;
+        obstX = [];
+        obstY = [];
+        currX = 0;
+        currY = 0;
         updateFoodObst();
     }
+
+    start = false;
 }
 
 //Update the board on the HTML and redraw what we want 
 //Running this function once will only do everything once 
 function update() {
     //If game over, return to stop updating the canvas/drawing
-    if (gameOver) {
+    if (gameOver) 
         return;
-    }
+    
     context.clearRect(0, 0, board.width, board.height); // clearing the frames
 
-    context.fillStyle="black" //change color of pen to black
+    context.fillStyle="black"; //change color of pen to black
     context.fillRect(0, 0, board.width, board.height); //starting from corner of canvas and filling a width and height of 500 (from 25 x 25)
+
+    if (start)
+    {
+        context.fillStyle = "white";
+        context.font = '100px Courier New';
+        context.fillText("SNAKE", 220, 250);
+        context.font = '30px Courier New';
+        context.fillText("Press an arrow key to begin", 145, 300);
+    }
+    else{
+        context.fillStyle="black";
+        context.fillRect(0, 0, board.width, board.height);
+    }
 
     //Painting the food under the snake head (why it's being drawn first)
     context.fillStyle = "red";
@@ -174,12 +195,11 @@ function update() {
 
     //Drawing body segments
     for (let i = 0; i < snakeBody.length; i++){
-        //snakeBody[i][0] = x coordinate
-        //snakeBody[i][1] = y coordinate
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
 
     //game over conditions
+    ////////////////////////////////////
     //going out of bounds
     if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows*blockSize){
         gameOver = gameIsOver();
@@ -192,16 +212,20 @@ function update() {
         }
     }
 
-    //if the snakehead
+    //The snake bumps into an obstacle...
+    //...when the snake only has a head
+    if (snakeBody.length == 0 && snakeX == obstX[0] && snakeY == obstY[0])
+    {
+        gameOver = gameIsOver();
+    }
 
-    //the snake bumps into an obstacle
+    //...or when the snake has a body
     for (let i = 0; i < snakeBody.length; i++)
     {
         if (snakeX == obstX[i] && snakeY == obstY[i]){
             gameOver = gameIsOver();
         }
     }
-    
 }
 
 function updateFoodObst(){
@@ -220,7 +244,7 @@ function updateFoodObst(){
         {
             obstX[i] = Math.floor(Math.random() * cols) * blockSize;
             obstY[i] = Math.floor(Math.random() * rows) * blockSize;
-        }while(foodX == obstX && foodY == obstY);
+        } while(foodX == obstX && foodY == obstY);
     }
 
     if (currentScore % 5 == 0 && currentScore != 0)
@@ -237,7 +261,10 @@ function gameIsOver(){
         highScore.innerHTML = highestScore;
     }
     context.fillStyle = "white";
+    context.font = '100px Courier New';
     context.fillText("GAME OVER", 100, 250);
+    context.font = '30px Courier New';
+    context.fillText("Press the space bar to play again", 78, 300);
 
     return true;
 }
