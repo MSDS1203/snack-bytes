@@ -36,7 +36,6 @@ var snakeHeight = 34;
 //We have to multiply each coordinate by the blockSize for it to actually fill the coordinate space
 var snakeX = blockSize * 5;
 var snakeY = blockSize * 5;
-var snakeHeadImg;
 
 //Giving the snake speed
 var velocityX = 0;
@@ -50,8 +49,10 @@ var foodX;
 var foodY;
 
 //drawing obstacle
-var obstX;
-var obstY;
+var currX = 0;
+var currY = 0;
+var obstX = [];
+var obstY = [];
 
 //Game variables
 var gameOver = false;
@@ -136,15 +137,12 @@ function update() {
     context.fillRect(foodX, foodY, blockSize, blockSize);
 
     //Painting the obstacle
-    context.fillStyle = "white";
-    context.fillRect(obstX, obstY, blockSize, blockSize);
-
-    if (currentScore % 10 == 0 && currentScore != 0)
+    for (let i = 0; i <= currX && i <= currY; i++)
     {
         context.fillStyle = "white";
-        context.fillRect(obstX, obstY, blockSize, blockSize);
+        context.fillRect(obstX[i], obstY[i], blockSize, blockSize);
     }
-
+    
     //Snake eating food
     if (snakeX == foodX && snakeY == foodY){
         snakeBody.push([foodX, foodY]); //grow segment where food was
@@ -162,7 +160,7 @@ function update() {
     }
 
     //Updating first body segment to take the head's place
-        //If there are body parts in the array...
+    //If there are body parts in the array...
     if (snakeBody.length){
         //Setting the segment before the head to the coordinates of the head
         snakeBody[0] = [snakeX, snakeY];
@@ -184,41 +182,26 @@ function update() {
     //game over conditions
     //going out of bounds
     if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows*blockSize){
-        gameOver = true;
-        if (currentScore > highestScore)
-        {
-            highestScore = currentScore;
-            highScore.innerHTML = highestScore;
-        }
-        context.fillStyle = "white";
-        context.fillText("GAME OVER", 100, 250);
+        gameOver = gameIsOver();
     } 
 
-    //the snake bumpts into itself
-    for (let i =0; i < snakeBody.length; i++) {
+    //the snake bumps into itself
+    for (let i = 0; i < snakeBody.length; i++) {
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
-            gameOver = true;
-            if (currentScore > highestScore)
-            {
-                highestScore = currentScore;
-                highScore.innerHTML = highestScore;
-            }
-            context.fillStyle = "white";
-            context.fillText("GAME OVER", 100, 250);
+            gameOver = gameIsOver();
         }
     }
 
+    //if the snakehead
+
     //the snake bumps into an obstacle
-    if (snakeX == obstX && snakeY == obstY){
-        gameOver = true;
-        if (currentScore > highestScore)
-        {
-            highestScore = currentScore;
-            highScore.innerHTML = highestScore;
+    for (let i = 0; i < snakeBody.length; i++)
+    {
+        if (snakeX == obstX[i] && snakeY == obstY[i]){
+            gameOver = gameIsOver();
         }
-        context.fillStyle = "white";
-        context.fillText("GAME OVER", 100, 250);
     }
+    
 }
 
 function updateFoodObst(){
@@ -229,13 +212,32 @@ function updateFoodObst(){
     foodX = Math.floor(Math.random() * cols) * blockSize;
     foodY = Math.floor(Math.random() * rows) * blockSize;
 
-    //Randomly place an obstacle 
-    obstX = Math.floor(Math.random() * cols) * blockSize;
-    obstY = Math.floor(Math.random() * rows) * blockSize;
-
     //Make sure the obstacle is not in the same position as the food
-    if(foodX == obstX && foodY == obstY)
+    //If it's not, then give every obstacle a new random placement
+    for (let i = 0; i <= currX && i <= currY; i++)
     {
-        placeObst();
+        do
+        {
+            obstX[i] = Math.floor(Math.random() * cols) * blockSize;
+            obstY[i] = Math.floor(Math.random() * rows) * blockSize;
+        }while(foodX == obstX && foodY == obstY);
     }
+
+    if (currentScore % 5 == 0 && currentScore != 0)
+    {
+        currX++;
+        currY++;
+    }
+}
+
+function gameIsOver(){
+    if (currentScore > highestScore)
+    {
+        highestScore = currentScore;
+        highScore.innerHTML = highestScore;
+    }
+    context.fillStyle = "white";
+    context.fillText("GAME OVER", 100, 250);
+
+    return true;
 }
