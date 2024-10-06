@@ -67,6 +67,15 @@ window.onload = function() {
     board.width = cols * blockSize;
     context = board.getContext("2d"); //used for drawing on the board
 
+    //loading the images
+    /*
+    snakeImg = new Image();
+    snakeImg.src = "./snakeHead.png";
+    snakeImg.onload = function() {
+        context.drawImage(snakeImg, snakeX, snakeY, blockSize, blockSize)
+    }
+    */
+
     //The score
     score = document.getElementById("score");
     score.innerHTML = currentScore;
@@ -75,8 +84,6 @@ window.onload = function() {
 
     //Randomly place the food and obstacle somehwere
     updateFoodObst();
-
-    //Will wait for a key to be pressed to make the start screen go away
 
     //Will wait for you to press an arrow key so as soon as you let go, snake will change direction
     document.addEventListener("keyup", changeDirection);
@@ -91,6 +98,7 @@ function changeDirection(e) {
     if (e.code == "ArrowUp" && velocityY != 1){
         velocityX = 0;
         velocityY = -1;
+        snakeImg.style.transform = 'rotate(-90deg)';
     }
     //When going down, make sure it's not also going up
     else if (e.code == "ArrowDown" && velocityY != -1){
@@ -193,6 +201,12 @@ function update() {
     snakeY += velocityY * blockSize;
     context.fillRect(snakeX, snakeY, blockSize, blockSize); //filRect(x-cor, y-cor, width, height)
 
+    /*
+    snakeX += velocityX * blockSize;
+    snakeY += velocityY * blockSize;
+    context.drawImage(snakeImg, snakeX, snakeY, 35, 50);
+    */
+
     //Drawing body segments
     for (let i = 0; i < snakeBody.length; i++){
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
@@ -201,9 +215,15 @@ function update() {
     //game over conditions
     ////////////////////////////////////
     //going out of bounds
-    if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows*blockSize){
+    if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows * blockSize){
         gameOver = gameIsOver();
     } 
+
+    for (let i = 0; i < snakeBody.length; i++) {
+        if (snakeBody[i][0] < 0 || snakeBody[i][0] > cols * blockSize || snakeBody[i][1] < 0 || snakeBody[i][1] > rows * blockSize){
+            gameOver = gameIsOver();
+        }
+    }
 
     //the snake bumps into itself
     for (let i = 0; i < snakeBody.length; i++) {
