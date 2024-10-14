@@ -68,13 +68,12 @@ window.onload = function() {
     context = board.getContext("2d"); //used for drawing on the board
 
     //loading the images
-    /*
+    
     snakeImg = new Image();
     snakeImg.src = "./snakeHead.png";
     snakeImg.onload = function() {
         context.drawImage(snakeImg, snakeX, snakeY, blockSize, blockSize)
     }
-    */
 
     //The score
     score = document.getElementById("score");
@@ -98,7 +97,7 @@ function changeDirection(e) {
     if (e.code == "ArrowUp" && velocityY != 1){
         velocityX = 0;
         velocityY = -1;
-        snakeImg.style.transform = 'rotate(-90deg)';
+        snakeImg.rotate((45 * Math.PI) / 180);
     }
     //When going down, make sure it's not also going up
     else if (e.code == "ArrowDown" && velocityY != -1){
@@ -196,16 +195,16 @@ function update() {
     }
 
     //The color of the snake head
+    /*
     context.fillStyle = "lime";
     snakeX += velocityX * blockSize; //w/o blockSize, it will go really slow; will now move 1 square over rather than 1 pixel over
     snakeY += velocityY * blockSize;
     context.fillRect(snakeX, snakeY, blockSize, blockSize); //filRect(x-cor, y-cor, width, height)
+    */
 
-    /*
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
     context.drawImage(snakeImg, snakeX, snakeY, 35, 50);
-    */
 
     //Drawing body segments
     for (let i = 0; i < snakeBody.length; i++){
