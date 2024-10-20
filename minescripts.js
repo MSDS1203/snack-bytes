@@ -12,7 +12,10 @@
 
     const menu = document.getElementById("menu");
     const board = document.getElementById("board");
+    const mainPlay = document.getElementById("main-row");
     const button = document.getElementById("flag-button");
+
+    const flagText = document.getElementById("flag-text");
 
 
     easy.addEventListener("click", easyBoard);
@@ -24,10 +27,12 @@
         if (flagOn === true) {
             flagOn = false;
             button.style.backgroundColor = "lightgreen";
+            flagText.innerText="Flag off";
          }
         else {
             flagOn = true;
             button.style.backgroundColor = "green"; 
+            flagText.innerText="Flag on";
         }
     }
 
@@ -42,7 +47,6 @@
         menu.style.display = "none";
         let arr = buildBombs(rows, cols, bombCount);
         buildBoard(rows, cols, arr);
-        //formatFlagButton();
     };
 
     function medBoard() {
@@ -55,7 +59,6 @@
         menu.style.display = "none";
         let arr = buildBombs(rows, cols, bombCount);
         buildBoard(rows, cols, arr);
-        //formatFlagButton();
     };
 
     function hardBoard() {
@@ -68,7 +71,6 @@
         menu.style.display = "none";
         let arr = buildBombs(rows, cols, bombCount);
         buildBoard(rows, cols, arr);
-       // formatFlagButton();
     };   
 
     // Global array
@@ -138,7 +140,9 @@
 
     // Called before each new level
     function buildBoard(rows, cols, bombArr) {
-        board.style.display = "flex";
+        board.style.display = "flex"; //possibly just start flex
+        mainPlay.style.display = "flex";
+
 
         let square = document.querySelector(".square");
         square.addEventListener("click", clickSquare);
@@ -180,15 +184,9 @@
                 square = clone;   
             }               
         }
+
+
     }
-
-    /*
-    function formatFlagButton() {
-        button.style.display = "inline-block";
-        button.style.width = "calc((" + "100vw - " + board.style.width + ") / 2 - 20px)";
-
-    } */
-    
 
     function clickSquare() {
         console.log(this.id + " clicked");

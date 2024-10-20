@@ -75,23 +75,27 @@ h1 {
 }
 
 #main-row {
-    display: flex;
+    display: none;
     gap: 5%;
     justify-content: space-evenly;
 }
 
 #button-column {
     flex: 1 1 25vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
+
 #flag-button {
     /* display: none;*/
     background-color: lightgreen;
     border: none;
     padding: 15px 32px;
-    font-family: "arsenal";
-    font-size: 16px;
     text-align: center;
-    text-decoration: none;
+    max-width: 250px;
 }
 
 #flag-button:hover {
@@ -101,6 +105,11 @@ h1 {
 #flag-button-img {
     max-width: 100%;
     max-height: 100%;
+}
+
+#button-column p {
+    font-family: "arsenal";
+    font-size: 2.5em;
 }
 
 #board {
