@@ -11,11 +11,15 @@
     const hard = document.getElementById("hard")
 
     const menu = document.getElementById("menu");
-    const board = document.getElementById("board");
     const mainPlay = document.getElementById("main-row");
+    const board = document.getElementById("board");
     const button = document.getElementById("flag-button");
-
     const flagText = document.getElementById("flag-text");
+
+    const userClearCnt = document.getElementById("cleared-output");
+    const userSquareCnt = document.getElementById("total-squares");
+    const userDifficulty = document.getElementById("diff-output");
+    const userBombCnt = document.getElementById("bomb-output");
 
 
     easy.addEventListener("click", easyBoard);
@@ -45,6 +49,7 @@
         winCount = 90;
         menuToggle = false;
         menu.style.display = "none";
+        userDifficulty.innerText = "Easy";
         let arr = buildBombs(rows, cols, bombCount);
         buildBoard(rows, cols, arr);
     };
@@ -57,6 +62,7 @@
         winCount = 224;
         menuToggle = false;
         menu.style.display = "none";
+        userDifficulty.innerText = "Medium";
         let arr = buildBombs(rows, cols, bombCount);
         buildBoard(rows, cols, arr);
     };
@@ -69,6 +75,7 @@
         winCount = 340;
         menuToggle = false;
         menu.style.display = "none";
+        userDifficulty.innerText = "Hard";
         let arr = buildBombs(rows, cols, bombCount);
         buildBoard(rows, cols, arr);
     };   
@@ -142,7 +149,9 @@
     function buildBoard(rows, cols, bombArr) {
         board.style.display = "flex"; //possibly just start flex
         mainPlay.style.display = "flex";
-
+        userClearCnt.innerText = 0;
+        userSquareCnt.innerText = (rows * cols) - bombCount;
+        userBombCnt.innerText = bombCount;
 
         let square = document.querySelector(".square");
         square.addEventListener("click", clickSquare);
@@ -227,9 +236,12 @@
                 this.innerText = this.bombNum;
                 this.clear = true;
                 clearCount++;
+                userClearCnt.innerText = clearCount;
             }
             else {       
                 clearBlank(this.r, this.c);
+                userClearCnt.innerText = clearCount;
+
             }
 
             // Win game
