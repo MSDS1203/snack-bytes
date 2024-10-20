@@ -15,6 +15,7 @@
     const board = document.getElementById("board");
     const button = document.getElementById("flag-button");
     const flagText = document.getElementById("flag-text");
+    const winMessage = document.getElementById("win");
 
     const userClearCnt = document.getElementById("cleared-output");
     const userSquareCnt = document.getElementById("total-squares");
@@ -247,7 +248,7 @@
             // Win game
             if (clearCount === winCount)
             {
-                alert("YOU WIN!!!");
+                win();
             }
         }
     }
@@ -317,6 +318,10 @@
                 
        //menuToggle = true;
        //menu.style.display = "flex";
+    }
+
+    function win() {
+        winMessage.style.display="block";
     }
 
     function reset() {
