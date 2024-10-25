@@ -1,0 +1,44 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="minestyles.css">
+  </head>
+    <body>
+        <div id="menu">
+            <div id="difficulty">
+                <div id="easy" class="menu-button tiny5-regular">
+                    Easy
+                </div>
+                <div id="medium" class="menu-button tiny5-regular">
+                    Medium
+                </div>
+                <div id="hard" class="menu-button tiny5-regular">
+                    Hard
+                </div>
+            </div>
+            <div class="menu-button">Instructions</div>
+        </div>
+        <img id="win" src="./WinMessage.png" alt="You Win!">
+        <h1 class="arsenal">DoughNOT Step Here</h1>
+        <div id="main-row">
+            <div id="button-column">
+                <button id="flag-button" onclick="flagOnOff()">
+                    <img id="flag-button-img" src="./LollipopFlag.png" alt="Pink lollipop flag">
+                </button>
+                <p id="flag-text">Flags Off</p>
+            </div>
+            <div id="board">
+                <div id="r0c0" class="square"></div>
+            </div>
+            <div id="score-column">
+                <div class="score-div">Squares cleared: <strong><span id="cleared-output">0</span>/<span id="total-squares">0</span></strong></div>
+                <div class="score-div"><strong><span id="diff-output">Easy</span></strong>&nbsp;—&nbsp;<strong><span id="bomb-output">10</span> bombs</strong></div>
+            </div>
+        </div>
+        </body>
+        <script src="minescripts.js"></script>
+    </body>
+</html>
