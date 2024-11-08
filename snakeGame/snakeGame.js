@@ -29,8 +29,8 @@ var context; //Used to draw with/ our drawing object
 
 
 //Width and height of snake and its semgents
-var snakeWidth = 34;
-var snakeHeight = 34;
+var snakeWidth = 50;
+var snakeHeight = 50;
 
 //Drawing the snake head - the snake will initially start at coordinate (5, 5)
 //We have to multiply each coordinate by the blockSize for it to actually fill the coordinate space
@@ -72,7 +72,7 @@ window.onload = function() {
     snakeImg = new Image();
     snakeImg.src = "./snakeHead.png";
     snakeImg.onload = function() {
-        context.drawImage(snakeImg, snakeX, snakeY, blockSize, blockSize)
+        context.drawImage(snakeImg, 10, 10, snakeWidth, snakeHeight)
     }
 
     //The score
@@ -97,22 +97,25 @@ function changeDirection(e) {
     if (e.code == "ArrowUp" && velocityY != 1){
         velocityX = 0;
         velocityY = -1;
-        snakeImg.rotate((45 * Math.PI) / 180);
+        headPos("./snakeHead.png")
     }
     //When going down, make sure it's not also going up
     else if (e.code == "ArrowDown" && velocityY != -1){
         velocityX = 0;
         velocityY = 1;
+        headPos("./snakeHead.png")
     }
     //When going left, make sure it's not also going right
     else if (e.code == "ArrowLeft" && velocityX != 1){
         velocityX = -1;
         velocityY = 0;
+        headPos("./snakeHead.png")
     }
     //When going right, make sure it's not also going left
     else if (e.code == "ArrowRight" && velocityX != -1){
         velocityX = 1;
         velocityY = 0;
+        headPos("./snakeHead.png")
     }
     //Restart the game if it's a game over and the space bar is pressed
     else if (e.code == "Space" && gameOver == true)
@@ -135,6 +138,15 @@ function changeDirection(e) {
     start = false;
 }
 
+//Update position of the head
+function headPos(headToUse)
+{
+    snakeImg.src = headToUse;
+    snakeImg.onload = function() {
+        context.drawImage(snakeImg, snakeX, snakeY, snakeWidth, snakeHeight)
+    }
+}
+
 //Update the board on the HTML and redraw what we want 
 //Running this function once will only do everything once 
 function update() {
@@ -142,11 +154,12 @@ function update() {
     if (gameOver) 
         return;
     
-    context.clearRect(0, 0, board.width, board.height); // clearing the frames
+    //context.clearRect(0, 0, board.width, board.height); // clearing the frames
 
+    /*
     context.fillStyle="black"; //change color of pen to black
     context.fillRect(0, 0, board.width, board.height); //starting from corner of canvas and filling a width and height of 500 (from 25 x 25)
-
+    */
     if (start)
     {
         context.fillStyle = "white";
@@ -208,6 +221,7 @@ function update() {
 
     //Drawing body segments
     for (let i = 0; i < snakeBody.length; i++){
+        context.fillStyle = "#4caf50";
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
 
