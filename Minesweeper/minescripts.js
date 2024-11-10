@@ -38,6 +38,13 @@
     inst.addEventListener("click", instructions);
     back.addEventListener("click", goBack)
 
+    // Allows space bar to toggle flag
+    document.addEventListener("keydown", (event) => {
+        if (event.code == "Space")
+            flagOnOff();
+    })
+
+    // Shows instructions in the menu
     function instructions() {
         easy.style.display = "none";
         med.style.display = "none";
@@ -47,6 +54,7 @@
         instText.style.display = "block";
     }
 
+    // Hides instructions in the menu
     function goBack() {
         easy.style.display = "block";
         med.style.display = "block";
@@ -56,7 +64,7 @@
         instText.style.display = "none";
     }
 
-
+    // Toggles the flag
     function flagOnOff() {
         if (flagOn === true) {
             flagOn = false;
