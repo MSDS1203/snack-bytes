@@ -161,10 +161,18 @@ h1 {
     cursor: pointer;
 }
 
+#timer {
+    font-family: "Tiny5", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 5rem;
+}
+
 #score-column {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 30px;
     flex: 1 1 25vh;
 }

@@ -6,6 +6,11 @@
     let flagOn = false; // Does the user have flags turned on?
     let clearCount = 0; // Counts squares clicked
 
+    const sec = document.getElementById("seconds");
+    const min = document.getElementById("minutes");
+    let secCnt = 0;
+    let minCnt = 0;
+
     const easy = document.getElementById("easy");
     const med = document.getElementById("medium");
     const hard = document.getElementById("hard")
@@ -195,7 +200,16 @@
             }               
         }
 
+        // Starts stopwatch and updates it every second
+        var intervalID = setInterval(updateTimer, 1000); 
 
+    }
+
+    function updateTimer() {
+        secCnt = ++secCnt % 60;
+        sec.innerText = String(secCnt).padStart(2, '0');
+        if (secCnt == 0)
+            min.innerText = ++minCnt;
     }
 
     function clickSquare() {
