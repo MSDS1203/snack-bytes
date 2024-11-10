@@ -43,11 +43,11 @@ h1 {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
-    height: 50vh;
+    /* height: 50vh; */
     max-height: 800px;
-    background-color: blue;
+    background-color: green;
     border-radius: 30px;
-    padding: 20px;
+    padding: 50px 20px;
 
     display: flex;
     flex-direction: column;
@@ -78,16 +78,45 @@ h1 {
 }
 
 .menu-button {
-    background-color: #d3d3d3;
+    background-color: lightgreen;
     border-radius: 10px;
     padding: 10px;
+    min-width: 100px;
+    text-align: center;
     font-size: 20pt;
-    transition: .25s;
+    font-family: Arsenal, sans-serif;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    transition: .1s;
 }
 
 .menu-button:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     cursor: pointer;
+}
+
+#menu-home {
+    display: none;
+    min-width: auto;
+}
+
+#inst-text {
+    display: none;
+    color: #ffffff;
+    font-family: "Arsenal", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15pt;
+}
+
+.pink {
+    color: #f691af;    ;
+    font-size: 20pt;
+}
+
+#flag-button:active {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3), 0 3px 10px 0 rgba(0,0,0,0.2);
 }
 
 #main-row {
@@ -114,10 +143,12 @@ h1 {
     max-width: 250px;
     border-radius: 20px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    transition: .1s;
 }
 
 #flag-button:hover {
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 #flag-button:active {

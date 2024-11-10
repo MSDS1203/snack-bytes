@@ -14,6 +14,10 @@
     const easy = document.getElementById("easy");
     const med = document.getElementById("medium");
     const hard = document.getElementById("hard")
+    const inst = document.getElementById("instructions");
+    const back = document.getElementById("menu-home");
+    const instText = document.getElementById("inst-text");
+
 
     const menu = document.getElementById("menu");
     const mainPlay = document.getElementById("main-row");
@@ -31,6 +35,26 @@
     easy.addEventListener("click", easyBoard);
     med.addEventListener("click", medBoard);
     hard.addEventListener("click", hardBoard);
+    inst.addEventListener("click", instructions);
+    back.addEventListener("click", goBack)
+
+    function instructions() {
+        easy.style.display = "none";
+        med.style.display = "none";
+        hard.style.display = "none";
+        inst.style.display = "none";
+        back.style.display = "block";
+        instText.style.display = "block";
+    }
+
+    function goBack() {
+        easy.style.display = "block";
+        med.style.display = "block";
+        hard.style.display = "block";
+        inst.style.display = "block";
+        back.style.display = "none";
+        instText.style.display = "none";
+    }
 
 
     function flagOnOff() {
@@ -308,6 +332,8 @@
     }
 
     function gameOver(bomb) {
+        // stop timer 
+        clearInterval(intervalId);
 
         for (let i = 0; i < rows; i++)
         {
