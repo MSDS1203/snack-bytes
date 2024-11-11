@@ -152,7 +152,7 @@
                 {
                     if (bombCol - 1 >= 0 && bombArray[bombRow - 1][bombCol - 1] != "B")
                         bombArray[bombRow - 1][bombCol - 1]++;
-                    if (bombArray[bombRow + 1][bombCol] != "B")
+                    if (bombArray[bombRow - 1][bombCol] != "B")
                         bombArray[bombRow - 1][bombCol]++;
                     if (bombCol + 1 < cols && bombArray[bombRow - 1][bombCol + 1] != "B")
                         bombArray[bombRow - 1][bombCol + 1]++;
@@ -258,6 +258,7 @@
         if (this.clear === true)
             return;
 
+        // If flags are on
         if (flagOn === true) {
             if(this.flag === false) {
                 // this.style.backgroundColor = "pink";
@@ -276,6 +277,7 @@
                 this.flag = false;
             }
         }
+        // If flags are off
         else if(this.flag === false){
             if(this.bombNum === "B") {
                 gameOver(this);
