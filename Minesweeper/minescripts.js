@@ -192,14 +192,19 @@
         userBombCnt.innerText = bombCount;
 
         let square = document.querySelector(".square");
-        square.addEventListener("click", clickSquare);
         square.style.width = "calc(" + 80 / cols + "vh - 5px)";
         square.style.height = "calc(" + 80 / rows + "vh - 5px)";
         square.style.lineHeight = "calc(" + 80 / rows + "vh - 5px)";
         square.style.fontSize = "calc(" + 80 / rows + "vh - 20px)";
 
-        square.bombNum = bombArr[0][0]; 
+        // First square
+        square.addEventListener("click", clickSquare);
+        square.r = 0;
+        square.c = 0;
+        square.flag = false;
         square.clear = false;
+        square.bombNum = bombArr[0][0]; 
+
 
         // First row
         for(let j = 1; j < cols; j++) {
