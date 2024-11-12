@@ -8,8 +8,8 @@
 
     const sec = document.getElementById("seconds");
     const min = document.getElementById("minutes");
-    let secCnt = 0;
-    let minCnt = 0;
+    let secCnt = 0; // seconds since game started
+    let minCnt = 0; // minutes since game started
     let intervalId;
 
     const easy = document.getElementById("easy");
@@ -27,6 +27,8 @@
     const button = document.getElementById("flag-button");
     const flagText = document.getElementById("flag-text");
     const winMessage = document.getElementById("win");
+    const gameOverMessage = document.getElementById("game-over");
+
 
     const userClearCnt = document.getElementById("cleared-output");
     const userSquareCnt = document.getElementById("total-squares");
@@ -287,7 +289,7 @@
         // If flags are off
         else if(this.flag === false){
             if(this.bombNum === "B") {
-                gameOver(this);
+                gameOver();
             }
             else if(this.bombNum !== 0) {
                 if (this.flag === true) 
@@ -353,10 +355,11 @@
         clearBlank(curRow - 1, curCol - 1);
     }
 
-    function gameOver(bomb) {
+    function gameOver() {
         // stop timer 
         clearInterval(intervalId);
 
+        // reveal bombs
         for (let i = 0; i < rows; i++)
         {
             for (let j = 0; j < cols; j++)
@@ -377,9 +380,10 @@
             }
             
         }
-                
-       //menuToggle = true;
-       //menu.style.display = "flex";
+
+        gameOverMessage.style.display = "flex";
+        finalBombs.innerHTML = bombCount;
+
     }
 
     function win() {
@@ -411,4 +415,6 @@
         bombArray.length = 0;
 
         board.style.display = "none";
+        menuToggle = true;
+        menu.style.display = "flex";
     }

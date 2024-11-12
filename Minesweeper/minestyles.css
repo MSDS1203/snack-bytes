@@ -63,10 +63,6 @@ h1 {
     gap: 20px;
 }
 
-#game-over {
-    display: none;
-}
-
 #menu-title {
     color: #f691af;  
     margin-top: 0; 
@@ -136,7 +132,22 @@ h1 {
 
 #win-image {
    /* object-fit: contain;*/
-   max-width: 100%;
+   width: 100%;
+   max-width: 450px;
+}
+
+#game-over {
+    display: none; /* flex when shown */
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
+#game-over-text {
+    color: #f691af;  
+    margin-top: 0; 
+    font-size: 35pt;
 }
 
 #flag-button:active {
