@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="minestyles.css">
   </head>
     <body>
-        <div id="menu">
+        <div id="menu" class="pop-up">
+            <h1 id="menu-title" class="arsenal">DoughNOT Step Here</h1>
             <div id="difficulty">
                 <div id="easy" class="menu-button">
                     Easy
@@ -33,8 +34,7 @@
             </p>
             <div id="menu-home" class="menu-button">Back</div>
         </div>
-        <img id="win" src="./WinMessage.png" alt="You Win!">
-        <h1 class="arsenal">DoughNOT Step Here</h1>
+        <h1 id="main-h1" class="arsenal">DoughNOT Step Here</h1>
         <div id="main-row">
             <div id="button-column">
                 <button id="flag-button" onclick="flagOnOff()">
@@ -50,6 +50,16 @@
                 <div class="score-div">Squares cleared: <strong><span id="cleared-output">0</span>/<span id="total-squares">0</span></strong></div>
                 <div class="score-div"><strong><span id="diff-output">Easy</span></strong>&nbsp;—&nbsp;<strong><span id="bomb-output">10</span> bombs</strong></div>
             </div>
+        </div>
+        <div id="game-over" class="pop-up">
+
+            <p><span id="final-bomb-score"></span> squares cleared</p>
+            <div id="replay1" class="menu-button">Replay</div>
+        </div>
+        <div id="win" class="pop-up">
+            <img id="win-image" src="./WinMessage.png" alt="You Win!">
+            <p class="arsenal pink">Time: <span id="final-time"></span></p>
+            <div id="replay2" class="menu-button">Replay</div>
         </div>
         </body>
         <script src="minescripts.js"></script>

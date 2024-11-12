@@ -10,6 +10,7 @@
     const min = document.getElementById("minutes");
     let secCnt = 0;
     let minCnt = 0;
+    let intervalId;
 
     const easy = document.getElementById("easy");
     const med = document.getElementById("medium");
@@ -20,6 +21,7 @@
 
 
     const menu = document.getElementById("menu");
+    const header = document.getElementById("main-h1");
     const mainPlay = document.getElementById("main-row");
     const board = document.getElementById("board");
     const button = document.getElementById("flag-button");
@@ -30,6 +32,10 @@
     const userSquareCnt = document.getElementById("total-squares");
     const userDifficulty = document.getElementById("diff-output");
     const userBombCnt = document.getElementById("bomb-output");
+
+    const finalBombs = document.getElementById("final-bomb-score")
+    const finalTime = document.getElementById("final-time");
+
 
 
     easy.addEventListener("click", easyBoard);
@@ -187,6 +193,7 @@
     function buildBoard(rows, cols, bombArr) {
         board.style.display = "flex"; //possibly just start flex
         mainPlay.style.display = "flex";
+        header.style.display = "block";
         userClearCnt.innerText = 0;
         userSquareCnt.innerText = (rows * cols) - bombCount;
         userBombCnt.innerText = bombCount;
@@ -238,7 +245,7 @@
         }
 
         // Starts stopwatch and updates it every second
-        var intervalID = setInterval(updateTimer, 1000); 
+        intervalId = setInterval(updateTimer, 1000); 
 
     }
 
@@ -376,7 +383,9 @@
     }
 
     function win() {
-        winMessage.style.display="block";
+        clearInterval(intervalId);
+        winMessage.style.display = "flex";
+        finalTime.innerHTML = minCnt + ":" + secCnt;
     }
 
     function reset() {
