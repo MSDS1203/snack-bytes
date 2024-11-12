@@ -29,13 +29,13 @@ var context; //Used to draw with/ our drawing object
 
 
 //Width and height of snake and its semgents
-var snakeWidth = 50;
-var snakeHeight = 50;
+var snakeWidth = 31;
+var snakeHeight = 31;
 
 //Drawing the snake head - the snake will initially start at coordinate (5, 5)
 //We have to multiply each coordinate by the blockSize for it to actually fill the coordinate space
-var snakeX = blockSize * 5;
-var snakeY = blockSize * 5;
+var snakeX = 50;
+var snakeY = 50;
 
 //Giving the snake speed
 var velocityX = 0;
@@ -63,16 +63,17 @@ var highestScore = 0;
 //When the page loads...
 window.onload = function() {
     board = document.getElementById("board"); //Now the element board is this canvas element tag
-    board.height = rows * blockSize;
-    board.width = cols * blockSize;
+    board.height = 490;//rows * blockSize;
+    board.width = 700;//cols * blockSize;
     context = board.getContext("2d"); //used for drawing on the board
+    context.clearRect(0, 0, board.width, board.height);
 
     //loading the images
     
     snakeImg = new Image();
     snakeImg.src = "./snakeHead.png";
     snakeImg.onload = function() {
-        context.drawImage(snakeImg, 10, 10, snakeWidth, snakeHeight)
+        context.drawImage(snakeImg, snakeX, snakeY, snakeWidth, snakeHeight)
     }
 
     //The score
@@ -97,25 +98,25 @@ function changeDirection(e) {
     if (e.code == "ArrowUp" && velocityY != 1){
         velocityX = 0;
         velocityY = -1;
-        headPos("./snakeHead.png")
+        headPos("./snakeHeadUp.png")
     }
     //When going down, make sure it's not also going up
     else if (e.code == "ArrowDown" && velocityY != -1){
         velocityX = 0;
         velocityY = 1;
-        headPos("./snakeHead.png")
+        headPos("./snakeHeadDown.png")
     }
     //When going left, make sure it's not also going right
     else if (e.code == "ArrowLeft" && velocityX != 1){
         velocityX = -1;
         velocityY = 0;
-        headPos("./snakeHead.png")
+        headPos("./snakeHeadLeft.png")
     }
     //When going right, make sure it's not also going left
     else if (e.code == "ArrowRight" && velocityX != -1){
         velocityX = 1;
         velocityY = 0;
-        headPos("./snakeHead.png")
+        headPos("./snakeHeadRight.png")
     }
     //Restart the game if it's a game over and the space bar is pressed
     else if (e.code == "Space" && gameOver == true)
@@ -124,8 +125,8 @@ function changeDirection(e) {
         score.innerHTML = currentScore;
         gameOver = false;
         snakeBody = [];
-        snakeX = blockSize * 5;
-        snakeY = blockSize * 5;
+        snakeX = 50;
+        snakeY = 50;
         velocityX = 0;
         velocityY = 0;
         obstX = [];
@@ -169,8 +170,8 @@ function update() {
         context.fillText("Press an arrow key to begin", 145, 300);
     }
     else{
-        context.fillStyle="black";
-        context.fillRect(0, 0, board.width, board.height);
+        //context.fillStyle="black";
+        context.clearRect(0, 0, board.width, board.height);
     }
 
     //Painting the food under the snake head (why it's being drawn first)
@@ -217,7 +218,7 @@ function update() {
 
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
-    context.drawImage(snakeImg, snakeX, snakeY, 35, 50);
+    context.drawImage(snakeImg, snakeX, snakeY, snakeWidth, snakeHeight);
 
     //Drawing body segments
     for (let i = 0; i < snakeBody.length; i++){
