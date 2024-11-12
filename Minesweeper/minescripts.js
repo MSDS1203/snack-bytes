@@ -35,8 +35,16 @@
     const userDifficulty = document.getElementById("diff-output");
     const userBombCnt = document.getElementById("bomb-output");
 
-    const finalBombs = document.getElementById("final-bomb-score")
+    const finalBombs = document.getElementById("final-bomb-score");
     const finalTime = document.getElementById("final-time");
+
+    const replay1 = document.getElementById("replay1");
+    const replay2 = document.getElementById("replay2");
+    const replay3 = document.getElementById("replay3");
+    replay1.addEventListener("click", reset);
+    replay2.addEventListener("click", reset);
+    replay3.addEventListener("click", reset);
+
 
 
 
@@ -414,7 +422,11 @@
         flagOn = false; 
         bombArray.length = 0;
 
+        gameOverMessage.style.display = "none";
+        winMessage.style.display = "none";
         board.style.display = "none";
+        mainPlay.style.display = "none";
+        header.style.display = "none";
         menuToggle = true;
         menu.style.display = "flex";
     }
