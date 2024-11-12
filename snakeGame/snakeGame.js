@@ -1,27 +1,5 @@
-/*
-The board will have 18X18 squares, where each 
-at the top-left hand square is 0,0 and the bottom
-right-hand square is 17, 17
-
-Will be set up like so: board[x][y], where x is moving along
-columns (left and right) and y is moving along the rows (up and down) 
-
-Going down and right is positive, going left and up is negative
-*/
-
-/*
-Size of the board 
-----------------------------
-We will use a variable called boxSize, referring to the size
-of each box in the board
-Ex: if the boxSize = 25, and you wanted the food box at (1,1) or [1][1],
-you would have to write [1 * 25][1 * 25] in order for it to actually show. 
-If we didn't multiple it with the box size, then it wouldn't show up on the 
-canvas.
-*/
-
 //board
-var blockSize = 25; //what we're using to fill in the coordinates
+var blockSize = 25; 
 var rows = 20;
 var cols = 30;
 var board;
@@ -31,6 +9,10 @@ var context; //Used to draw with/ our drawing object
 //Width and height of snake and its semgents
 var snakeWidth = 31;
 var snakeHeight = 31;
+
+//Width and height of food
+var foodWidth = 20;
+var foodHeight = 20;
 
 //Drawing the snake head - the snake will initially start at coordinate (5, 5)
 //We have to multiply each coordinate by the blockSize for it to actually fill the coordinate space
@@ -45,8 +27,8 @@ var velocityY = 0;
 var snakeBody = [];
 
 //drawing food 
-var foodX = 100;
-var foodY = 300;
+var foodX = 200;
+var foodY = 200;
 
 //drawing obstacle
 var currX = 0;
@@ -62,26 +44,36 @@ var highestScore = 0;
 
 //When the page loads...
 window.onload = function() {
-    board = document.getElementById("board"); //Now the element board is this canvas element tag
-    board.height = 490;//rows * blockSize;
-    board.width = 700;//cols * blockSize;
-    context = board.getContext("2d"); //used for drawing on the board
-    context.clearRect(0, 0, board.width, board.height);
+    board = document.getElementById("board"); 
+    board.height = rows * blockSize;
+    board.width = cols * blockSize;
+    context = board.getContext("2d"); 
 
     //loading the images
+    //Snake Head images
+
+    snakeHeadPositions = {
+        up: new Image(),
+        down: new Image(),
+        left: new Image(),
+        right: new Image()
+    };
+
+    snakeHeadPositions.up.src = "./snakeHeadUp.png";
+    snakeHeadPositions.down.src = "./snakeHeadDown.png";
+    snakeHeadPositions.left.src = "./snakeHeadLeft.png";
+    snakeHeadPositions.right.src = "./snakeHeadRight.png";
+    snakeImg = snakeHeadPositions.right;
     
-    //Snake Head
-    snakeImg = new Image();
-    snakeImg.src = "./snakeHeadUp.png";
-    snakeImg.onload = function() {
-        context.drawImage(snakeImg, snakeX, snakeY, snakeWidth, snakeHeight);
-    }
+    // snakeImg.onload = function() {
+    //     context.drawImage(snakeImg, snakeX, snakeY, snakeWidth, snakeHeight);
+    // }
 
     //Food
     foodImg = new Image();
-    foodImg.src - "./food.png";
+    foodImg.src = "./food.png";
     foodImg.onload = function() {
-        context.drawImage(foodImg, foodX, foodY, 31, 31);
+        context.drawImage(foodImg, foodX, foodY, foodWidth, foodHeight);
     }
 
     //The score
@@ -106,25 +98,25 @@ function changeDirection(e) {
     if (e.code == "ArrowUp" && velocityY != 1){
         velocityX = 0;
         velocityY = -1;
-        headPos("./snakeHeadUp.png")
+        snakeImg = snakeHeadPositions.up;
     }
     //When going down, make sure it's not also going up
     else if (e.code == "ArrowDown" && velocityY != -1){
         velocityX = 0;
         velocityY = 1;
-        headPos("./snakeHeadDown.png")
+        snakeImg = snakeHeadPositions.down;
     }
     //When going left, make sure it's not also going right
     else if (e.code == "ArrowLeft" && velocityX != 1){
         velocityX = -1;
         velocityY = 0;
-        headPos("./snakeHeadLeft.png")
+        snakeImg = snakeHeadPositions.left;
     }
     //When going right, make sure it's not also going left
     else if (e.code == "ArrowRight" && velocityX != -1){
         velocityX = 1;
         velocityY = 0;
-        headPos("./snakeHeadRight.png")
+        snakeImg = snakeHeadPositions.right;
     }
     //Restart the game if it's a game over and the space bar is pressed
     else if (e.code == "Space" && gameOver == true)
@@ -147,28 +139,12 @@ function changeDirection(e) {
     start = false;
 }
 
-//Update position of the head
-function headPos(headToUse)
-{
-    snakeImg.src = headToUse;
-    snakeImg.onload = function() {
-        context.drawImage(snakeImg, snakeX, snakeY, snakeWidth, snakeHeight)
-    }
-}
-
-//Update the board on the HTML and redraw what we want 
-//Running this function once will only do everything once 
+//Update the board  
 function update() {
     //If game over, return to stop updating the canvas/drawing
     if (gameOver) 
         return;
     
-    //context.clearRect(0, 0, board.width, board.height); // clearing the frames
-
-    /*
-    context.fillStyle="black"; //change color of pen to black
-    context.fillRect(0, 0, board.width, board.height); //starting from corner of canvas and filling a width and height of 500 (from 25 x 25)
-    */
     if (start)
     {
         context.fillStyle = "white";
@@ -178,15 +154,8 @@ function update() {
         context.fillText("Press an arrow key to begin", 145, 300);
     }
     else{
-        //context.fillStyle="black";
         context.clearRect(0, 0, board.width, board.height);
     }
-
-    //Painting the food under the snake head (why it's being drawn first)
-    /*
-    context.fillStyle = "red";
-    context.fillRect(foodX, foodY, blockSize, blockSize);
-    */
 
     //Painting the obstacle
     for (let i = 0; i <= currX && i <= currY; i++)
@@ -194,6 +163,9 @@ function update() {
         context.fillStyle = "white";
         context.fillRect(obstX[i], obstY[i], blockSize, blockSize);
     }
+
+    //Draw the food
+    context.drawImage(foodImg, foodX, foodY, foodWidth, foodHeight);
     
     //Snake eating food
     if (snakeX == foodX && snakeY == foodY){
@@ -218,14 +190,7 @@ function update() {
         snakeBody[0] = [snakeX, snakeY];
     }
 
-    //The color of the snake head
-    /*
-    context.fillStyle = "lime";
-    snakeX += velocityX * blockSize; //w/o blockSize, it will go really slow; will now move 1 square over rather than 1 pixel over
-    snakeY += velocityY * blockSize;
-    context.fillRect(snakeX, snakeY, blockSize, blockSize); //filRect(x-cor, y-cor, width, height)
-    */
-
+   //Moving the snake head
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
     context.drawImage(snakeImg, snakeX, snakeY, snakeWidth, snakeHeight);
@@ -242,7 +207,6 @@ function update() {
     if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows * blockSize){
         gameOver = gameIsOver();
     } 
-
     for (let i = 0; i < snakeBody.length; i++) {
         if (snakeBody[i][0] < 0 || snakeBody[i][0] > cols * blockSize || snakeBody[i][1] < 0 || snakeBody[i][1] > rows * blockSize){
             gameOver = gameIsOver();
@@ -281,7 +245,7 @@ function updateFoodObst(){
     foodY = Math.floor(Math.random() * rows) * blockSize;
 
     foodImg.onload = function() {
-        context.drawImage(foodImg, foodX, foodY, 31, 31);
+        context.drawImage(foodImg, foodX, foodY, foodWidth, foodHeight);
     }
 
     //Make sure the obstacle is not in the same position as the food
