@@ -4,3 +4,8 @@ if (userEmail) {
 } else {
   document.getElementById("user-email").textContent = "No user logged in.";
 }
+
+function updateUserName(userName)
+{
+  
+}
