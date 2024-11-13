@@ -13,8 +13,7 @@ var snakeHeight = 31;
 var foodWidth = 20;
 var foodHeight = 20;
 
-//Drawing the snake head - the snake will initially start at coordinate (5, 5)
-//We have to multiply each coordinate by the blockSize for it to actually fill the coordinate space
+//Starting the snake at coordinates (50, 50)
 var snakeX = 50;
 var snakeY = 50;
 
@@ -22,7 +21,7 @@ var snakeY = 50;
 var velocityX = 0;
 var velocityY = 0;
 
-//making the body, where each element in the array is a segment, where each segment is an x,y coordinate for a body part
+//Snake body - each element in the array is a segment and each segment is an x,y coordinate for a body part
 var snakeBody = [];
 
 //drawing food 
@@ -35,7 +34,7 @@ var currY = 0;
 var obstX = [];
 var obstY = [];
 
-//Game variables
+//Game variables for starting, ending, and the score of the game
 var gameOver = false;
 var start = true;
 var currentScore = 0;
@@ -43,14 +42,13 @@ var highestScore = 0;
 
 //When the page loads...
 window.onload = function() {
+    //Setting up the board
     board = document.getElementById("board"); 
     board.height = rows * blockSize;
     board.width = cols * blockSize;
     context = board.getContext("2d"); 
 
-    //loading the images
-    //Snake Head images
-
+    //Loading up all directions of snake head images
     snakeHeadPositions = {
         up: new Image(),
         down: new Image(),
@@ -64,54 +62,49 @@ window.onload = function() {
     snakeHeadPositions.right.src = "./snakeHeadRight.png";
     snakeImg = snakeHeadPositions.right;
     
-    // snakeImg.onload = function() {
-    //     context.drawImage(snakeImg, snakeX, snakeY, snakeWidth, snakeHeight);
-    // }
-
-    //Food
+    //Loading food image
     foodImg = new Image();
     foodImg.src = "./food.png";
     foodImg.onload = function() {
         context.drawImage(foodImg, foodX, foodY, foodWidth, foodHeight);
     }
 
-    //The score
+    //Getting the current and highest score
     score = document.getElementById("score");
     score.innerHTML = currentScore;
     highScore = document.getElementById("highScore");
     highScore.innerHTML = highestScore;
 
-    //Randomly place the food and obstacle somehwere
     updateFoodObst();
 
-    //Will wait for you to press an arrow key so as soon as you let go, snake will change direction
+    //When you press an arrow key, look at changeDirection()
     document.addEventListener("keyup", changeDirection);
 
-    //Calling the update function 10 times a second; every 100 milliseconds (1000/10) it will run the update function
+    //Calling the update function 10 times a second
     setInterval(update, 1000/10); 
 }
 
 //Will pass in a key event and then change direction depending on arrow key pressed
 function changeDirection(e) {
-    //Making sure that when it's going up, it's not also going down (the snake would then eat its own body)
+    //Change direction to go up (but not when currently down) 
     if (e.code == "ArrowUp" && velocityY != 1){
         velocityX = 0;
         velocityY = -1;
         snakeImg = snakeHeadPositions.up;
     }
-    //When going down, make sure it's not also going up
+    //Change direction to go down (but not when currently up) 
     else if (e.code == "ArrowDown" && velocityY != -1){
         velocityX = 0;
         velocityY = 1;
         snakeImg = snakeHeadPositions.down;
     }
-    //When going left, make sure it's not also going right
+    //Change direction to go left (but not when currently right) 
     else if (e.code == "ArrowLeft" && velocityX != 1){
         velocityX = -1;
         velocityY = 0;
         snakeImg = snakeHeadPositions.left;
     }
-    //When going right, make sure it's not also going left
+    //Change direction to go right (but not when currently left) 
     else if (e.code == "ArrowRight" && velocityX != -1){
         velocityX = 1;
         velocityY = 0;
@@ -140,10 +133,11 @@ function changeDirection(e) {
 
 //Update the board  
 function update() {
-    //If game over, return to stop updating the canvas/drawing
+    //If game over, rstop updating the canvas/drawing
     if (gameOver) 
         return;
     
+    //Displaying the title screen
     if (start)
     {
         context.fillStyle = "white";
@@ -163,7 +157,7 @@ function update() {
         context.fillRect(obstX[i], obstY[i], blockSize, blockSize);
     }
 
-    //Draw the food
+    //Draw the food image
     context.drawImage(foodImg, foodX, foodY, foodWidth, foodHeight);
     
     //Snake eating food
@@ -174,10 +168,7 @@ function update() {
         updateFoodObst();
     }
 
-    /*moving the body - starting at the end of the body (the tail) and 
-    before we update the x and y coordinate, we want the tail to get
-    the previous x and y coordinates so that they can go forward*/
-    //We're have the current segment move forward to where the next segment is
+    //Moving the body
     for (let i = snakeBody.length - 1; i > 0; i--) {
         snakeBody[i] = snakeBody[i-1];
     }
@@ -225,7 +216,6 @@ function update() {
     {
         gameOver = gameIsOver();
     }
-
     //...or when the snake has a body
     for (let i = 0; i < snakeBody.length; i++)
     {
@@ -235,11 +225,10 @@ function update() {
     }
 }
 
+//Randomly place food and obstacle
 function updateFoodObst(){
+
     //Randomly place food
-    //Math.random returns a number from 0-1 
-    //Multiplying by cols/rows to get a number from 0-19.99999 so doing floor to get rid of floor to get (0-19)
-    //We then multiply it by blockSize so that it can appear
     foodX = Math.floor(Math.random() * cols) * blockSize;
     foodY = Math.floor(Math.random() * rows) * blockSize;
 
@@ -248,7 +237,6 @@ function updateFoodObst(){
     }
 
     //Make sure the obstacle is not in the same position as the food
-    //If it's not, then give every obstacle a new random placement
     for (let i = 0; i <= currX && i <= currY; i++)
     {
         do
@@ -258,6 +246,7 @@ function updateFoodObst(){
         } while(foodX == obstX && foodY == obstY);
     }
 
+    //Update the number of obstacles to use when 5 more points are reached
     if (currentScore % 5 == 0 && currentScore != 0)
     {
         currX++;
@@ -265,6 +254,7 @@ function updateFoodObst(){
     }
 }
 
+//Display game over and updating high score if needed
 function gameIsOver(){
     if (currentScore > highestScore)
     {
