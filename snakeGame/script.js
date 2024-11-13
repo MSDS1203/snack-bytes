@@ -39,7 +39,7 @@ const returnBtn = document.getElementById("return-btn");
 
 var email, password, signupEmail, signupPassword, confirmSignupEmail, confirmSignUpPassword, signUpUserName;
 
-createacctbtn.addEventListener("click", function() {
+createacctbtn.addEventListener("click", async function() {
   var isVerified = true;
 
   signupEmail = signupEmailIn.value;
@@ -62,29 +62,26 @@ createacctbtn.addEventListener("click", function() {
     isVerified = false;
   }
   
-  if(isVerified) {
-    createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
-      .then((userCredential) => {
-      // Signed in 
+  if (isVerified) {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, signupEmail, signupPassword);
       const user = userCredential.user;
-      // ...
       window.alert("Success! Account created.");
       localStorage.setItem("userEmail", user.email);
       window.location.href = "home.html";
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
+
+      // Add user data to Firestore with user ID
+      await setDoc(doc(db, "userScores", user.uid), {
+        userName: signUpUserName,
+        email: signupEmail
+      });
+
+    } catch (error) {
+      console.error("Error occurred:", error);
       window.alert("Error occurred. Try again.");
-    });
-
-
-    // Add a new document in collection "userScores"
-    await setDoc(doc(db, "cities", "LA"), {
-      userName: signUpUserName
-    });
+    }
   }
+
 });
 
 submitButton.addEventListener("click", function() {
