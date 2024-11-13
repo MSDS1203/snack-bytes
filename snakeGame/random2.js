@@ -279,19 +279,3 @@ function gameIsOver(){
 
     return true;
 }
-
-function saveScore() {
-    const user = firebase.auth().currentUser;
-    if (user) {
-      const userId = user.uid;
-      const highScoreRef = firebase.firestore().collection('highScores').doc(userId);
-  
-      highScoreRef.get().then(doc => {
-        const data = doc.exists ? doc.data() : {};
-        const newHighScore = data.snake > highestScore ? data.snake : highestScore;
-        highScoreRef.set({
-          snake: newHighScore
-        }, { merge: true });
-      });
-    }
-  }
