@@ -1,7 +1,19 @@
-import { doc, updateDoc } from "firebase/firestore";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 
-// Get a reference to the document you want to update
-const docRef = doc(db, "userScores", "srazam5@gmail.com");
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyDcTqPERyxlIKB3CCDY6BgX3tsr6S8UIzU",
+    authDomain: "snack-bytes.firebaseapp.com",
+    projectId: "snack-bytes",
+    storageBucket: "snack-bytes.firebasestorage.app",
+    messagingSenderId: "149505884441",
+    appId: "1:149505884441:web:6aff0e6f5b65d453350588"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 const userEmail = localStorage.getItem("userEmail");
 if (userEmail) {
@@ -10,11 +22,15 @@ if (userEmail) {
   document.getElementById("user-email").textContent = "No user logged in.";
 }
 
-
-async function updateUserName(userName)
-{
-  // Update the document field
-  await updateDoc(docRef, {
-    userName: "userName"
+const signOutButton = document.getElementById("logout");
+signOutButton.addEventListener("click", function(){
+  signOut(auth)
+  .then(() => {
+    localStorage.removeItem("userEmail");
+    window.alert("Logging out.");
+    window.location.href = "index.html";
+  })
+  .catch((error) => {
+    console.log(error);
   });
-}
+})

@@ -1,6 +1,9 @@
+//https://firebase.google.com/docs/firestore/manage-data/add-data
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import { doc, setDoc, getFirestore } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,6 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 const submitButton = document.getElementById("submit");
 const signupButton = document.getElementById("sign-up");
@@ -24,6 +28,7 @@ const passwordInput = document.getElementById("password");
 const main = document.getElementById("main");
 const createacct = document.getElementById("create-acct")
 
+const signUpUserNameIn = document.getElementById("user-name");
 const signupEmailIn = document.getElementById("email-signup");
 const confirmSignupEmailIn = document.getElementById("confirm-email-signup");
 const signupPasswordIn = document.getElementById("password-signup");
@@ -32,7 +37,7 @@ const createacctbtn = document.getElementById("create-acct-btn");
 
 const returnBtn = document.getElementById("return-btn");
 
-var email, password, signupEmail, signupPassword, confirmSignupEmail, confirmSignUpPassword;
+var email, password, signupEmail, signupPassword, confirmSignupEmail, confirmSignUpPassword, signUpUserName;
 
 createacctbtn.addEventListener("click", function() {
   var isVerified = true;
@@ -51,7 +56,8 @@ createacctbtn.addEventListener("click", function() {
       isVerified = false;
   }
   
-  if(signupEmail == null || confirmSignupEmail == null || signupPassword == null || confirmSignUpPassword == null) {
+  signUpUserName = signUpUserNameIn.value;
+  if(signUpUserName == null || signupEmail == null || confirmSignupEmail == null || signupPassword == null || confirmSignUpPassword == null) {
     window.alert("Please fill out all required fields.");
     isVerified = false;
   }
@@ -71,6 +77,12 @@ createacctbtn.addEventListener("click", function() {
       const errorMessage = error.message;
       // ..
       window.alert("Error occurred. Try again.");
+    });
+
+
+    // Add a new document in collection "userScores"
+    await setDoc(doc(db, "cities", "LA"), {
+      userName: signUpUserName
     });
   }
 });
