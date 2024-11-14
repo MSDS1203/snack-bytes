@@ -35,7 +35,7 @@ signOutButton.addEventListener("click", function(){
   .then(() => {
     localStorage.removeItem("userEmail");
     window.alert("Logging out.");
-    window.location.href = "index.html";
+    window.location.href = "login.html";
   })
   .catch((error) => {
     console.log(error);
