@@ -22,6 +22,13 @@ if (userEmail) {
   document.getElementById("user-email").textContent = "No user logged in.";
 }
 
+const userName = localStorage.getItem("userName");
+if (userEmail) {
+  document.getElementById("user-name").textContent = userName;
+} else {
+  document.getElementById("user-name").textContent = "No user logged in.";
+}
+
 const signOutButton = document.getElementById("logout");
 signOutButton.addEventListener("click", function(){
   signOut(auth)

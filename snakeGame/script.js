@@ -3,7 +3,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { doc, setDoc, getFirestore } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { doc, setDoc, getFirestore, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -72,6 +72,7 @@ createacctbtn.addEventListener("click", async function() {
       const user = userCredential.user;
       window.alert("Success! Account created.");
       localStorage.setItem("userEmail", user.email);
+      localStorage.setItem("userName", signUpUserName);
 
       console.log("User ID:", user.uid);
       console.log(auth.currentUser);
@@ -97,27 +98,38 @@ createacctbtn.addEventListener("click", async function() {
 
 });
 
-submitButton.addEventListener("click", function() {
+submitButton.addEventListener("click", async function() {
   email = emailInput.value;
   console.log(email);
   password = passwordInput.value;
   console.log(password);
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
+  try{
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log("Success! Welcome back!");
       window.alert("Success! Welcome back!");
       localStorage.setItem("userEmail", user.email);
+
+      const docRef = doc(db, "userScores", user.uid)
+      const docSnap = await getDoc(docRef);
+
+      if(docSnap.exists()) {
+        console.log("Document data: ", docSnap.data());
+        localStorage.setItem("userName", docSnap.data()["username"]);
+      }
+      else{
+        console.log("document doesn't exist ");
+      }
+
       window.location.href = "home.html";
-    })
-    .catch((error) => {
+    }
+    catch(error){
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log("Error occurred. Try again.");
       window.alert("Error occurred. Try again.");
-    });
+    }
 });
 
 signupButton.addEventListener("click", function() {
