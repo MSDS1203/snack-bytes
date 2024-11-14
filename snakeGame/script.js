@@ -21,6 +21,10 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+console.log("firebase app initialized: ", app.name);
+console.log("firestore initialized: ", !!db);
+
+
 const submitButton = document.getElementById("submit");
 const signupButton = document.getElementById("sign-up");
 const emailInput = document.getElementById("email");
@@ -68,13 +72,22 @@ createacctbtn.addEventListener("click", async function() {
       const user = userCredential.user;
       window.alert("Success! Account created.");
       localStorage.setItem("userEmail", user.email);
-      window.location.href = "home.html";
 
+      console.log("User ID:", user.uid);
+      console.log(auth.currentUser);
+
+      console.log("Attemptying to add user data to firestore:");
       // Add user data to Firestore with user ID
       await setDoc(doc(db, "userScores", user.uid), {
-        userName: signUpUserName,
-        email: signupEmail
+        username: signUpUserName,
+        donut: 0,
+        flappyBat: 0,
+        snake: 0,
+        solitaire: 0
       });
+      console.log("User data added to firestore");
+
+      window.location.href = "home.html";
 
     } catch (error) {
       console.error("Error occurred:", error);
