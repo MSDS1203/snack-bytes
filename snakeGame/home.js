@@ -23,7 +23,7 @@ if (userEmail) {
 }
 
 const userName = localStorage.getItem("userName");
-if (userEmail) {
+if (userName) {
   document.getElementById("user-name").textContent = userName;
 } else {
   document.getElementById("user-name").textContent = "No user logged in.";

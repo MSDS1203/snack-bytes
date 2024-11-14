@@ -38,7 +38,7 @@ var obstY = [];
 var gameOver = false;
 var start = true;
 var currentScore = 0;
-var highestScore = 0;
+//var highestScore = 0;
 
 //When the page loads...
 window.onload = function() {
@@ -72,8 +72,8 @@ window.onload = function() {
     //Getting the current and highest score
     score = document.getElementById("score");
     score.innerHTML = currentScore;
-    highScore = document.getElementById("highScore");
-    highScore.innerHTML = highestScore;
+    //highScore = document.getElementById("highScore");
+    //highScore.innerHTML = highestScore;
 
     updateFoodObst();
 
@@ -256,11 +256,8 @@ function updateFoodObst(){
 
 //Display game over and updating high score if needed
 function gameIsOver(){
-    if (currentScore > highestScore)
-    {
-        highestScore = currentScore;
-        highScore.innerHTML = highestScore;
-    }
+    console.log("Saving current score to localStorage: ", currentScore);
+    localStorage.setItem("currentScoreSnake", currentScore);
     context.fillStyle = "white";
     context.font = '100px Courier New';
     context.fillText("GAME OVER", 100, 250);

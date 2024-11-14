@@ -109,7 +109,7 @@ submitButton.addEventListener("click", async function() {
       const user = userCredential.user;
       console.log("Success! Welcome back!");
       window.alert("Success! Welcome back!");
-      localStorage.setItem("userEmail", user.email);
+      localStorage.setItem("userEmail", user.email);      
 
       const docRef = doc(db, "userScores", user.uid)
       const docSnap = await getDoc(docRef);
