@@ -1,3 +1,48 @@
+#container {
+    max-width: 1400px;
+}
+
 h1 {
     text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+#row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+#game-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.game {
+    border-radius: 20px;
+    width: 300px;
+    overflow: hidden;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+}
+
+.game > div {
+    height: 200px;
+    overflow: hidden;
+}
+
+.game img {
+    object-fit: cover;    
+}
+
+#leaderboard {
+    flex: none;
+    width: 400px;
+    height: 600px;
+    background: yellow;
 }
