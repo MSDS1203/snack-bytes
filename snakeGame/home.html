@@ -5,6 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel = "stylesheet" href = "home.css">
   <title>Home</title>
 </head>
 <body>
@@ -16,7 +17,35 @@
 
   <h2>Snake</h2>
   <button onclick="window.location.href ='snakeGameIndex.html'">Play Game</button>
-  <button onclick="window.location.href ='snakeGameIndex.html'">Show Leaderboard</button>
+  <button id="snakeLBButton">Show Leaderboard</button>
+  <div id="snakeBox">
+    <h3>Leaderboard for Snake</h3>
+    <p id = "scoresForSnake"></p>
+  </div>
+
+  <h2>Donut Jelly</h2>
+  <button>Play Game</button>
+  <button id="donutLBButton">Show Leaderboard</button>
+  <div id="donutBox">
+    <h3>Leaderboard for Donut</h3>
+    <p id = "scoresForDonut"></p>
+  </div>
+
+  <h2>Flappy Bat</h2>
+  <button>Play Game</button>
+  <button id="flappyBatLBButton">Show Leaderboard</button>
+  <div id="flappyBatBox">
+    <h3>Leaderboard for Flappy Bat</h3>
+    <p id = "scoresForFlappyBat"></p>
+  </div>
+
+  <h2>Solitaire</h2>
+  <button>Play Game</button>
+  <button id="solitaireLBButton">Show Leaderboard</button>
+  <div id="solitaireBox">
+    <h3>Leaderboard for Solitaire</h3>
+    <p id = "scoresForSolitaire"></p>
+  </div>
  
 
   <script type="module" src="home.js"></script>

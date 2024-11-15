@@ -1,0 +1,13 @@
+#snakeBox, #donutBox, #solitaireBox, #flappyBatBox {
+    display: none;
+    position: fixed;           /* Keeps the box in a fixed position */
+    top: 20%;                  /* Adjust as needed for vertical positioning */
+    right: 2%;                 /* Position near the right edge */
+    background-color: rgb(255, 195, 240);
+    padding: 6%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 20vw;               /* Width adjusted to fit content */
+    height: 40vh;
+    overflow-y: auto;          /* Allows scrolling if content overflows */
+    z-index: 1000;             /* Ensures it stays above other content */
+}

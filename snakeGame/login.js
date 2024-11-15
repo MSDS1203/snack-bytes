@@ -88,6 +88,26 @@ createacctbtn.addEventListener("click", async function() {
       });
       console.log("User data added to firestore");
 
+      await setDoc(doc(db, "snakeLeaderboard", user.uid), {
+        username: signUpUserName,
+        snake: 0,
+      });
+
+      await setDoc(doc(db, "flappyBatLeaderboard", user.uid), {
+        username: signUpUserName,
+        flappyBat: 0,
+      });
+
+      await setDoc(doc(db, "donutLeaderboard", user.uid), {
+        username: signUpUserName,
+        donut: 0,
+      });
+
+      await setDoc(doc(db, "solitaireLeaderboard", user.uid), {
+        username: signUpUserName,
+        solitaire: 0,
+      });
+
       window.location.href = "home.html";
 
     } catch (error) {

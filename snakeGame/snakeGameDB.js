@@ -43,6 +43,10 @@ onAuthStateChanged(auth, (user) => {
             console.log("getting the doc reference: ", !!docRef);
             const docSnap = await getDoc(docRef);
             console.log("i am now here");
+
+            const docRef1 = doc(db, "snakeLeaderboard", uid);
+            console.log("getting the doc reference for snake leaderboard: ", !!docRef);
+            console.log("i am now here");
     
             if (docSnap.exists()) {
                 console.log("Document data:", docSnap.data()["snake"]);
@@ -52,6 +56,7 @@ onAuthStateChanged(auth, (user) => {
                 {
                     console.log("High score is being updated");
                     await setDoc(docRef, { snake: newHighScore }, { merge: true });
+                    await setDoc(docRef1, { snake: newHighScore }, { merge: true });
                     window.alert("New high score!");
                 }
                 else{
@@ -65,7 +70,6 @@ onAuthStateChanged(auth, (user) => {
         {
             console.error("Error updating high score:", error);
         }
-    
     });
 
   } else {
