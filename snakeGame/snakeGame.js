@@ -1,5 +1,3 @@
-import { updatingScore } from './snakeGameDB.js';
-
 //board
 var blockSize = 25; 
 var rows = 20;
@@ -43,7 +41,7 @@ var currentScore = 0;
 //var highestScore = 0;
 
 //When the page loads...
-window.onload = /*async*/ function() {
+window.onload = function() {
     //Setting up the board
     board = document.getElementById("board"); 
     board.height = rows * blockSize;
@@ -76,7 +74,6 @@ window.onload = /*async*/ function() {
     score.innerHTML = currentScore;
     highScore = document.getElementById("highScore");
 
-    //await updatingScore();
     updateFoodObst();
 
     //When you press an arrow key, look at changeDirection()
@@ -265,7 +262,6 @@ function gameIsOver(){
     context.fillText("GAME OVER", 100, 250);
     context.font = '30px Courier New';
     context.fillText("Press the space bar to play again", 78, 300);
-    updatingScore();
 
     return true;
 }
