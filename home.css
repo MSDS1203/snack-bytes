@@ -25,15 +25,6 @@
     100% { transform: rotate(360deg); }
   }
 
-/*.rotating {
-    transform: rotate(0deg);
-    transition-duration: linear infinite;
-}
-
-.rotating:hover{
-    transform: rotate(360deg)
-}*/
-
 #header {
     background-color: #BFECFF;
     padding: 20px;
