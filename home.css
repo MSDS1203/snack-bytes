@@ -1,13 +1,22 @@
+.space-grotesk-temp {
+    font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
 #container {
     max-width: 1400px;
 }
 
 h1 {
     text-align: center;
+    font-size: 3rem;
 }
 
 h2 {
     text-align: center;
+    margin-bottom: 0;
 }
 
 #row {
@@ -41,16 +50,26 @@ h2 {
 }
 
 .buttons {
+    padding: 15px;
     display: flex;
+    justify-content: space-around;
+
 }
 
 button {
     background-color: #CDC1FF;
+    min-width: 100px;
     padding: 10px;
     text-align: center;
     text-decoration: none;
-    border-radius: 25%;
+    border-radius: 10px;
     border: none;
+    transition-duration: .25s;
+}
+
+button:hover {
+    background-color: #BFECFF;
+    letter-spacing: .15rem;
 }
 
 #leaderboard {
