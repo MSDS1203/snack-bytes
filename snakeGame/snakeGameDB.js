@@ -29,6 +29,23 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
     console.log("UID: ", uid);
+    const scoreRef = collection(db, "userScores");
+    const q = query(collection(db, "cities"), where("capital", "==", true));
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        
+    });
+
+    try{
+        currHighScore = docSnap.data()["snake"];
+
+    }catch(error){
+        console.log("No such document!");
+    }
+
+
+
     submitScore.addEventListener("click", async function() {
         //Getting the current high score to see if it's smaller than the new high score
         console.log("User requested to submit score");
