@@ -41,12 +41,16 @@ h2 {
 }
 
 .img-div {
-    height: 200px;
+    /* height: 200px;
+    width: 300px; */
     overflow: hidden;
 }
 
 .game img {
-    object-fit: cover;    
+    height: 200px;
+    width: 300px;
+    object-fit: cover; 
+    object-position: center;   
 }
 
 .buttons {
@@ -57,20 +61,23 @@ h2 {
 }
 
 button {
+    display: block;
     background-color: #CDC1FF;
-    min-width: 100px;
+    width: 100px;
     padding: 10px;
     text-align: center;
     text-decoration: none;
     border-radius: 10px;
     border: none;
-    transition-duration: .25s;
+    transition-duration: .25s; 
 }
 
 button:hover {
     background-color: #BFECFF;
     letter-spacing: .15rem;
+    width: 150px;
 }
+
 
 #leaderboard {
     display: none;
@@ -79,4 +86,3 @@ button:hover {
     height: 600px;
     background: yellow;
 }
-
