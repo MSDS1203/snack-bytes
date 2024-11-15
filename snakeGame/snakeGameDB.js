@@ -17,6 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const submitScore = document.getElementById("submitScore");
+const highScore = document.getElementById("highScore");
 const auth = getAuth();
 
 console.log("firebase app initialized: ", app.name);
@@ -25,32 +26,26 @@ console.log("firestore initialized: ", !!db);
 var currHighScore;
 var newHighScore;
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (user) {
     const uid = user.uid;
-    console.log("UID: ", uid);
-    const scoreRef = collection(db, "userScores");
-    const q = query(collection(db, "cities"), where("capital", "==", true));
+    
+    console.log("I am now here ur mom");
+    const docRef = doc(db, "userScores", uid);
+    console.log("getting the doc reference to display current high score: ", !!docRef);
+    const docSnap = await getDoc(docRef);
+    console.log("I have the doc snap");
 
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        
-    });
-
-    try{
+    if (docSnap.exists()) {
+        console.log("Current score for", uid, ":", docSnap.data()["snake"]);
         currHighScore = docSnap.data()["snake"];
-
-    }catch(error){
-        console.log("No such document!");
+        highScore.innerHTML = currHighScore;
     }
-
-
 
     submitScore.addEventListener("click", async function() {
         //Getting the current high score to see if it's smaller than the new high score
         console.log("User requested to submit score");
         console.log("Current UID: ", uid);
-        console.log(`Document path: userScores/${uid}`);
     
         newHighScore = Number(localStorage.getItem("currentScoreSnake"));
         console.log("New score to be added: ", newHighScore);
