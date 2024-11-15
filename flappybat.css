@@ -1,0 +1,12 @@
+body {
+    /*font-family:'Courier New', Courier, monospace;*/
+    /*font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;*/
+
+    font-family: Copperplate,Copperplate Gothic Light,fantasy;
+    text-align: center;
+}
+
+#board{
+    /*background-color: skyblue;*/
+    background-image: url("./flappybirdbg.png");
+}
