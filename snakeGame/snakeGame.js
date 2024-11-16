@@ -1,7 +1,7 @@
 //board
 var blockSize = 25; 
-var rows = 20;
-var cols = 30;
+var rows = 27;
+var cols = 50;
 var board;
 var context; //Used to draw with/ our drawing object
 
@@ -12,6 +12,10 @@ var snakeHeight = 31;
 //Width and height of food
 var foodWidth = 20;
 var foodHeight = 20;
+
+//Width and height of obstacle
+var obstWidth = 31;
+var obstHeight = 31;
 
 //Starting the snake at coordinates (50, 50)
 var snakeX = 50;
@@ -67,6 +71,13 @@ window.onload = function() {
     foodImg.src = "./food.png";
     foodImg.onload = function() {
         context.drawImage(foodImg, foodX, foodY, foodWidth, foodHeight);
+    }
+
+    //Loadings obstacle
+    obstacleImg = new Image();
+    obstacleImg.src = "./obstacle.png";
+    obstacleImg.onload = function() {
+        context.drawImage(obstacleImg, obstX, obstY, obstWidth, obstHeight);
     }
 
     //Getting the current and highest score
@@ -141,7 +152,7 @@ function update() {
     {
         context.fillStyle = "white";
         context.font = '100px Courier New';
-        context.fillText("SNAKE", 220, 250);
+        context.fillText("SNAKE", rows*blockSize/3, cols*blockSize/3);
         context.font = '30px Courier New';
         context.fillText("Press an arrow key to begin", 145, 300);
     }
@@ -149,15 +160,14 @@ function update() {
         context.clearRect(0, 0, board.width, board.height);
     }
 
-    //Painting the obstacle
-    for (let i = 0; i <= currX && i <= currY; i++)
-    {
-        context.fillStyle = "white";
-        context.fillRect(obstX[i], obstY[i], blockSize, blockSize);
-    }
-
     //Draw the food image
     context.drawImage(foodImg, foodX, foodY, foodWidth, foodHeight);
+
+    //Draw the obstacle image
+    for (let i = 0; i <= currX && i <= currY; i++)
+    {
+        context.drawImage(obstacleImg, obstX[i], obstY[i], obstWidth, obstHeight);
+    }
     
     //Snake eating food
     if (snakeX == foodX && snakeY == foodY){
@@ -211,25 +221,43 @@ function update() {
 
     //The snake bumps into an obstacle...
     //...when the snake only has a head
-    if (snakeBody.length == 0 && snakeX == obstX[0] && snakeY == obstY[0])
+    // if (snakeBody.length == 0 && snakeX == obstX[0] && snakeY == obstY[0])
+    // {
+    //     gameOver = gameIsOver();
+    // }
+    // //...or when the snake has a body
+    // for (let i = 0; i < snakeBody.length; i++)
+    // {
+    //     if (snakeX == obstX[i] && snakeY == obstY[i]){
+    //         gameOver = gameIsOver();
+    //     }
+    // }
+
+    for (let i = 0; i < currX && i < currY; i++)
     {
-        gameOver = gameIsOver();
-    }
-    //...or when the snake has a body
-    for (let i = 0; i < snakeBody.length; i++)
-    {
-        if (snakeX == obstX[i] && snakeY == obstY[i]){
+        if (snakeBody.length == 0 && snakeX < obstX[i] + obstWidth && 
+                snakeX < obstX[i] + obstWidth && snakeX + snakeWidth > obstX && 
+                snakeY < obstY[i]+ obstHeight && snakeY + snakeHeight > obstY[i]){
             gameOver = gameIsOver();
         }
     }
+
 }
 
 //Randomly place food and obstacle
 function updateFoodObst(){
 
-    //Randomly place food
+    //Randomly place food not in the same position as the snake:
     foodX = Math.floor(Math.random() * cols) * blockSize;
     foodY = Math.floor(Math.random() * rows) * blockSize;
+    for(let i = 0; i < currentScore + 1; i++)
+    {
+        do{
+            foodX = Math.floor(Math.random() * cols) * blockSize;
+            foodY = Math.floor(Math.random() * rows) * blockSize;
+        }while([foodX, foodY] == snakeBody[i]);
+    }
+    
 
     foodImg.onload = function() {
         context.drawImage(foodImg, foodX, foodY, foodWidth, foodHeight);
