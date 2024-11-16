@@ -6,3 +6,7 @@ p{
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
 }
+
+#board{
+    background-image: url("./background.png")
+}
