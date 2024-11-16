@@ -1,7 +1,7 @@
 //board
 var blockSize = 25; 
-var rows = 27;
-var cols = 50;
+var rows = 20;
+var cols = 30;
 var board;
 var context; //Used to draw with/ our drawing object
 
@@ -33,8 +33,7 @@ var foodX = 200;
 var foodY = 200;
 
 //drawing obstacle
-var currX = 0;
-var currY = 0;
+var numOfObst = 0;
 var obstX = [];
 var obstY = [];
 
@@ -42,7 +41,6 @@ var obstY = [];
 var gameOver = false;
 var start = true;
 var currentScore = 0;
-//var highestScore = 0;
 
 //When the page loads...
 window.onload = function() {
@@ -133,8 +131,7 @@ function changeDirection(e) {
         velocityY = 0;
         obstX = [];
         obstY = [];
-        currX = 0;
-        currY = 0;
+        numOfObst = 0;
         updateFoodObst();
     }
 
@@ -164,7 +161,7 @@ function update() {
     context.drawImage(foodImg, foodX, foodY, foodWidth, foodHeight);
 
     //Draw the obstacle image
-    for (let i = 0; i <= currX && i <= currY; i++)
+    for (let i = 0; i <= numOfObst; i++)
     {
         context.drawImage(obstacleImg, obstX[i], obstY[i], obstWidth, obstHeight);
     }
@@ -219,25 +216,10 @@ function update() {
         }
     }
 
-    //The snake bumps into an obstacle...
-    //...when the snake only has a head
-    // if (snakeBody.length == 0 && snakeX == obstX[0] && snakeY == obstY[0])
-    // {
-    //     gameOver = gameIsOver();
-    // }
-    // //...or when the snake has a body
-    // for (let i = 0; i < snakeBody.length; i++)
-    // {
-    //     if (snakeX == obstX[i] && snakeY == obstY[i]){
-    //         gameOver = gameIsOver();
-    //     }
-    // }
-
-    for (let i = 0; i < currX && i < currY; i++)
+    //The snake bumps into an obstacle
+    for (let i = 0; i < obstX.length; i++)
     {
-        if (snakeBody.length == 0 && snakeX < obstX[i] + obstWidth && 
-                snakeX < obstX[i] + obstWidth && snakeX + snakeWidth > obstX && 
-                snakeY < obstY[i]+ obstHeight && snakeY + snakeHeight > obstY[i]){
+        if (snakeX == obstX[i] && snakeY == obstY[i]){
             gameOver = gameIsOver();
         }
     }
@@ -264,7 +246,7 @@ function updateFoodObst(){
     }
 
     //Make sure the obstacle is not in the same position as the food
-    for (let i = 0; i <= currX && i <= currY; i++)
+    for (let i = 0; i <= numOfObst; i++)
     {
         do
         {
@@ -276,8 +258,7 @@ function updateFoodObst(){
     //Update the number of obstacles to use when 5 more points are reached
     if (currentScore % 5 == 0 && currentScore != 0)
     {
-        currX++;
-        currY++;
+        numOfObst++;
     }
 }
 
