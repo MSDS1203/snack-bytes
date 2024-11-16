@@ -105,7 +105,7 @@ function update() {
 
     //score
     context.fillStyle = "white";
-    context.font="45px sans-serif";
+    context.font="45px MidnightMinutes_DEMO";
     context.fillText(score, 5, 45);
 
     if (gameOver) {

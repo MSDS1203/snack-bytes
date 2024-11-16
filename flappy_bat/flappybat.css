@@ -2,11 +2,11 @@ body {
     /*font-family:'Courier New', Courier, monospace;*/
     /*font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;*/
 
-    font-family: Copperplate,Copperplate Gothic Light,fantasy;
+    /*font-family: 'DevilCandle_PERSONAL_USE_ONLY',*/
+    font-family: 'MidnightMinutes_DEMO';
     text-align: center;
 }
 
 #board{
-    /*background-color: skyblue;*/
     background-image: url("./background.png");
 }
