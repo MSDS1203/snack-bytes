@@ -49,16 +49,16 @@ window.onload = function() {
 
     //load images
     birdImg = new Image();
-    birdImg.src = "./flappybird.png";
+    birdImg.src = "./flappybat.png";
     birdImg.onload = function() {
         context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
     }
 
     topPipeImg = new Image();
-    topPipeImg.src = "./toppipe.png";
+    topPipeImg.src = "./bluepipe.png";
 
     bottomPipeImg = new Image();
-    bottomPipeImg.src = "./bottompipe.png";
+    bottomPipeImg.src = "./pinkpipe.png";
 
     requestAnimationFrame(update);
     setInterval(placePipes, 1500); //every 1.5 seconds
@@ -165,13 +165,13 @@ function moveBird(e) {
         velocityY = -6;
         setInterval(function(){
             var i = 0; 
-            var pics = ["./flappybird.png", "./pixil-frame-0.png"];
+            var pics = ["./flappybat.png", "./Flyingbat.png"];
             birdImg.src = pics[i];
             //i = (i+1) % pics.length;
             //birdImg.src = pics[i];
         }
         ,500);
-        birdImg.src =  "./pixil-frame-0.png";
+        birdImg.src =  "./Flyingbat.png";
         //reset game
         if (gameOver) {
             bird.y = birdY;
