@@ -1,7 +1,4 @@
 body {
-    /*font-family:'Courier New', Courier, monospace;*/
-    /*font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;*/
-
     /*font-family: 'DevilCandle_PERSONAL_USE_ONLY',*/
     font-family: 'MidnightMinutes_DEMO';
     text-align: center;
@@ -9,4 +6,36 @@ body {
 
 #board{
     background-image: url("./background.png");
+    justify-content: space-around;
+    border:7px solid;
+    border-style: solid;
+    border-color: #b97cff;
+}
+
+.return {
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+}
+
+button {
+    display: block;
+    background-color: #6ee0e8;
+    width: 100px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    border: none;
+    transition-duration: .25s; 
+}
+
+button:hover {
+    background-color: #e68b8b;
+    letter-spacing: .15rem;
+    width: 150px;
+}
+
+button:active {
+    background-color: #e68b8b;
 }
