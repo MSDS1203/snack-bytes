@@ -1,7 +1,7 @@
 //board
 var blockSize = 25; 
 var rows = 20;
-var cols = window.innerHeight/20;
+var cols = Math.floor(window.innerHeight/20);
 var board;
 var context; //Used to draw with/ our drawing object
 
@@ -14,8 +14,8 @@ var foodWidth = 20;
 var foodHeight = 20;
 
 //Width and height of obstacle
-var obstWidth = 31;
-var obstHeight = 31;
+var obstWidth = 30;
+var obstHeight = 30;
 
 //Starting the snake at coordinates (50, 50)
 var snakeX = 50;
@@ -163,6 +163,7 @@ function update() {
     //Draw the obstacle image(s)
     for (let i = 0; i <= numOfObst; i++)
     {
+        console.log("There is an obstacle here: ", obstX[i], ", ", obstY[i]);
         context.drawImage(obstacleImg, obstX[i], obstY[i], obstWidth, obstHeight);
     }
     
@@ -234,21 +235,21 @@ function updateFoodObst(){
     foodY = Math.floor(Math.random() * rows) * blockSize;
     for(let i = 0; i < snakeBody.length; i++)
     {
-        if ([foodX, foodY] == snakeBody[i]){
-            foodX = Math.floor(Math.random() * cols - 5) * blockSize;
-            foodY = Math.floor(Math.random() * rows - 5) * blockSize;
+        if (foodX == snakeBody[i][0] && foodY == snakeBody[i][1]){
+            foodX = Math.floor(Math.random() * cols) * blockSize;
+            foodY = Math.floor(Math.random() * rows) * blockSize;
         }
     }
 
     //Make sure the obstacle is not in the same position as the food nor the snake body
     for (let i = 0; i <= numOfObst; i++)
     {
-        obstX[i] = Math.floor(Math.random() * cols - 5) * blockSize;
-        obstY[i] = Math.floor(Math.random() * rows - 5) * blockSize;
+        obstX[i] = Math.floor(Math.random() * cols) * blockSize;
+        obstY[i] = Math.floor(Math.random() * rows) * blockSize;
 
         for(let j = 0; j < snakeBody.length; j++)
         {
-            if((obstX[i] == foodX && obstY[i]) == foodY || ([obstX[i], obstY[i]] == snakeBody[j]))
+            if((obstX[i] == foodX && obstY[i] == foodY) || (obstX[i] == snakeBody[j][0] && obstY[i] == snakeBody[j][1]))
             {
                 obstX[i] = Math.floor(Math.random() * cols) * blockSize;
                 obstY[i] = Math.floor(Math.random() * rows) * blockSize;
@@ -256,8 +257,8 @@ function updateFoodObst(){
         }
     }
     
-    //Update the number of obstacles to use when 7 more points are reached
-    if (currentScore % 7 == 0 && currentScore != 0)
+    //Update the number of obstacles to use when 5 more points are reached
+    if (currentScore % 5 == 0 && currentScore != 0)
     {
         numOfObst++;
     }
