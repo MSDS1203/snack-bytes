@@ -10,6 +10,8 @@ body {
     border:7px solid;
     border-style: solid;
     border-color: #b97cff;
+    position:relative;
+    top: 25px;
 }
 
 .return {
@@ -28,6 +30,8 @@ button {
     border-radius: 10px;
     border: none;
     transition-duration: .25s; 
+    position: relative;
+    top: 15px;
 }
 
 button:hover {
