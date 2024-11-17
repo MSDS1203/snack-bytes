@@ -1,7 +1,7 @@
 //board
 var blockSize = 25; 
 var rows = 20;
-var cols = 30;
+var cols = Math.floor(window.innerHeight/20);
 var board;
 var context; //Used to draw with/ our drawing object
 
@@ -12,6 +12,10 @@ var snakeHeight = 31;
 //Width and height of food
 var foodWidth = 20;
 var foodHeight = 20;
+
+//Width and height of obstacle
+var obstWidth = 30;
+var obstHeight = 30;
 
 //Starting the snake at coordinates (50, 50)
 var snakeX = 50;
@@ -29,8 +33,7 @@ var foodX = 200;
 var foodY = 200;
 
 //drawing obstacle
-var currX = 0;
-var currY = 0;
+var numOfObst = 0;
 var obstX = [];
 var obstY = [];
 
@@ -38,7 +41,6 @@ var obstY = [];
 var gameOver = false;
 var start = true;
 var currentScore = 0;
-//var highestScore = 0;
 
 //When the page loads...
 window.onload = function() {
@@ -67,6 +69,13 @@ window.onload = function() {
     foodImg.src = "./food.png";
     foodImg.onload = function() {
         context.drawImage(foodImg, foodX, foodY, foodWidth, foodHeight);
+    }
+
+    //Loadings obstacle
+    obstacleImg = new Image();
+    obstacleImg.src = "./obstacle.png";
+    obstacleImg.onload = function() {
+        context.drawImage(obstacleImg, obstX, obstY, obstWidth, obstHeight);
     }
 
     //Getting the current and highest score
@@ -122,8 +131,7 @@ function changeDirection(e) {
         velocityY = 0;
         obstX = [];
         obstY = [];
-        currX = 0;
-        currY = 0;
+        numOfObst = 0;
         updateFoodObst();
     }
 
@@ -135,29 +143,29 @@ function update() {
     //If game over, rstop updating the canvas/drawing
     if (gameOver) 
         return;
-    
+
     //Displaying the title screen
     if (start)
     {
-        context.fillStyle = "white";
+        context.fillStyle = "black";
         context.font = '100px Courier New';
-        context.fillText("SNAKE", 220, 250);
+        context.fillText("SNAKE", rows*blockSize, cols*blockSize/6);
         context.font = '30px Courier New';
-        context.fillText("Press an arrow key to begin", 145, 300);
+        context.fillText("Press an arrow key to begin", rows*blockSize/1.6, cols*blockSize/5);
     }
     else{
         context.clearRect(0, 0, board.width, board.height);
     }
 
-    //Painting the obstacle
-    for (let i = 0; i <= currX && i <= currY; i++)
-    {
-        context.fillStyle = "white";
-        context.fillRect(obstX[i], obstY[i], blockSize, blockSize);
-    }
-
     //Draw the food image
     context.drawImage(foodImg, foodX, foodY, foodWidth, foodHeight);
+
+    //Draw the obstacle image(s)
+    for (let i = 0; i <= numOfObst; i++)
+    {
+        console.log("There is an obstacle here: ", obstX[i], ", ", obstY[i]);
+        context.drawImage(obstacleImg, obstX[i], obstY[i], obstWidth, obstHeight);
+    }
     
     //Snake eating food
     if (snakeX == foodX && snakeY == foodY){
@@ -186,18 +194,18 @@ function update() {
 
     //Drawing body segments
     for (let i = 0; i < snakeBody.length; i++){
-        context.fillStyle = "#4caf50";
+        context.fillStyle = "#ffcdd2";
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
 
     //game over conditions
     ////////////////////////////////////
     //going out of bounds
-    if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows * blockSize){
+    if (snakeX < 0 || snakeX >= cols*blockSize || snakeY < 0 || snakeY >= rows * blockSize){
         gameOver = gameIsOver();
     } 
     for (let i = 0; i < snakeBody.length; i++) {
-        if (snakeBody[i][0] < 0 || snakeBody[i][0] > cols * blockSize || snakeBody[i][1] < 0 || snakeBody[i][1] > rows * blockSize){
+        if (snakeBody[i][0] < 0 || snakeBody[i][0] >= cols * blockSize || snakeBody[i][1] < 0 || snakeBody[i][1] >= rows * blockSize){
             gameOver = gameIsOver();
         }
     }
@@ -209,59 +217,62 @@ function update() {
         }
     }
 
-    //The snake bumps into an obstacle...
-    //...when the snake only has a head
-    if (snakeBody.length == 0 && snakeX == obstX[0] && snakeY == obstY[0])
-    {
-        gameOver = gameIsOver();
-    }
-    //...or when the snake has a body
-    for (let i = 0; i < snakeBody.length; i++)
+    //The snake bumps into an obstacle
+    for (let i = 0; i < obstX.length; i++)
     {
         if (snakeX == obstX[i] && snakeY == obstY[i]){
             gameOver = gameIsOver();
         }
     }
+
 }
 
 //Randomly place food and obstacle
 function updateFoodObst(){
 
-    //Randomly place food
+    //Randomly place food not in the same position as the snake body
     foodX = Math.floor(Math.random() * cols) * blockSize;
     foodY = Math.floor(Math.random() * rows) * blockSize;
-
-    foodImg.onload = function() {
-        context.drawImage(foodImg, foodX, foodY, foodWidth, foodHeight);
-    }
-
-    //Make sure the obstacle is not in the same position as the food
-    for (let i = 0; i <= currX && i <= currY; i++)
+    for(let i = 0; i < snakeBody.length; i++)
     {
-        do
-        {
-            obstX[i] = Math.floor(Math.random() * cols) * blockSize;
-            obstY[i] = Math.floor(Math.random() * rows) * blockSize;
-        } while(foodX == obstX && foodY == obstY);
+        if (foodX == snakeBody[i][0] && foodY == snakeBody[i][1]){
+            foodX = Math.floor(Math.random() * cols) * blockSize;
+            foodY = Math.floor(Math.random() * rows) * blockSize;
+        }
     }
 
+    //Make sure the obstacle is not in the same position as the food nor the snake body
+    for (let i = 0; i <= numOfObst; i++)
+    {
+        obstX[i] = Math.floor(Math.random() * cols) * blockSize;
+        obstY[i] = Math.floor(Math.random() * rows) * blockSize;
+
+        for(let j = 0; j < snakeBody.length; j++)
+        {
+            if((obstX[i] == foodX && obstY[i] == foodY) || (obstX[i] == snakeBody[j][0] && obstY[i] == snakeBody[j][1]))
+            {
+                obstX[i] = Math.floor(Math.random() * cols) * blockSize;
+                obstY[i] = Math.floor(Math.random() * rows) * blockSize;
+            } 
+        }
+    }
+    
     //Update the number of obstacles to use when 5 more points are reached
     if (currentScore % 5 == 0 && currentScore != 0)
     {
-        currX++;
-        currY++;
+        numOfObst++;
     }
 }
 
 //Display game over and updating high score if needed
 function gameIsOver(){
     console.log("Saving current score to localStorage: ", currentScore);
-    localStorage.setItem("currentScoreSnake", currentScore); //FOR EVERYONE TO ADD - PUTTING THE CURRENT SCORE INTO LOCAL STORAGE
-    context.fillStyle = "white";
+    localStorage.setItem("currentScoreSnake", currentScore);
+    context.fillStyle = "black";
     context.font = '100px Courier New';
-    context.fillText("GAME OVER", 100, 250);
+    context.fillText("GAME OVER", rows*blockSize/1.5, cols*blockSize/7);
     context.font = '30px Courier New';
-    context.fillText("Press the space bar to play again", 78, 300);
+    context.fillText("Press the space bar to play again", rows*blockSize/1.8, cols*blockSize/6);
 
     return true;
 }
