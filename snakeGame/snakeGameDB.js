@@ -3,7 +3,7 @@ import { doc, setDoc, getFirestore, getDoc } from "https://www.gstatic.com/fireb
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDcTqPERyxlIKB3CCDY6BgX3tsr6S8UIzU",
     authDomain: "snack-bytes.firebaseapp.com",
@@ -15,59 +15,75 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
-const submitScore = document.getElementById("submitScore");
-const highScore = document.getElementById("highScore");
+
+// Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
 
+//Getting the HTML elements that contain the button and showing the high score respectively
+const submitScore = document.getElementById("submitScore");
+const highScore = document.getElementById("highScore");
+
+//Checking if the firebase application and the firestore database has been gotten
 console.log("firebase app initialized: ", app.name);
 console.log("firestore initialized: ", !!db);
 
 var currHighScore;
 var newHighScore;
 
+//Checking the current state of the current user
 onAuthStateChanged(auth, async (user) => {
+    //Checking if the current user logged in is authenticated; is the only way to make read/writes to the DB
     if (user) {
+        //Getting the current user's UID - what each document is
         const uid = user.uid;
         
-        console.log("I am now here ur mom");
+        //Getting all the document from the database(db), collection(userScores), and document (uid) respectively 
         const docRef = doc(db, "userScores", uid);
-        console.log("getting the doc reference to display current high score: ", !!docRef);
+        console.log("getting the collection reference to display current high score: ", !!docRef);
+
+        //Same thing but for the game's leaderboard 
+        //FOR EVERYONE TO CHANGE - "snakeLeaderboard" to whatever your game's leaderboard is
+        const docRef1 = doc(db, "snakeLeaderboard", uid);
+        console.log("getting the doc reference for snake leaderboard: ", !!docRef1);
+
+        //Getting the document
         const docSnap = await getDoc(docRef);
-        console.log("I have the doc snap");
+        console.log("I have the doc");
     
+        //If the document exists, when the user first logs in, show their current high score
         if (docSnap.exists()) {
             console.log("Current score for", uid, ":", docSnap.data()["snake"]);
             currHighScore = docSnap.data()["snake"];
             highScore.innerHTML = currHighScore;
         }
     
+        //When the user presses the submit score button...
         submitScore.addEventListener("click", async function() {
-            //Getting the current high score to see if it's smaller than the new high score
             console.log("User requested to submit score");
-            console.log("Current UID: ", uid);
-        
+            
+            //Getting the current score the user has from local storage
+            //FOR EVERYONE - CHANGE "currentScoreSnake" TO WHAT YOU HAVE YOUR CURRENT SCORE SAVED IN STORAGE AS
             newHighScore = Number(localStorage.getItem("currentScoreSnake"));
             console.log("New score to be added: ", newHighScore);
         
             try{
-                const docRef = doc(db, "userScores", uid);
-                console.log("getting the doc reference: ", !!docRef);
-                const docSnap = await getDoc(docRef);
-                console.log("i am now here");
-        
-                const docRef1 = doc(db, "snakeLeaderboard", uid);
-                console.log("getting the doc reference for snake leaderboard: ", !!docRef);
-                console.log("i am now here");
-        
                 if (docSnap.exists()) {
                     console.log("Document data:", docSnap.data()["snake"]);
-                    currHighScore = docSnap.data()["snake"];
+                    //Getting the current high score in the database
+                    //FOR EVERYONE - change "snake" to your game as written in the userScores collection
+                    currHighScore = docSnap.data()["snake"]; 
         
+                    //Updatting and displaying the new high score if the one currently in the database is lower
                     if(newHighScore > currHighScore)
                     {
                         console.log("High score is being updated");
-                        await setDoc(docRef, { snake: newHighScore }, { merge: true });
+
+                        //Using "merge" to add the new data to the respective documents; not doing so would overwrite everything
+                        //FOR EVERYONE TO CHANGE - change snake to your game name as written in the document
+                        await setDoc(docRef, { snake: newHighScore }, { merge: true }); 
                         await setDoc(docRef1, { snake: newHighScore }, { merge: true });
                         window.alert("New high score!");
                         highScore.innerHTML = newHighScore;
@@ -85,7 +101,8 @@ onAuthStateChanged(auth, async (user) => {
             }
         });
     
-    } else {
+    }  
+    else {
         console.log("User is not signed in");
         window.alert("You're not signed in");
     }
