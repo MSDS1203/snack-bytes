@@ -20,6 +20,16 @@
     justify-content: space-between;
 }
 
+#logout {
+    text-decoration: underline;
+    transition-duration: .25s;
+}
+
+#logout:hover {
+    cursor: pointer;
+    letter-spacing: .15rem;
+}
+
 #header img {
     width: 30px;
     height: 30px;

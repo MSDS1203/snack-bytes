@@ -28,7 +28,7 @@ if (userEmail) {
 
 const userName = localStorage.getItem("userName");
 if (userName) {
-  document.getElementById("username").textContent = userName;
+  document.getElementById("username").textContent = userName + "!";
 } else {
   document.getElementById("username").textContent = "No user logged in.";
 }
