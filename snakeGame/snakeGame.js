@@ -143,11 +143,11 @@ function update() {
     //If game over, rstop updating the canvas/drawing
     if (gameOver) 
         return;
-    
+
     //Displaying the title screen
     if (start)
     {
-        context.fillStyle = "white";
+        context.fillStyle = "black";
         context.font = '100px Courier New';
         context.fillText("SNAKE", rows*blockSize, cols*blockSize/6);
         context.font = '30px Courier New';
@@ -193,18 +193,18 @@ function update() {
 
     //Drawing body segments
     for (let i = 0; i < snakeBody.length; i++){
-        context.fillStyle = "#4caf50";
+        context.fillStyle = "#ffcdd2";
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
 
     //game over conditions
     ////////////////////////////////////
     //going out of bounds
-    if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows * blockSize){
+    if (snakeX < 0 || snakeX >= cols*blockSize || snakeY < 0 || snakeY >= rows * blockSize){
         gameOver = gameIsOver();
     } 
     for (let i = 0; i < snakeBody.length; i++) {
-        if (snakeBody[i][0] < 0 || snakeBody[i][0] > cols * blockSize || snakeBody[i][1] < 0 || snakeBody[i][1] > rows * blockSize){
+        if (snakeBody[i][0] < 0 || snakeBody[i][0] >= cols * blockSize || snakeBody[i][1] < 0 || snakeBody[i][1] >= rows * blockSize){
             gameOver = gameIsOver();
         }
     }
@@ -232,21 +232,21 @@ function updateFoodObst(){
     //Randomly place food not in the same position as the snake body
     foodX = Math.floor(Math.random() * cols) * blockSize;
     foodY = Math.floor(Math.random() * rows) * blockSize;
-    for(let i = 0; i < currentScore + 1; i++)
+    for(let i = 0; i < snakeBody.length; i++)
     {
         if ([foodX, foodY] == snakeBody[i]){
-            foodX = Math.floor(Math.random() * cols) * blockSize;
-            foodY = Math.floor(Math.random() * rows) * blockSize;
+            foodX = Math.floor(Math.random() * cols - 5) * blockSize;
+            foodY = Math.floor(Math.random() * rows - 5) * blockSize;
         }
     }
 
     //Make sure the obstacle is not in the same position as the food nor the snake body
     for (let i = 0; i <= numOfObst; i++)
     {
-        obstX[i] = Math.floor(Math.random() * cols) * blockSize;
-        obstY[i] = Math.floor(Math.random() * rows) * blockSize;
+        obstX[i] = Math.floor(Math.random() * cols - 5) * blockSize;
+        obstY[i] = Math.floor(Math.random() * rows - 5) * blockSize;
 
-        for(let j = 0; j < currentScore + 1; j++)
+        for(let j = 0; j < snakeBody.length; j++)
         {
             if((obstX[i] == foodX && obstY[i]) == foodY || ([obstX[i], obstY[i]] == snakeBody[j]))
             {
@@ -267,7 +267,7 @@ function updateFoodObst(){
 function gameIsOver(){
     console.log("Saving current score to localStorage: ", currentScore);
     localStorage.setItem("currentScoreSnake", currentScore);
-    context.fillStyle = "white";
+    context.fillStyle = "black";
     context.font = '100px Courier New';
     context.fillText("GAME OVER", rows*blockSize/1.5, cols*blockSize/7);
     context.font = '30px Courier New';
