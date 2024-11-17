@@ -397,7 +397,7 @@
     function win() {
         clearInterval(intervalId);
         winMessage.style.display = "flex";
-        finalTime.innerHTML = minCnt + ":" + secCnt;
+        finalTime.innerHTML = minCnt + ":" + String(secCnt).padStart(2, '0');
     }
 
     function reset() {
