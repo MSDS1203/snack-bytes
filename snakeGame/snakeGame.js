@@ -266,7 +266,7 @@ function updateFoodObst(){
 
 //Display game over and updating high score if needed
 function gameIsOver(){
-    console.log("Saving current score to localStorage: ", currentScore);
+    console.log("Saving current score to localStorage: ", currentScore); //FOR EVERYONE TO ADD - PUTTING THE CURRENT SCORE INTO LOCAL STORAGE
     localStorage.setItem("currentScoreSnake", currentScore);
     context.fillStyle = "black";
     context.font = '100px Courier New';
