@@ -11,6 +11,8 @@ console.log("start");
 var suits = ["hearts", "diamonds", "clubs", "spades"];
 var values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
+var d = document;
+console.log(document);
 var deck = []; // holder for all cards
 var stock = []; // deck to draw from
 var discard = []; // cards not used from deck
@@ -37,21 +39,21 @@ table['pile-slots'] = slots;
 var playedCards = '#discard .card,' + '#suit-slots .card,' + '#pile-slots .card:last-child';
 
 // canvas features
-var _timer = document.querySelector('#score .timer');
-var _timerSpan = document.querySelector('#score .timer span');
-var _moveCount = document.querySelector('#score .moves');
-var _moveCountSpan = document.querySelector('#score .moves span');
-var _score = document.querySelector('#score .score');
-var _scoreSpan = document.querySelector('#score .score span');
-var _playPause = document.querySelector('#play-pause');
-var _gameBoard = document.querySelector('#table');
-var _upper = document.querySelector('#table .upper-row');
-var _lower = document.querySelector('#table .lower-row');
-var _deckPile = document.querySelector('#deck-pile');
-var _discardPile = document.querySelector('#discard');
-var _suitSlots = document.querySelector('#suit-slots');
-var _pileSlots = document.querySelector('#pile-slots');
-var _autoWin = document.querySelector('#auto-win');
+var _timer = d.querySelector('#score .timer');
+var _timerSpan = d.querySelector('#score .timer span');
+var _moveCount = d.querySelector('#score .moves');
+var _moveCountSpan = d.querySelector('#score .moves span');
+var _score = d.querySelector('#score .score');
+var _scoreSpan = d.querySelector('#score .score span');
+var _playPause = d.querySelector('#play-pause');
+var _gameBoard = d.querySelector('#table');
+var _upper = d.querySelector('#table .upper-slots');
+var _lower = d.querySelector('#table .lower-slots');
+var _deckPile = d.querySelector('#deck-pile');
+var _discardPile = d.querySelector('#discard');
+var _suitSlots = d.querySelector('#suit-slots');
+var _pileSlots = d.querySelector('#pile-slots');
+var _autoWin = d.querySelector('#auto-win');
 
 // other features
 var clock = 0;
@@ -62,9 +64,11 @@ var lastEventTime = 0;
 var unplayedCards = [];
 
 deck = getDeck(); // create deck
+console.log(deck);
 console.log("create deck");
 deck = shuffle(deck); // shuffles deck
 console.log("shuffle");
+console.log(deck);
 table = dealCards(deck, table); // deal deck
 console.log("dealing");
 renderTable(table, playedCards); // render table
@@ -101,10 +105,12 @@ function shuffle(deck) {
         deck[place1] = deck[place2];
         deck[place2] = temp;
     }
+    return deck;
 }
 
 function dealCards(deck, table) {
     table['deck-pile'] = deck;
+    console.log(deck);
     var tab = table['pile-slots'];
     for ( var row = 1; row <= 7; row++ ) {
         for ( var pile = row; pile <= 7; pile++ ) {
@@ -117,7 +123,7 @@ function dealCards(deck, table) {
 
 function move(from, to, pop, selectedCards = 1) {
     if( pop !== true ) {
-        var card = from.shift();
+        var card= from.shift();
         to.push(card);
     } else {
         while ( selectedCards ) {
@@ -144,7 +150,7 @@ function renderTable(table, playedCards) {
     update(table['spades'], '#spades ul', playedCards);
     var tab = table['pile-slots'];
     for ( var i = 1; i <= 7; i++ ) {
-        update(tab[i], '#pile-slots li:child('+i+') ul', playedCards, true);
+        update(tab[i], '#pile-slots li:nth-child('+i+') ul', playedCards, true);
     }
 
     // get unplayed cards
@@ -152,13 +158,13 @@ function renderTable(table, playedCards) {
     sizeCards();
 
     // show table
-    table.style.opacity = '100';
+    _gameBoard.style.opacity = '100';
     console.log(table);
     return;
 }
 
 function update(pile, selector, playedCards, append) {
-    var e = document.querySelector(selector);
+    var e = d.querySelector(selector);
     var children = e.children;
     var grandparent = e.parentElement.parentElement;
     e.innerHTML = '';
@@ -180,13 +186,12 @@ function update(pile, selector, playedCards, append) {
     return pile;
 }
 
-// get HTML template for cards
 function getTemplate(card) {
-    var value = card[0]; // get vaule
-    var suit = card[1]; // get suit
-    // HTML template
-    var html = document.querySelector('.template li[data-rank="'+value+'"]').innerHTML;
-    // search/replave suit variable
+    var value = card.Value;
+    var suit = card.Suit;
+
+    var html = d.querySelector('.card li[data-rank="'+value+'"]').innerHTML;
+
     html = html.replace('{{suit}}', suit);
     return html;
 }
@@ -194,15 +199,16 @@ function getTemplate(card) {
 function createCard(card, selector, html, append) {
     var value = card[0]; // get value
     var suit = card[1]; // get suit
+    var temp = selector.includes('#spades');
     // get pile based on what the user clicks
-    if ( selector.includes('#deck-pile') ) var p = 'deck-pile';
-    if ( selector.includes('#discard') ) var p = 'discard';
-    if ( selector.includes('#hearts') ) var p = 'hearts';
-    if ( selector.includes('#diamonds') ) var p = 'diamonds';
-    if ( selector.includes('#clubs') ) var p = 'clubs';
-    if ( selector.inlcudes('#spades') ) var p = 'spades';
-    if ( selector.includes('#pile-slots') ) var p = 'pile-slots';
-    var e = document.createElement('li'); // create li element for the selected pile/card
+    if (selector.includes('#deck-pile')) var p = 'deck-pile';
+    if (selector.includes('#discard')) var p = 'discard';
+    if (selector.includes('#hearts')) var p = 'hearts';
+    if (selector.includes('#diamonds')) var p = 'diamonds';
+    if (selector.includes('#clubs')) var p = 'clubs';
+    if (temp) var p = 'spades';
+    if (selector.includes('#pile-slots')) var p = 'pile-slots';
+    var e = d.createElement('li'); // create li element for the selected pile/card
     e.className = 'card'; // add .card class to element
     e.dataset.value = value; // set value attribute
     e.dataset.suit = suit; // set suit attribute
@@ -210,7 +216,7 @@ function createCard(card, selector, html, append) {
     e.dataset.selected = 'false'; // set selected attribute
     e.innerHTML = html; // insert html to element
     // query for pile
-    var pile = document.querySelector(selector);
+    var pile = d.querySelector(selector);
     // append to selected pile
     if ( append ) pile.appendChild(e);
     // or prepend to selected pile
@@ -220,7 +226,7 @@ function createCard(card, selector, html, append) {
 
 function checkForPlayedCards(playedCards) {
     // query
-    var eles = document.querySelectorAll('.card[data-played="true"]');
+    var eles = d.querySelectorAll('.card[data-played="true"]');
     for ( var e in eles ) {
         e = eles[e];
         if ( e.nodeType ) {
@@ -234,7 +240,7 @@ function checkForPlayedCards(playedCards) {
 
 function checkForEmptyPiles(table) {
     // reset empty data on all piles
-    var eles = document.querySelectorAll('.pile'); // query elements
+    var eles = d.querySelectorAll('.pile'); // query elements
     for ( var e in eles ) {
         e = eles[e];
         if ( e.nodeType ) {
@@ -267,7 +273,7 @@ function checkForEmptyPiles(table) {
         }
     }
     // mark piles as empty
-    eles = document.querySelectorAll(emptyPiles); // query elements
+    eles = d.querySelectorAll(emptyPiles); // query elements
     for ( var e in eles ) {
         e = eles[e];
         if ( e.nodeType ) {
@@ -302,7 +308,7 @@ function countUnplayedCards(cards) {
 }
 
 function flipCards(selectors, direction) {
-    var eles = document.querySelectorAll(selectors); // query all elements
+    var eles = d.querySelectorAll(selectors); // query all elements
     for ( var e in eles ) { // loop through elements
         e = eles[e];
         if ( e.nodeType ) {
@@ -335,7 +341,7 @@ function getUnplayedCards() {
     // reset array
     unplayedCards = [];
     // get all face down cards
-    var eles = document.querySelectorAll('#pile-slots .card:not([data-played="true"])');
+    var eles = d.querySelectorAll('#pile-slots .card:not([data-played="true"])');
     for ( var e in eles ) {
         e = eles[e];
         if ( e.nodeType ) {
@@ -348,13 +354,13 @@ function getUnplayedCards() {
 function sizeCards(selector = '.pile', ratio = 1.4) {
     var s = selector;
     var r = ratio;
-    var e = document.querySelector(s); // query element
+    var e = d.querySelector(s); // query element
     var h = e.offsetWidth * r; // height of the card
     // set row heights
     _upper.style.height = h + 10 + 'px';
     _lower.style.height = h + 120 + 'px';
     // set height of cards
-    var eles = document.querySelectorAll(s); // query all elements
+    var eles = d.querySelectorAll(s); // query all elements
     for ( var e in eles ) { // loop through elements
         e = eles[e];
         if ( e.nodeType ) e.style.height = h + 'px'; // set height in css
@@ -382,10 +388,10 @@ function gamePlay(table) {
 }
 
 function bindClick(selectors, double) {
-    var eles = document.querySelectorAll(selectors); // query all elements
+    var eles = d.querySelectorAll(selectors); // query all elements
     // loop through elements
-    for ( var e in elements ) {
-        e = elements[e];
+    for ( var e in eles ) {
+        e = eles[e];
         // add event listener
         if ( e.nodeType ) {
             if ( !double ) e.addEventListener('click', select);
@@ -396,7 +402,7 @@ function bindClick(selectors, double) {
 }
 
 function unbindClick(selectors, double) {
-    var eles = document.querySelectorAll(selectors); // query all elements
+    var eles = d.querySelectorAll(selectors); // query all elements
     // loop through elements
     for ( var e in eles ) {
         e = eles[e];
@@ -585,7 +591,7 @@ function validateMove(selected, to) {
     // if destination pile is one of the suit slots
     if ( ['hearts', 'diamonds', 'clubs', 'spades'].indexOf(toPile) >= 0 ) {
         // get last card in that pile
-        var lastCard = document.querySelector('#'+to+' .card:first-child');
+        var lastCard = d.querySelector('#'+to+' .card:first-child');
         if ( lastCard ) {
             var toValue = parseValueAsInt(lastCard.dataset.value);
             var toSuit = lastCard.dataset.suit;
@@ -645,7 +651,7 @@ function makeMove() {
         // if to is pile slot
         else {
             // get selected card
-            var selected = document.querySelector('.card[data-selected]="true"');
+            var selected = d.querySelector('.card[data-selected]="true"');
             // get all cards stacked on selected card
             var selectedCards = [selected];
             while ( selected = selected['nextSibling'] ) {
@@ -723,7 +729,7 @@ function timer(action) {
     // declare timer variables
     var minutes = 0;
     var seconds = 0;
-    var gameplay = document.body.dataset.gameplay;
+    var gameplay = d.body.dataset.gameplay;
     // set timer attributes
     _timer.dataset.action = action;
     // switch case
@@ -743,7 +749,7 @@ function timer(action) {
                 _timerSpan.textContent = minutes + ":" + seconds;
             }, 1000);
             // add dataset to body
-            document.body.dataset.gameplay = 'active';
+            d.body.dataset.gameplay = 'active';
             // unbind click to play button
             if ( gameplay === 'paused' ) _playPause.removeEventListener('click', playTimer);
             // bind click to pause button
@@ -754,7 +760,7 @@ function timer(action) {
         // pause timer
         case 'pause' :
             clearInterval(clock);
-            document.body.dataset.gameplay = 'paused';
+            d.body.dataset.gameplay = 'paused';
             // unbind click to pause button
             // unbind click to play button
             if ( gameplay === 'active' ) _playPause.removeEventListener('click', pauseTimer);
@@ -766,7 +772,7 @@ function timer(action) {
         // stop timer
         case 'stop' :
             clearInterval(clock);
-            document.body.dataset.gameplay = 'over';
+            d.body.dataset.gameplay = 'over';
             break;
         default : break;
     }
@@ -807,11 +813,11 @@ function checkWin(table) {
 
 function checkAutoWin(table) {
     // if all cards on gameboard are flipped over and all discard cards are played
-    if ( parseInt(_pileSlots.dataset.unplayed) + table['deck-slot'].length + table['discard'].length === 0 ) {
+    if ( parseInt(_pileSlots.dataset.unplayed) + table['deck-pile'].length + table['discard'].length === 0 ) {
         // show autowin button
         _autoWin.style.display = 'block';
         // bind click to autowin button
-        _autoWin.addEventListener('click', utoWin);
+        _autoWin.addEventListener('click', autoWin);
     }
     return;
 }
@@ -858,7 +864,7 @@ function autoWinAnimation(table) {
 function animationLoop() {
     // get lowest value card
     var lowCards = [];
-    var eles = document.querySelectorAll('#pile-slots .card:last-child');
+    var eles = d.querySelectorAll('#pile-slots .card:last-child');
     for ( var e in eles ) {
         e = eles[e];
         if ( e.nodeType ) lowCards.push(parseValueAsInt(e.dataset.value));
@@ -868,7 +874,7 @@ function animationLoop() {
     // parse int as value
     var cardValue = parseIntAsValue(lowValue);
     // get element with this value
-    var e = document.querySelector('#pile-slots .card[data-rank"'+cardValue+'"]');
+    var e = d.querySelector('#pile-slots .card[data-rank"'+cardValue+'"]');
     // set up move
     var cardSuit = e.dataset.suit; // suit of card
     var arrCard = [cardValue, cardSuit]; // card array

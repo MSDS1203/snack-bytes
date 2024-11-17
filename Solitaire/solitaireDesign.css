@@ -203,15 +203,14 @@ body {
 
 .card {
     display: block;
-    position: absolute;
+    position: flex;
     top: 0;
     left: 0;
-    background-color: #ddd;
-    background-image: url('https://bfa.github.io/solitaire-js/img/card_back_bg.png');
+    background-image: url('./redBack.png');
     background-size: contain;
     background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
     font-family: 'Suit-Regular', sans-serif;
     font-size: 0.6vw;
     border-radius: 5px;
@@ -249,6 +248,215 @@ body {
     display: none;
 }
 
+.card .two.spades {
+    background-image: url('./spades/2s.png')
+}
+
+.card .three.spades {
+    background-image: url('./spades/3s.png')
+}
+
+.card .four.spades {
+    background-image: url('./spades/4s.png')
+}
+
+.card .five.spades {
+    background-image: url('./spades/5s.png')
+}
+
+.card .six.spades {
+    background-image: url('./spades/6s.png')
+}
+
+.card .seven.spades {
+    background-image: url('./spades/7s.png')
+}
+
+.card .eight.spades {
+    background-image: url('./spades/8s.png')
+}
+
+.card .nine.spades {
+    background-image: url('./spades/9s.png')
+}
+
+.card .ten.spades {
+    background-image: url('./spades/10s.png')
+}
+
+.card .jack.spades {
+    background-image: url('./spades/Js.png')
+}
+
+.card .queen.spades {
+    background-image: url('./spades/Qs.png')
+}
+
+.card .king.spades {
+    background-image: url('./spades/Ks.png')
+}
+
+.card .ace.spades {
+    background-image: url('./spades/As.png')
+}
+
+.card .two.clubs {
+    background-image: url('./clubs/2c.png')
+}
+
+.card .three.clubs {
+    background-image: url('./clubs/3c.png')
+}
+
+.card .four.clubs {
+    background-image: url('./clubs/4c.png')
+}
+
+.card .five.clubs {
+    background-image: url('./clubs/5c.png')
+}
+
+.card .six.clubs {
+    background-image: url('./clubs/6c.png')
+}
+
+.card .seven.clubs {
+    background-image: url('./clubs/7c.png')
+}
+
+.card .eight.clubs {
+    background-image: url('./clubs/8c.png')
+}
+
+.card .nine.clubs {
+    background-image: url('./clubs/9c.png')
+}
+
+.card .ten.clubs {
+    background-image: url('./clubs/10c.png')
+}
+
+.card .jack.clubs {
+    background-image: url('./clubs/Jc.png')
+}
+
+.card .queen.clubs {
+    background-image: url('./clubs/Qc.png')
+}
+
+.card .king.clubs {
+    background-image: url('./clubs/Kc.png')
+}
+
+.card .ace.clubs {
+    background-image: url('./clubs/Ac.png')
+}
+
+.card .two.diamonds {
+    background-image: url('./diamonds/2d.png')
+}
+
+.card .three.diamonds {
+    background-image: url('./diamonds/3d.png')
+}
+
+.card .four.diamonds {
+    background-image: url('./diamonds/4d.png')
+}
+
+.card .five.diamonds {
+    background-image: url('./diamonds/5d.png')
+}
+
+.card .six.diamonds {
+    background-image: url('./diamonds/6d.png')
+}
+
+.card .seven.diamonds {
+    background-image: url('./diamonds/7d.png')
+}
+
+.card .eight.diamonds {
+    background-image: url('./diamonds/8d.png')
+}
+
+.card .nine.diamonds {
+    background-image: url('./diamonds/9d.png')
+}
+
+.card .ten.diamonds {
+    background-image: url('./diamonds/10d.png')
+}
+
+.card .jack.diamonds {
+    background-image: url('./diamonds/Jd.png')
+}
+
+.card .queen.diamonds {
+    background-image: url('./diamonds/Qd.png')
+}
+
+.card .king.diamonds {
+    background-image: url('./diamonds/Kd.png')
+}
+
+.card .ace.diamonds {
+    background-image: url('./diamonds/Ad.png')
+}
+
+.card .two.hearts {
+    background-image: url('./hearts/2h.png')
+}
+
+.card .three.hearts {
+    background-image: url('./hearts/3h.png')
+}
+
+.card .four.hearts {
+    background-image: url('./hearts/4h.png')
+}
+
+.card .five.hearts {
+    background-image: url('./hearts/5h.png')
+}
+
+.card .six.hearts {
+    background-image: url('./hearts/6h.png')
+}
+
+.card .seven.hearts {
+    background-image: url('./hearts/7h.png')
+}
+
+.card .eight.hearts {
+    background-image: url('./hearts/8h.png')
+}
+
+.card .nine.hearts {
+    background-image: url('./hearts/9h.png')
+}
+
+.card .ten.hearts {
+    background-image: url('./hearts/10h.png')
+}
+
+.card .jack.hearts {
+    background-image: url('./hearts/Jh.png')
+}
+
+.card .queen.hearts {
+    background-image: url('./hearts/Qh.png')
+}
+
+.card .king.hearts {
+    background-image: url('./hearts/Kh.png')
+}
+
+.card .ace.hearts {
+    background-image: url('./hearts/Ah.png')
+}
+
+/*
 .card.up {
     background-image: url('https://bfa.github.io/solitaire-js/img/card_face_bg.png');
     background-repeat: repeat;
@@ -361,7 +569,7 @@ body {
     margin-top: -0.5em;
     margin-left: -0.35em;
 }
-
+*/
 .card .face::before {
     display: none;
     content: '';
@@ -380,6 +588,8 @@ body {
     }
 }
 
+
+/*
 .card .spade.king .face::before {
     background-image: url('https://bfa.github.io/solitaire-js/img/face-king-spade.png');
 }
@@ -607,7 +817,7 @@ body {
 .card:nth-child(5) {
     top: 8px;
     z-index: 1;
-}
+}*/
 
 /* deck pile */
 .deck-pile {

@@ -5,7 +5,6 @@
         <meta name="viewport", content="width=device-width, initial-scale=1.0">
         <title>Solitaire</title>
         <link rel="stylesheet" href="solitaireDesign.css">
-        <script type="text/javascript" src="solitaire.js"></script>
     </head>
 
     <body>
@@ -32,7 +31,7 @@
             </div>
             <div id="table">
                 <div class="upper-slots">
-                    <div id="deck-pile" class="deck pile" data-pile="deck-pile">
+                    <div id="deck-pile" class="deck pile" data-pile="deck">
                         <i class="reload-icon" data-action="reload">
                             <span></span>
                         </i>
@@ -84,7 +83,63 @@
             </div>
         </div> <!-- /.container -->
         <button id="auto-win">Auto Win</button>
-        <ul class="template">
+        <ul class="card">
+            <li data-rank="2">
+                <div class="two {{suit}}">
+                </div>
+            </li>
+            <li data-rank="3">
+                <div class="three {{suit}}">
+                </div>
+            </li>
+            <li data-rank="4">
+                <div class="four {{suit}}">
+                </div>
+            </li>
+            <li data-rank="5">
+                <div class="five {{suit}}">
+                </div>
+            </li>
+            <li data-rank="6">
+                <div class="six {{suit}}">
+                </div>
+            </li>
+            <li data-rank="7">
+                <div class="seven {{suit}}">
+                </div>
+            </li>
+            <li data-rank="8">
+                <div class="eight {{suit}}">
+                </div>
+            </li>
+            <li data-rank="9">
+                <div class="nine {{suit}}">
+                </div>
+            </li>
+            <li data-rank="10">
+                <div class="ten {{suit}}">
+                </div>
+            </li>
+            <li data-rank="J">
+                <div class="jack {{suit}}">
+                </div>
+            </li>
+            <li data-rank="Q">
+                <div class="queen {{suit}}">
+                </div>
+            </li>
+            <li data-rank="K">
+                <div class="king {{suit}}">
+                </div>
+            </li>
+            <li data-rank="A">
+                <div class="ace {{suit}}">
+                </div>
+            </li>
+        </ul> <!-- ./suit -->
+    </ul> <!-- ./card -->
+    <script src="solitaire.js"></script>
+<!--        <ul class="template">
             <li data-rank="2">
                 <div class="two {{suit}}">
                     <div class="corner top">
@@ -299,6 +354,6 @@
                     </div>
                 </div>
             </li>
-        </ul> <!-- /.template -->
+        </ul> -->
     </body>
 </html>
