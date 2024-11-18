@@ -2,6 +2,7 @@ body{
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
 }
+
 p{
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
@@ -10,4 +11,28 @@ p{
 #board{
     background-image: url("./background.png");
     margin: 0;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    display: block;
+    background-color: #CDC1FF;
+    width: 100px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    border: none;
+    transition-duration: .25s; 
+}
+
+button:hover {
+    background-color: #BFECFF;
+    letter-spacing: .15rem;
+    width: 150px;
 }
