@@ -3,9 +3,24 @@
     background-color: white;
 }
 
+.standard .game {
+    background-color: white;
+}
 
-.green {
-    background-color: lightgreen;
+.dark-mode {
+    background-color: #2E073F;
+}
+
+.dark-mode #header, .dark-mode .game, .dark-mode #leaderboard {
+    background-color: #7A1CAC;
+}
+
+.dark-mode h1, .dark-mode h2, .dark-mode p, .dark-mode #logout {
+    color: #BFECFF;
+}
+
+.pink {
+    background-color: #FFCCEA;
 }
 
 .lilac {

@@ -1,14 +1,17 @@
-// get each button in the dropdown menu
+// Get each button in the dropdown menu
 let standard = document.getElementById("standard-theme");
-let green = document.getElementById("green-theme");
+let dark = document.getElementById("dark-mode");
+let pink = document.getElementById("pink-theme");
 let lilac = document.getElementById("lilac-theme");
 
 // Add event listeners for each
 // .theme should equal the name of the class in themes.css
 standard.addEventListener("click", updateTheme);
 standard.theme = "standard";
-green.addEventListener("click", updateTheme);
-green.theme = "green";
+dark.addEventListener("click", updateTheme);
+dark.theme = "dark-mode";
+pink.addEventListener("click", updateTheme);
+pink.theme = "pink";
 lilac.addEventListener("click", updateTheme);
 lilac.theme = "lilac";
 
