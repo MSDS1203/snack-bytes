@@ -20,6 +20,7 @@ function updateTheme() {
     console.log("Change to theme " + this.theme);
     document.body.className = "";
     document.body.classList.add(this.theme);
+    document.cookie = "theme=" + this.theme + "; path=./Minesweeper/minesweeper.html";
 }
 
 
