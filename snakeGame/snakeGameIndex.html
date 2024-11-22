@@ -8,17 +8,22 @@
     </head>
 
     <body>
-        <button onclick="window.location.href ='../home.html'">Back To Home</button>
+        <div class="center">
+            <button onclick="window.location.href ='../home.html'">Home</button>
+        </div>
+
         <h1>Snake</h1>
 
         <canvas id="board"></canvas>
-        <p>Score: <span id = "score"></span></p>
 
         <!--FOR EVERYONE TO ADD-->
+        <p>Score: <span id = "score"></span></p>
         <!--Current High Score (in the database)-->
         <p>High Score: <span id = "highScore"></span></p>
         <!--Submitting the score the user currently has-->
-        <button id = "submitScore">Submit Score</button>
+        <div class="center">
+            <button id = "submitScore">Submit Score</button>
+        </div>
 
         <script src="snakeGame.js"></script>
         <!--Linking the database Javascript file - MAKE SURE TO HAVE type="module"-->

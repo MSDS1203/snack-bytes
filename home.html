@@ -6,81 +6,86 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Snack Bytes</title>
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="themes.css">
     <!-- Temp -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-    <script type="module" src="home.js"></script>
   </head>
   <body>
-    <div class="test"></div>
-    <section id="header">
-      <div>
-        <p class="space-grotesk-temp">Hello, <span id="username">test</span></p>
-        <a id="logout" class="space-grotesk-temp">Log Out</a> 
-      </div>
-      <h1 class="space-grotesk-temp">Snack Bytes</h1>
-      <div class="dropdown">
-        <img src="./cog.png" class = "cog">
-        <div class="dropdown-content">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
+    <div id="test">
+      <section id="header">
+        <div>
+          <p class="space-grotesk-temp">Hello, <span id="username">test</span></p>
+          <a id="logout" class="space-grotesk-temp">Log Out</a> 
         </div>
-      </div>
-    </section>
-    <section id="container">
-      <div id="row">
-        <div id="game-grid">
-          <div class="game">
-            <div class="img-div">
-              <img src="./snake-tn.png" alt="Snake and cupcake">
-            </div>
-            <h2 class="space-grotesk-temp">Snake</h2>
-            <div class="buttons">
-              <a href="./snakeGame/snakeGameIndex.html"><button>Play</button></a>
-              <button id="snakeLBButton">Leaderboard</button>
-            </div>
-          </div>
-
-          <div class="game">
-            <div class="img-div">
-              <img src="./flappy_bat_tn.png" alt="Bat with witch hat">
-            </div>
-            <h2 class="space-grotesk-temp">Flappy Bat</h2>
-            <div class="buttons">
-              <a href="./flappy_bat/flappy_bat.html"><button>Play</button></a>
-              <button id="flappyBatLBButton">Leaderboard</button>
-            </div>
-          </div>
-
-          <div class="game">
-            <div class="img-div">
-              <img src="./donot-tn.png" alt="jelly doughnut and lollipop">
-            </div>
-            <h2 class="space-grotesk-temp">DoNOT step there!</h2>
-            <div class="buttons">
-              <a href="./Minesweeper/minesweeper.html"><button>Play</button></a>
-              <button id="donutLBButton">Leaderboard</button>
-            </div>
-          </div>
-
-          <div class="game">
-            <div class="img-div">
-              <img src="./solitaire-tn.png" alt="Solitaire suits">
-            </div>
-            <h2 class="space-grotesk-temp">Solitaire</h2>
-            <div class="buttons">
-              <a href=""><button>Play</button></a>
-              <button id="solitaireLBButton">Leaderboard</button>
-            </div>
+        <h1 class="space-grotesk-temp">Snack Bytes</h1>
+        <div class="dropdown">
+          <img src="./cog.png" class = "cog">
+          <!-- Buttons for each theme --> 
+          <div class="dropdown-content">
+            <button id="standard-theme">Standard</button>
+            <button id="dark-mode">Dark Mode</button>
+            <button id="pink-theme">Pink</button>
+            <button id="lilac-theme">Lilac</button>
           </div>
         </div>
-        <div id="leaderboard">
-          <h2 id="leaderboard-name">Leaderboard</h2>
-          <p id="leaderboard-scores"></p>
+      </section>
+      <section id="container">
+        <div id="row">
+          <div id="game-grid">
+            <div class="game">
+              <div class="img-div">
+                <img src="./snake-tn.png" alt="Snake and cupcake">
+              </div>
+              <h2 class="space-grotesk-temp">Snake</h2>
+              <div class="buttons">
+                <a href="./snakeGame/snakeGameIndex.html"><button class="game-button">Play</button></a>
+                <button id="snakeLBButton" class="game-button">Leaderboard</button>
+              </div>
+            </div>
+
+            <div class="game">
+              <div class="img-div">
+                <img src="./flappy_bat_tn.png" alt="Bat with witch hat">
+              </div>
+              <h2 class="space-grotesk-temp">Flappy Bat</h2>
+              <div class="buttons">
+                <a href="./flappy_bat/flappy_bat.html"><button class="game-button">Play</button></a>
+                <button id="flappyBatLBButton" class="game-button">Leaderboard</button>
+              </div>
+            </div>
+
+            <div class="game">
+              <div class="img-div">
+                <img src="./donot-tn.png" alt="jelly doughnut and lollipop">
+              </div>
+              <h2 class="space-grotesk-temp">DoNOT step there!</h2>
+              <div class="buttons">
+                <a href="./Minesweeper/minesweeper.html"><button class="game-button">Play</button></a>
+                <button id="donutLBButton" class="game-button">Leaderboard</button>
+              </div>
+            </div>
+
+            <div class="game">
+              <div class="img-div">
+                <img src="./solitaire-tn.png" alt="Solitaire suits">
+              </div>
+              <h2 class="space-grotesk-temp">Solitaire</h2>
+              <div class="buttons">
+                <a href=""><button class="game-button">Play</button></a>
+                <button id="solitaireLBButton" class="game-button">Leaderboard</button>
+              </div>
+            </div>
+          </div>
+          <div id="leaderboard">
+            <h2 id="leaderboard-name">Leaderboard</h2>
+            <p id="leaderboard-scores"></p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </body>
+  <script type="module" src="home.js"></script>
+  <script src="themes.js"></script>
 </html>
