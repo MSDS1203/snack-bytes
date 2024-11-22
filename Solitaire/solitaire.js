@@ -206,8 +206,8 @@ function getTemplate(card) {
 }
 
 function createCard(card, selector, html, append) {
-    var value = card[0]; // get value
-    var suit = card[1]; // get suit
+    var value = card.Value; // get value
+    var suit = card.Suit; // get suit
     var temp = selector.includes('#spades');
     // get pile based on what the user clicks
     if (selector.includes('#deck-pile')) var p = 'deck-pile';
@@ -221,11 +221,12 @@ function createCard(card, selector, html, append) {
     e.className = 'card'; // add .card class to element
     e.dataset.value = value; // set value attribute
     e.dataset.suit = suit; // set suit attribute
-    e.dataset.pile = pile; // set pile attribute
+    e.dataset.pile = p; // set pile attribute
     e.dataset.selected = 'false'; // set selected attribute
     e.innerHTML = html; // insert html to element
     // query for pile
     var pile = d.querySelector(selector);
+    console.log(pile);
     // append to selected pile
     if ( append ) pile.appendChild(e);
     // or prepend to selected pile
