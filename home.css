@@ -175,3 +175,12 @@ a {
     border-radius: 20px;
     box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
+
+/* Page-Specific Theme Handling */
+.dark-mode #header, .dark-mode .game, .dark-mode #leaderboard {
+    background-color: #7A1CAC;
+}
+
+.dark-mode h1, .dark-mode h2, .dark-mode p, .dark-mode #logout {
+    color: #BFECFF;
+}

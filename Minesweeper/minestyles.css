@@ -251,3 +251,9 @@ h1 {
     font-family: "arsenal";
     text-align: center;
 }
+
+/** Theme handling **/
+
+.dark-mode #timer {
+    color: #BFECFF;
+}

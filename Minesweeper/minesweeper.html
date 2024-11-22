@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Minesweeper</title>
     <link rel="stylesheet" href="minestyles.css">
+    <link rel="stylesheet" href="../themes.css"> <!--Added for background themes-->
   </head>
     <body>
         <div id="menu" class="pop-up">
@@ -55,12 +56,18 @@
         <div id="game-over" class="pop-up">
             <p id="game-over-text" class="arsenal">You got jellied!</p>
             <p class="arsenal pink"><span id="final-bomb-score"></span> squares cleared</p>
-            <div id="replay1" class="menu-button">Replay</div>
+            <div>
+                <div id="home1" class="menu-button">Home</div>
+                <div id="replay1" class="menu-button">Replay</div>
+            </div>
         </div>
         <div id="win" class="pop-up">
             <img id="win-image" src="./WinMessage.png" alt="You Win!">
             <p class="arsenal pink">Time: <span id="final-time"></span></p>
-            <div id="replay2" class="menu-button">Replay</div>
+            <div>
+                <div id="home2" class="menu-button">Home</div>
+                <div id="replay2" class="menu-button">Replay</div>
+            </div>
         </div>
         <script src="minescripts.js"></script>
     </body>

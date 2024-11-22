@@ -109,6 +109,7 @@ function update() {
     context.fillText(score, 5, 45);
 
     if (gameOver) {
+        otherdiv = 4;
         context.fillText("GAME OVER", 5, 90);
     }
 }

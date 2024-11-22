@@ -1,3 +1,33 @@
+    /***********Handle Themes**********/
+    let cookie = document.cookie;
+    console.log(cookie);
+
+    let theme = parseTheme(cookie);
+    console.log(theme);
+
+    setTheme(theme); 
+
+    function parseTheme(cookie) {
+        let cookieArray = cookie.split(';'); //Split into an array of cookies
+
+        for (i = 0; i < cookieArray.length; i++)
+        {
+            let keyValue = cookieArray[i].split('='); //Split each cookie into key-value pairs
+            if (keyValue[0] === "theme") {
+                return keyValue[1];
+            }
+        }
+
+        return "";
+      }
+
+      function setTheme(theme) {
+        console.log("Change to theme " + theme);
+        document.body.className = "";
+        document.body.classList.add(theme);
+    }
+    /******************************/
+    
     let rows = 0; // rows and cols in current board
     let cols = 0;
     let bombCount = 0 // number of bombs on the board
