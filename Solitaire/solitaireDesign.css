@@ -68,8 +68,6 @@ body {
 #score .timer button {
     display: none;
     position: absolute;
-    appearance: none;
-    -webkit-appearance: none;
     background: transparent;
     outline: none;
     border: 0;
@@ -129,8 +127,6 @@ body {
 
 #auto-win {
     display: none;
-    appearance: none;
-    -webkit-appearance: none;
     outline: none;
     border: 0;
     position: absolute;
@@ -181,7 +177,7 @@ body {
     position: relative;
     float: left;
     width: 13%;
-    margin-right: 1.5%;
+    margin-right: 10px;
     margin-bottom: 10px;
     padding: 5px;
 }
@@ -246,6 +242,36 @@ body {
 
 .card>div {
     display: none;
+}
+
+/*
+.card.up {
+    background-image: url('https://bfa.github.io/solitaire-js/img/card_face_bg.png');
+    background-repeat: repeat;
+    color: #111;
+}*/
+
+.card.up>div {
+    display: block;
+}
+
+.card::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.card[data-selected="true"]::before {
+    box-shadow: 0 0 6px 3px #FCDB1A;
+}
+
+@media screen and (min-width: 768px) {
+    .card::before {
+        border-radius: 10px;
+    }
 }
 
 .card .two.spades {
@@ -457,35 +483,6 @@ body {
 }
 
 /*
-.card.up {
-    background-image: url('https://bfa.github.io/solitaire-js/img/card_face_bg.png');
-    background-repeat: repeat;
-    color: #111;
-}
-
-.card.up>div {
-    display: block;
-}
-
-.card::before {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-}
-
-.card[data-selected="true"]::before {
-    box-shadow: 0 0 6px 3px #FCDB1A;
-}
-
-@media screen and (min-width: 768px) {
-    .card::before {
-        border-radius: 10px;
-    }
-}
-
 .card .suit {
     font-size: 5.8em;
     font-weight: normal;
@@ -569,7 +566,7 @@ body {
     margin-top: -0.5em;
     margin-left: -0.35em;
 }
-*/
+
 .card .face::before {
     display: none;
     content: '';
@@ -589,7 +586,7 @@ body {
 }
 
 
-/*
+
 .card .spade.king .face::before {
     background-image: url('https://bfa.github.io/solitaire-js/img/face-king-spade.png');
 }
@@ -784,7 +781,7 @@ body {
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
 }
-
+*/
 .card:nth-child(1),
 .card:nth-child(2),
 .card:nth-child(3),
@@ -817,7 +814,7 @@ body {
 .card:nth-child(5) {
     top: 8px;
     z-index: 1;
-}*/
+}
 
 /* deck pile */
 .deck-pile {

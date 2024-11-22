@@ -183,6 +183,15 @@ function update(pile, selector, playedCards, append) {
         if ( isNaN(playedAll) ) playedAll = 0;
         grandparent.dataset.played = playedAll + played;
     }
+
+    var unplayed = countUnplayedCards(children);
+    e.parentElement.dataset.unplayed = unplayed;
+
+    if ( grandparent.id === 'pile-slots' || grandparent.id === 'suit-slots' ) {
+        var unplayedAll = parseInt(grandparent.dataset.unplayed);
+        if( isNaN(unplayedAll) ) unplayedAll = 0;
+        grandparent.dataset.unplayed = unplayedAll + unplayed;
+    }
     return pile;
 }
 
@@ -190,7 +199,7 @@ function getTemplate(card) {
     var value = card.Value;
     var suit = card.Suit;
 
-    var html = d.querySelector('.card li[data-rank="'+value+'"]').innerHTML;
+    var html = d.querySelector('.template li[data-rank="'+value+'"]').innerHTML;
 
     html = html.replace('{{suit}}', suit);
     return html;
@@ -320,7 +329,8 @@ function flipCards(selectors, direction) {
                             for ( var card in unplayedCards ) { // loop through unplayed cards
                                 card = unplayedCards[card];
                                 // add 5 to score if suit and value match
-                                if ( e.dataset.value === card[0] && e.dataset.suit === card[1] ) updateScore(5);
+                                if ( e.dataset.value === card[0] && e.dataset.suit === card[1] ) 
+                                    updateScore(5);
                             }
                         }
                         e.className += 'up'; // add class
@@ -345,7 +355,7 @@ function getUnplayedCards() {
     for ( var e in eles ) {
         e = eles[e];
         if ( e.nodeType ) {
-            unplayedCards.push([e.dataset.value, e.dataset.suit]);
+            unplayedCards.push( [ e.dataset.value, e.dataset.suit ] );
         }
     }
     return unplayedCards;
@@ -395,7 +405,7 @@ function bindClick(selectors, double) {
         // add event listener
         if ( e.nodeType ) {
             if ( !double ) e.addEventListener('click', select);
-            else e.addEventListener('doubleClick', select);
+            else e.addEventListener('dblclick', select);
         }
     }
     return;
@@ -409,7 +419,7 @@ function unbindClick(selectors, double) {
         // remove event listener
         if ( e.nodeType ) {
             if ( !double ) e.removeEventListener('click', select);
-            else e.removeEventListener('doubleClick', select);
+            else e.removeEventListener('dblclick', select);
         }
     }
     return;
@@ -428,11 +438,14 @@ function select(event) {
     }
     // if timestamp matches return false
     var time = event.timeStamp; // get timestamp
-    if ( time === lastEventTime ) return false;
-    else lastEventTime = time; // cache timestamp
-    // get variables
+    if ( time === lastEventTime ){
+        return false;
+    }
+    else{ 
+        lastEventTime = time; // cache timestamp
+    }
+        // get variables
     var e = event.target; // get element
-    var isSelected = e.dataset.selected; // get selected attribute
     var value = e.dataset.value; // get value
     var suit = e.dataset.suit; // get suit
     var pile = e.dataset.pile; // get pile
@@ -443,26 +456,26 @@ function select(event) {
     clicks++;
     // single click
     if ( clicks === 1 && event.type === 'click' ) {
-        clickTimer = seetTimeout(function() {
+        clickTimer = setTimeout(function() {
             // reset click counter
             clicks = 0;
             // if same card is clicked
             if ( e.dataset.selected === 'true' ) {
                 // deselect card
                 delete e.dataset.selected;
-                delete table.dataset.move;
-                delete table.dataset.selected;
-                delete table.dataset.source;
+                delete _gameBoard.dataset.move;
+                delete _gameBoard.dataset.selected;
+                delete _gameBoard.dataset.source;
             }
             // if move in progress
-            else if ( table.dataset.move ) {
+            else if ( _gameBoard.dataset.move ) {
                 // get selected
-                var selected = table.dataset.selected.split(',');
+                var selected = _gameBoard.dataset.selected.split(',');
                 // update table dataset with destination pile
-                table.dataset.to = e.closest('.pile').dataset.pile;
+                _gameBoard.dataset.to = e.closest('.pile').dataset.pile;
                 // get destination card or pile
                 if ( card ) var to = card;
-                else var to = table.dataset.to;
+                else var to = _gameBoard.dataset.to;
                 // validate move
                 if ( validateMove(selected, to) ) {
                     // make move
@@ -514,9 +527,9 @@ function select(event) {
             else {
                 // select card
                 e.dataset.selected = 'true';
-                table.dataset.move = 'true';
-                table.dataset.selected = card;
-                table.dataset.source = e.closest('.pile').dataset.pile;
+                _gameBoard.dataset.move = 'true';
+                _gameBoard.dataset.selected = card;
+                _gameBoard.dataset.source = e.closest('.pile').dataset.pile;
                 // if ace is selected
                 if ( value === 'A' ) {
                     bindClick('#suit-slots #'+suit+'s.pile[data-empty="true"]');
@@ -533,13 +546,13 @@ function select(event) {
         clicks = 0; // reset click counter
         // select card
         e.dataset.selected = 'true';
-        table.dataset.move = 'true';
-        table.dataset.selected = card;
-        table.dataset.source = e.closest('.pile').dataset.pile;
+        _gameBoard.dataset.move = 'true';
+        _gameBoard.dataset.selected = card;
+        _gameBoard.dataset.source = e.closest('.pile').dataset.pile;
         // get destination pile
         if ( card ) var to = card[1]+'s';
         // update table dataset with destination
-        table.dataset.to = to;
+        _gameBoard.dataset.to = to;
         // validate move
         if ( validateMove(card, to) ) {
             // make move
@@ -565,7 +578,7 @@ function validateMove(selected, to) {
     if ( to.constructor === Array ) {
         var toValue = parseValueAsInt(to[0]);
         var toSuit = to[1];
-        var toPile = table.dataset.to;
+        var toPile = _gameBoard.dataset.to;
         // if destination pile is one of the suit slots
         if ( ['hearts', 'diamonds', 'clubs', 'spades'].indexOf(toPile) >= 0 ) {
             // if value is not the next in the sequence, invalid move
@@ -616,8 +629,8 @@ function validateMove(selected, to) {
 
 function makeMove() {
     // get to and from piles
-    var from = table.dataset.from;
-    var to = table.dataset.to;
+    var from = _gameBoard.dataset.from;
+    var to = _gameBoard.dataset.to;
     // if from is the discard pile
     if ( from === 'discard' ) {
         // if to is suit slot
@@ -715,10 +728,10 @@ function parseIntAsValue(int) {
 }
 
 function reset(table) {
-    delete table.dataset.move;
-    delete table.dataset.selected;
-    delete table.dataset.source;
-    delete table.dataset.dest;
+    delete _gameBoard.dataset.move;
+    delete _gameBoard.dataset.selected;
+    delete _gameBoard.dataset.source;
+    delete _gameBoard.dataset.dest;
     delete _suitSlots.dataset.played;
     delete _suitSlots.dataset.unplayed;
     delete _pileSlots.dataset.played;
@@ -883,9 +896,9 @@ function animationLoop() {
     if ( validateMove(arrCard, to) ) {
         // set from pile
         var from = e.parentElement.parentElement;
-        table.dataset.source = from.dataset.pile;
+        _gameBoard.dataset.source = from.dataset.pile;
         // set to pile
-        table.dataset.to = to;
+        _gameBoard.dataset.to = to;
         // make move
         makeMove();
         reset(table);

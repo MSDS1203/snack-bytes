@@ -2,14 +2,12 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport", content="width=device-width, initial-scale=1.0">
         <title>Solitaire</title>
-        <link rel="stylesheet" href="solitaireDesign.css">
+        <meta name="viewport", content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./solitaireDesign.css">
     </head>
 
     <body>
-        <h1>Solitaire</h1>
-        <canvas id="board"></canvas>
         <div class="container">
             <div id="score">
                 <div class="timer">
@@ -83,7 +81,7 @@
             </div>
         </div> <!-- /.container -->
         <button id="auto-win">Auto Win</button>
-        <ul class="card">
+        <ul class="template">
             <li data-rank="2">
                 <div class="two {{suit}}">
                 </div>
@@ -138,8 +136,8 @@
             </li>
         </ul> <!-- ./suit -->
     </ul> <!-- ./card -->
-    <script src="solitaire.js"></script>
-<!--        <ul class="template">
+    <script src="solitaire.js"></script><!--
+        <ul class="template">
             <li data-rank="2">
                 <div class="two {{suit}}">
                     <div class="corner top">
