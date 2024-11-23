@@ -171,7 +171,7 @@ function moveBird(e) {
             //i = (i+1) % pics.length;
             //birdImg.src = pics[i];
         }
-        ,500);
+        ,750);
         birdImg.src =  "./Flyingbat.png";
         //reset game
         if (gameOver) {
