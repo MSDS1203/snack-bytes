@@ -1,6 +1,12 @@
+var body = document.getElementById("body");
+var rows = 20;
+do{
+    rows = rows - 3;
+}while(body.scrollHeight > body.clientHeight);
+
+
 //board
 var blockSize = 25; 
-var rows = 20;
 var cols = Math.floor(window.innerHeight/20);
 var board;
 var context; //Used to draw with/ our drawing object
