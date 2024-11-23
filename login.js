@@ -154,10 +154,10 @@ submitButton.addEventListener("click", async function() {
 
 signupButton.addEventListener("click", function() {
     main.style.display = "none";
-    createacct.style.display = "block";
+    createacct.style.display = "flex";
 });
 
 returnBtn.addEventListener("click", function() {
-    main.style.display = "block";
+    main.style.display = "flex";
     createacct.style.display = "none";
 });
