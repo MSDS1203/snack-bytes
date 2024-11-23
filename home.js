@@ -106,17 +106,33 @@ donutLBButton.addEventListener("click", async function() {
   if (donutLBButton.innerHTML == "Leaderboard") {
     donutLBButton.innerHTML = "Hide";
     renameButtons("Donut");
-    const q = query(collection(db, "donutLeaderboard"), orderBy("donut", "desc"), limit(10));
+    const q1 = query(collection(db, "donutLeaderboard"), orderBy("donutEasy", "desc"), limit(10));
+    const q2 = query(collection(db, "donutLeaderboard"), orderBy("donutMedium", "desc"), limit(10));
+    const q3 = query(collection(db, "donutLeaderboard"), orderBy("donutHard", "desc"), limit(10));
     console.log("query made for donut leader boards");
-    const querySnapshot = await getDocs(q);
-    const donutScores = [];
-    querySnapshot.forEach((doc) => {
-      var newLine = (doc.data()["username"]).concat(": ", doc.data()["donut"]); 
-      donutScores.push(newLine);
+    const querySnapshot1 = await getDocs(q1);
+    const querySnapshot2 = await getDocs(q2);
+    const querySnapshot3 = await getDocs(q3);
+    const donutScoresEasy = [];
+    const donutScoresMedium = [];
+    const donutScoresHard = [];
+    querySnapshot1.forEach((doc) => {
+      var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutEasy"]); 
+      donutScoresEasy.push(newLine);
+    });
+
+    querySnapshot2.forEach((doc) => {
+      var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutMedium"]); 
+      donutScoresMedium.push(newLine);
+    });
+
+    querySnapshot3.forEach((doc) => {
+      var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutHard"]); 
+      donutScoresHard.push(newLine);
     });
 
     gamename.innerHTML = "Leaderboard for DoNOT Step There";
-    scores.innerHTML = donutScores.join("<br>");
+    scores.innerHTML = "<h3>Easy</h3>" + donutScoresEasy.join("<br>") + "<h3>Medium</h3>" + donutScoresMedium.join("<br>") + "<h3>Hard</h3>" + donutScoresHard.join("<br>");
   } 
   else {
     donutLBButton.innerHTML = "Leaderboard";

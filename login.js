@@ -81,7 +81,9 @@ createacctbtn.addEventListener("click", async function() {
       // Add user data to Firestore with user ID
       await setDoc(doc(db, "userScores", user.uid), {
         username: signUpUserName,
-        donut: 0,
+        donutEasy: 0,
+        donutMedium: 0,
+        donutHard: 0,
         flappyBat: 0,
         snake: 0,
         solitaire: 0
@@ -100,7 +102,9 @@ createacctbtn.addEventListener("click", async function() {
 
       await setDoc(doc(db, "donutLeaderboard", user.uid), {
         username: signUpUserName,
-        donut: 0,
+        donutEasy: 0,
+        donutMedium: 0,
+        donutHard: 0,
       });
 
       await setDoc(doc(db, "solitaireLeaderboard", user.uid), {
