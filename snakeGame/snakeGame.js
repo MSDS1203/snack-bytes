@@ -1,13 +1,9 @@
 var body = document.getElementById("body");
-var rows = 20;
-do{
-    rows = rows - 3;
-}while(body.scrollHeight > body.clientHeight);
-
 
 //board
 var blockSize = 25; 
-var cols = Math.floor(window.innerHeight/20);
+var cols;
+var rows;
 var board;
 var context; //Used to draw with/ our drawing object
 
@@ -56,9 +52,20 @@ var screenMessage = document.getElementById("screen-message");
 window.onload = function() {
     //Setting up the board
     board = document.getElementById("board"); 
+    context = board.getContext("2d"); 
+
+    //Setting up number of rows and columns
+    cols = Math.floor(window.innerHeight/20);
+    rows = 20;
+
+    while(body.scrollHeight > body.clientHeight)
+    {
+        rows--;
+    }
+
     board.height = rows * blockSize;
     board.width = cols * blockSize;
-    context = board.getContext("2d"); 
+
 
     //Loading up all directions of snake head images
     snakeHeadPositions = {
