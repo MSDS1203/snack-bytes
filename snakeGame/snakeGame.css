@@ -59,3 +59,15 @@ button:hover {
     left: 50%; 
     transform: translate(-160%, -110%); 
 }
+
+.dark-mode #title, .dark-mode #text {
+    color: #BFECFF;
+}
+
+.lilac button{
+    background-color: #e4deff;
+}
+
+.lilac button:hover{
+    background-color: #BFECFF;
+}

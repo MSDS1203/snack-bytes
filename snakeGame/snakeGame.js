@@ -1,3 +1,29 @@
+//Handling themes
+let cookie = document.cookie;
+let theme = parseTheme(cookie);
+
+setTheme(theme); 
+
+function parseTheme(cookie) {
+    let cookieArray = cookie.split(';'); //Split into an array of cookies
+
+    for (i = 0; i < cookieArray.length; i++)
+    {
+        let keyValue = cookieArray[i].split('='); //Split each cookie into key-value pairs
+        if (keyValue[0] === "theme") {
+            return keyValue[1];
+        }
+    }
+
+    return "";
+  }
+
+  function setTheme(theme) {
+    console.log("Change to theme " + theme);
+    document.body.className = "";
+    document.body.classList.add(theme);
+}
+
 var body = document.getElementById("body");
 
 //board
@@ -56,7 +82,7 @@ window.onload = function() {
 
     //Setting up number of rows and columns
     cols = Math.floor(window.innerHeight/20);
-    rows = 20;
+    rows = 18;
 
     while(body.scrollHeight > body.clientHeight)
     {
