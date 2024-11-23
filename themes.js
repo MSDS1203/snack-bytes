@@ -22,7 +22,7 @@ function parseTheme(cookie) {
     return "standard";
     }
 
-    function setTheme(theme) {
+function setTheme(theme) {
     console.log("Change to theme " + theme);
     document.body.className = "";
     document.body.classList.add(theme);
