@@ -201,7 +201,7 @@ function getTemplate(card) {
 
     var html = d.querySelector('.template li[data-rank="'+value+'"]').innerHTML;
 
-    html = html.replace('{{suit}}', suit);
+    html = html.replaceAll('{{suit}}', suit);
     return html;
 }
 
@@ -226,7 +226,6 @@ function createCard(card, selector, html, append) {
     e.innerHTML = html; // insert html to element
     // query for pile
     var pile = d.querySelector(selector);
-    console.log(pile);
     // append to selected pile
     if ( append ) pile.appendChild(e);
     // or prepend to selected pile
