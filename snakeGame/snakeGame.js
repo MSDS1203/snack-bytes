@@ -42,6 +42,10 @@ var gameOver = false;
 var start = true;
 var currentScore = 0;
 
+var startScreen = document.getElementById("start-screen");
+var screenTitle = document.getElementById("screen-title");
+var screenMessage = document.getElementById("screen-message");
+
 //When the page loads...
 window.onload = function() {
     //Setting up the board
@@ -148,13 +152,10 @@ function update() {
     if (start)
     {
         context.fillStyle = "black";
-        context.font = '100px Courier New';
-        context.fillText("SNAKE", rows*blockSize, cols*blockSize/6);
-        context.font = '30px Courier New';
-        context.fillText("Press an arrow key to begin", rows*blockSize/1.6, cols*blockSize/5);
     }
     else{
         context.clearRect(0, 0, board.width, board.height);
+        startScreen.style.display = "none";
     }
 
     //Draw the food image
@@ -268,11 +269,11 @@ function updateFoodObst(){
 function gameIsOver(){
     console.log("Saving current score to localStorage: ", currentScore); //FOR EVERYONE TO ADD - PUTTING THE CURRENT SCORE INTO LOCAL STORAGE
     localStorage.setItem("currentScoreSnake", currentScore);
-    context.fillStyle = "black";
-    context.font = '100px Courier New';
-    context.fillText("GAME OVER", rows*blockSize/1.5, cols*blockSize/7);
-    context.font = '30px Courier New';
-    context.fillText("Press the space bar to play again", rows*blockSize/1.8, cols*blockSize/6);
+    startScreen.style.display = "flex";
+    screenTitle.innerHTML = "GAME OVER";
+    screenMessage.innerHTML = "Press the space bar to begin again";
+
+
 
     return true;
 }
