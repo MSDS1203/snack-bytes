@@ -22,3 +22,9 @@
 .lilac {
     background-color: #CDC1FF;
 }
+
+
+.candy {
+    background-image: url(Theme1.png);
+    background-repeat: repeat;
+}
