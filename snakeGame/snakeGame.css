@@ -71,3 +71,10 @@ button:hover {
 .lilac button:hover{
     background-color: #BFECFF;
 }
+
+.candy #forCandy{
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+}
