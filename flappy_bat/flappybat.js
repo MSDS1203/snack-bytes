@@ -137,6 +137,7 @@ function update() {
 
     if (gameOver) {
         otherdiv = 4;
+        localStorage.setItem("currentScoreFlappyBat", score);
         context.fillText("GAME OVER", 5, 90);
     }
 }
