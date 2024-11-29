@@ -17,8 +17,7 @@
                 return keyValue[1];
             }
         }
-
-        return "";
+        return "standard";
       }
 
       function setTheme(theme) {
@@ -49,7 +48,6 @@
     const back = document.getElementById("menu-home");
     const instText = document.getElementById("inst-text");
 
-
     const menu = document.getElementById("menu");
     const header = document.getElementById("main-h1");
     const mainPlay = document.getElementById("main-row");
@@ -58,7 +56,6 @@
     const flagText = document.getElementById("flag-text");
     const winMessage = document.getElementById("win");
     const gameOverMessage = document.getElementById("game-over");
-
 
     const userClearCnt = document.getElementById("cleared-output");
     const userSquareCnt = document.getElementById("total-squares");
@@ -75,14 +72,13 @@
     replay2.addEventListener("click", reset);
     replay3.addEventListener("click", reset);
 
-
-
-
     easy.addEventListener("click", easyBoard);
     med.addEventListener("click", medBoard);
     hard.addEventListener("click", hardBoard);
     inst.addEventListener("click", instructions);
     back.addEventListener("click", goBack)
+
+    console.log("hello");
 
     // Allows space bar to toggle flag
     document.addEventListener("keydown", (event) => {

@@ -10,7 +10,7 @@
     <body>
         <div id="menu" class="pop-up">
             <h1 id="menu-title" class="arsenal">DoughNOT Step Here</h1>
-            <div id="difficulty">
+            <div id="difficulty" class="button-row">
                 <div id="easy" class="menu-button">
                     Easy
                 </div>
@@ -23,12 +23,12 @@
             </div>
             <div id="instructions" class="menu-button">Instructions</div>
             <p id="inst-text"> 
-                <span class="pink">Oh, no!</span> A prankster has stolen the baker's 
-                <span class="pink">jelly doughnuts</span> and scattered them all over 
+                <span class="pink-text">Oh, no!</span> A prankster has stolen the baker's 
+                <span class="pink-text">jelly doughnuts</span> and scattered them all over 
                 the lawn! Your help is needed to find them all. But watch out! If you 
                 step on a doughnut, you will be splattered with jelly! Luckily, the 
                 tricky thief left a hint: A number on a square means it is touching 
-                that many doughnuts. Use the candyman's extra <span class="pink">
+                that many doughnuts. Use the candyman's extra <span class="pink-text">
                 lollipops</span> to mark squares you think have jelly lurking beneath. 
                 Toggle flags using the spacebar. Click on all squares without a doughnut 
                 to win!
@@ -55,18 +55,19 @@
         </div>
         <div id="game-over" class="pop-up">
             <p id="game-over-text" class="arsenal">You got jellied!</p>
-            <p class="arsenal pink"><span id="final-bomb-score"></span> squares cleared</p>
-            <div>
+            <p class="arsenal pink-text"><span id="final-bomb-score"></span> squares cleared</p>
+            <div class="button-row">
                 <div id="home1" class="menu-button">Home</div>
                 <div id="replay1" class="menu-button">Replay</div>
             </div>
         </div>
         <div id="win" class="pop-up">
             <img id="win-image" src="./WinMessage.png" alt="You Win!">
-            <p class="arsenal pink">Time: <span id="final-time"></span></p>
-            <div>
+            <p class="arsenal pink-text">Time: <span id="final-time"></span></p>
+            <div id="win-buttons" class="button-row">
                 <div id="home2" class="menu-button">Home</div>
                 <div id="replay2" class="menu-button">Replay</div>
+                <div id="submit-score" class="menu-button">Submit Score</div>
             </div>
         </div>
         <script src="minescripts.js"></script>

@@ -68,7 +68,7 @@ h1 {
     margin-top: 0; 
 }
 
-#difficulty {
+.button-row {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -76,7 +76,7 @@ h1 {
     gap: 20px;
 }
 
-#difficulty > .menu-button {
+.button-row > .menu-button {
     flex-grow: 1;
 }
 
@@ -117,7 +117,7 @@ h1 {
     font-size: 15pt;
 }
 
-.pink {
+.pink-text {
     color: #f691af;    ;
     font-size: 20pt;
 }
