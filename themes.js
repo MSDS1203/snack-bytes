@@ -36,6 +36,8 @@ let standard = document.getElementById("standard-theme");
 let dark = document.getElementById("dark-mode");
 let pink = document.getElementById("pink-theme");
 let lilac = document.getElementById("lilac-theme");
+let candy = document.getElementById("candy-theme");
+let snakeCupcake = document.getElementById("snakeCupcake-theme");
 
 // Add event listeners for each
 // .theme should equal the name of the class in themes.css
@@ -47,6 +49,10 @@ pink.addEventListener("click", updateTheme);
 pink.theme = "pink";
 lilac.addEventListener("click", updateTheme);
 lilac.theme = "lilac";
+candy.addEventListener("click", updateTheme);
+candy.theme = "candy";
+snakeCupcake.addEventListener("click", updateTheme);
+snakeCupcake.theme = "snakeCupcake";
 
 
 function updateTheme() {

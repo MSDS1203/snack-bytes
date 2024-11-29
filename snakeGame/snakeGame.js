@@ -15,7 +15,7 @@ function parseTheme(cookie) {
         }
     }
 
-    return "";
+    return "standard";
   }
 
   function setTheme(theme) {
