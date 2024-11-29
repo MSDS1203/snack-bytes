@@ -79,6 +79,7 @@ function renameButtons(buttonName)
 }
 
 snakeLBbutton.addEventListener("click", async function() {
+  console.log("Snake leaderboard button");
   if (snakeLBbutton.innerHTML == "Leaderboard") {
     snakeLBbutton.innerHTML = "Hide";
     renameButtons("Snake");
