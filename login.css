@@ -22,6 +22,16 @@
     padding-bottom: 5vh;
   }
 
+  #header-bg {
+    position: fixed;
+    top: 0;
+    transform: translateX(calc(50vw - 250px));
+    width: 500px;
+    height: 200px;
+    z-index: -1;
+    background-color: #e0c4e4;
+  }
+
   h1 {
     text-align: center;
     color: #fff;
