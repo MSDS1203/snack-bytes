@@ -65,6 +65,13 @@
     const finalBombs = document.getElementById("final-bomb-score");
     const finalTime = document.getElementById("final-time");
 
+    const home1 = document.getElementById("home");
+    const home2 = document.getElementById("home1");
+    const home3 = document.getElementById("home2");
+    home1.addEventListener("click", goHome);
+    home2.addEventListener("click", goHome);
+    home3.addEventListener("click", goHome);
+
     const replay1 = document.getElementById("replay1");
     const replay2 = document.getElementById("replay2");
     const replay3 = document.getElementById("replay3");
@@ -80,11 +87,6 @@
 
     console.log("hello");
 
-    // Allows space bar to toggle flag
-    document.addEventListener("keydown", (event) => {
-        if (event.code == "Space")
-            flagOnOff();
-    })
 
     // Shows instructions in the menu
     function instructions() {
@@ -105,6 +107,18 @@
         back.style.display = "none";
         instText.style.display = "none";
     }
+
+    // Directs user to the home page
+    function goHome() {
+        console.log("home");
+        window.location.href = "../home.html";
+    }
+
+    // Allows space bar to toggle flag
+    document.addEventListener("keydown", (event) => {
+        if (event.code == "Space")
+            flagOnOff();
+    })
 
     // Toggles the flag
     function flagOnOff() {
