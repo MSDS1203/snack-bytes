@@ -438,6 +438,7 @@
     }
 
     function win() {
+        localStorage.setItem("currentScoreMineSweep", minCnt * 60 + secCnt); /* Store score */
         clearInterval(intervalId);
         winMessage.style.display = "flex";
         finalTime.innerHTML = minCnt + ":" + String(secCnt).padStart(2, '0');

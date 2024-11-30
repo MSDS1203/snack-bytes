@@ -22,8 +22,8 @@ const db = getFirestore(app);
 const auth = getAuth();
 
 //Getting the HTML elements that contain the button and showing the high score respectively
-const submitScore = document.getElementById("submitScore");
-const highScore = document.getElementById("highScore");
+const submitScore = document.getElementById("submit-score");
+const highScore = document.getElementById("high-score");
 
 //Checking if the firebase application and the firestore database has been gotten
 console.log("firebase app initialized: ", app.name);
@@ -54,8 +54,8 @@ onAuthStateChanged(auth, async (user) => {
     
         //If the document exists, when the user first logs in, show their current high score
         if (docSnap.exists()) {
-            console.log("Current score for", uid, ":", docSnap.data()["MineSweep"]);
-            currHighScore = docSnap.data()["MineSweep"];
+            console.log("Current score for", uid, ":", docSnap.data()["donutEasy"]);
+            currHighScore = docSnap.data()["donutEasy"];
             highScore.innerHTML = currHighScore;
         }
     
@@ -70,21 +70,20 @@ onAuthStateChanged(auth, async (user) => {
         
             try{
                 if (docSnap.exists()) {
-                    console.log("Document data:", docSnap.data()["MineSweep"]);
+                    console.log("Document data:", docSnap.data()["donutEasy"]);
                     //Getting the current high score in the database
                     //FOR EVERYONE - change "snake" to your game as written in the userScores collection
-                    currHighScore = docSnap.data()["MineSweep"]; 
+                    currHighScore = docSnap.data()["donutEasy"]; 
         
                     //Updatting and displaying the new high score if the one currently in the database is lower
-                    if(newHighScore > currHighScore)
+                    if(newHighScore < currHighScore || currHighScore === 0)
                     {
                         console.log("High score is being updated");
 
                         //Using "merge" to add the new data to the respective documents; not doing so would overwrite everything
                         //FOR EVERYONE TO CHANGE - change snake to your game name as written in the document
-                        await setDoc(docRef, { MineSweep: newHighScore }, { merge: true }); 
-                        await setDoc(docRef1, { MineSweep: newHighScore }, { merge: true });
-                        window.alert("New high score!");
+                        await setDoc(docRef, { donutEasy: newHighScore }, { merge: true }); 
+                        await setDoc(docRef1, { donutEasy: newHighScore }, { merge: true });
                         highScore.innerHTML = newHighScore;
                     }
                     else{

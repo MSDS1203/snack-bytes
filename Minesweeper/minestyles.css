@@ -156,6 +156,10 @@ h1 {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3), 0 3px 10px 0 rgba(0,0,0,0.2);
 }
 
+#flag-text {
+    margin-top: 0;
+} 
+
 #main-row {
     display: none;
     gap: 5%;
@@ -256,5 +260,9 @@ h1 {
 /** Theme handling **/
 
 .dark-mode #timer {
+    color: #BFECFF;
+}
+
+.dark-mode #flag-text {
     color: #BFECFF;
 }
