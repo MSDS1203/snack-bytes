@@ -46,6 +46,7 @@ signOutButton.addEventListener("click", function(){
   });
 })
 
+const leaderboard = document.getElementById("leaderboard");
 const gamename = document.getElementById("leaderboard-name");
 const scores = document.getElementById("leaderboard-scores")
 const snakeLBbutton = document.getElementById("snakeLBButton");
@@ -91,7 +92,8 @@ snakeLBbutton.addEventListener("click", async function() {
       var newLine = (doc.data()["username"]).concat(": ", doc.data()["snake"]); 
       snakeScores.push(newLine);
     });
-
+    
+    leaderboard.style.display = "block";
     gamename.innerHTML = "Leaderboard for Snake";
     scores.innerHTML = snakeScores.join("<br>");
   } 
@@ -99,7 +101,7 @@ snakeLBbutton.addEventListener("click", async function() {
     snakeLBbutton.innerHTML = "Leaderboard";
     gamename.innerHTML = "Leaderboard";
     scores.innerHTML = " ";
-
+    leaderboard.style.display = "none";
   }
 });
 
@@ -132,6 +134,7 @@ donutLBButton.addEventListener("click", async function() {
       donutScoresHard.push(newLine);
     });
 
+    leaderboard.style.display = "block";
     gamename.innerHTML = "Leaderboard for DoNOT Step There";
     scores.innerHTML = "<h3>Easy</h3>" + donutScoresEasy.join("<br>") + "<h3>Medium</h3>" + donutScoresMedium.join("<br>") + "<h3>Hard</h3>" + donutScoresHard.join("<br>");
   } 
@@ -139,6 +142,7 @@ donutLBButton.addEventListener("click", async function() {
     donutLBButton.innerHTML = "Leaderboard";
     gamename.innerHTML = "Leaderboard";
     scores.innerHTML = " ";
+    leaderboard.style.display = "none";
   }
 });
 
@@ -154,6 +158,8 @@ solitaireLBButton.addEventListener("click", async function() {
       var newLine = (doc.data()["username"]).concat(": ", doc.data()["solitaire"]); 
       solitaireScores.push(newLine);
     });
+
+    leaderboard.style.display = "block";
     gamename.innerHTML = "Leaderboard for Solitaire";
     scores.innerHTML = solitaireScores.join("<br>");
   } 
@@ -161,6 +167,7 @@ solitaireLBButton.addEventListener("click", async function() {
     solitaireLBButton.innerHTML = "Leaderboard";
     gamename.innerHTML = "Leaderboard";
     scores.innerHTML = " ";
+    leaderboard.style.display = "none";
   }
 });
 
@@ -177,6 +184,7 @@ flappyBatLBButton.addEventListener("click", async function() {
       flappyBatScores.push(newLine);
     });
 
+    leaderboard.style.display = "block";
     gamename.innerHTML = "Leaderboard for Flappy Bat";
     scores.innerHTML = flappyBatScores.join("<br>");
   } 
@@ -184,5 +192,6 @@ flappyBatLBButton.addEventListener("click", async function() {
     flappyBatLBButton.innerHTML = "Leaderboard";
     gamename.innerHTML = "Leaderboard";
     scores.innerHTML = " ";
+    leaderboard.style.display = "none";
   }
 });

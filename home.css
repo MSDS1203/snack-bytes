@@ -168,6 +168,7 @@ a {
 
 
 #leaderboard {
+    display: none; 
     flex: none;
     width: 400px;
     height: 600px;
