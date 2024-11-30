@@ -61,7 +61,7 @@ a {
     gap: 30px;
 }
 
-.cog:hover {
+.dropdown:hover > .cog, .cog:hover {
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
   }
