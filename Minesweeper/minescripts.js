@@ -68,9 +68,12 @@
     const home1 = document.getElementById("home");
     const home2 = document.getElementById("home1");
     const home3 = document.getElementById("home2");
+    const home4 = document.getElementById("home3");
     home1.addEventListener("click", goHome);
     home2.addEventListener("click", goHome);
     home3.addEventListener("click", goHome);
+    home4.addEventListener("click", goHome);
+
 
     const replay1 = document.getElementById("replay1");
     const replay2 = document.getElementById("replay2");
@@ -125,12 +128,12 @@
         if (flagOn === true) {
             flagOn = false;
             button.style.backgroundColor = "lightgreen";
-            flagText.innerText="Flag off";
+            flagText.innerText="Flags off";
          }
         else {
             flagOn = true;
             button.style.backgroundColor = "green"; 
-            flagText.innerText="Flag on";
+            flagText.innerText="Flags on";
         }
     }
 
