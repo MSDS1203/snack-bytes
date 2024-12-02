@@ -65,14 +65,16 @@
     const finalBombs = document.getElementById("final-bomb-score");
     const finalTime = document.getElementById("final-time");
 
-    const home1 = document.getElementById("home");
+    const home1 = document.getElementById("home"); // Main menu home button
     const home2 = document.getElementById("home1");
     const home3 = document.getElementById("home2");
     const home4 = document.getElementById("home3");
+    const home5 = document.getElementById("home4"); // Instructions menu home button
     home1.addEventListener("click", goHome);
     home2.addEventListener("click", goHome);
     home3.addEventListener("click", goHome);
     home4.addEventListener("click", goHome);
+    home5.addEventListener("click", goHome);
 
 
     const replay1 = document.getElementById("replay1");
@@ -97,7 +99,10 @@
         med.style.display = "none";
         hard.style.display = "none";
         inst.style.display = "none";
+        home1.style.display = "none";
+
         back.style.display = "block";
+        home5.style.display = "block";
         instText.style.display = "block";
     }
 
@@ -107,7 +112,9 @@
         med.style.display = "block";
         hard.style.display = "block";
         inst.style.display = "block";
+        home1.style.display = "block";
         back.style.display = "none";
+        home5.style.display = "none";
         instText.style.display = "none";
     }
 
