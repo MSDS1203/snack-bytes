@@ -17,15 +17,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-/*
-const userEmail = localStorage.getItem("userEmail");
-if (userEmail) {
-  document.getElementById("user-email").textContent = userEmail;
-} else {
-  document.getElementById("user-email").textContent = "No user logged in.";
-}
-*/
-
 const userName = localStorage.getItem("userName");
 if (userName) {
   document.getElementById("username").textContent = userName + "!";
@@ -89,8 +80,11 @@ snakeLBbutton.addEventListener("click", async function() {
     const querySnapshot = await getDocs(q);
     const snakeScores = [];
     querySnapshot.forEach((doc) => {
-      var newLine = (doc.data()["username"]).concat(": ", doc.data()["snake"]); 
-      snakeScores.push(newLine);
+      if (doc.data()["snake"] > 0)
+      {
+        var newLine = (doc.data()["username"]).concat(": ", doc.data()["snake"]); 
+        snakeScores.push(newLine);
+      }
     });
     
     leaderboard.style.display = "block";
@@ -120,18 +114,26 @@ donutLBButton.addEventListener("click", async function() {
     const donutScoresMedium = [];
     const donutScoresHard = [];
     querySnapshot1.forEach((doc) => {
-      var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutEasy"]); 
-      donutScoresEasy.push(newLine);
+      if (doc.data()["donutEasy"] > 0)
+      {
+        var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutEasy"]); 
+        donutScoresEasy.push(newLine);
+      }
     });
 
     querySnapshot2.forEach((doc) => {
-      var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutMedium"]); 
-      donutScoresMedium.push(newLine);
+      if (doc.data()["donutMedium"] > 0)
+      {
+        var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutMedium"]); 
+        donutScoresMedium.push(newLine);
+      }
     });
 
     querySnapshot3.forEach((doc) => {
-      var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutHard"]); 
-      donutScoresHard.push(newLine);
+      if (doc.data()["donutHard"] > 0){
+        var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutHard"]); 
+        donutScoresHard.push(newLine);
+      }
     });
 
     leaderboard.style.display = "block";
@@ -155,8 +157,10 @@ solitaireLBButton.addEventListener("click", async function() {
     const querySnapshot = await getDocs(q);
     const solitaireScores = [];
     querySnapshot.forEach((doc) => {
-      var newLine = (doc.data()["username"]).concat(": ", doc.data()["solitaire"]); 
-      solitaireScores.push(newLine);
+      if (doc.data()["solitaire"] > 0) {
+        var newLine = (doc.data()["username"]).concat(": ", doc.data()["solitaire"]); 
+        solitaireScores.push(newLine);
+      }
     });
 
     leaderboard.style.display = "block";
@@ -180,8 +184,10 @@ flappyBatLBButton.addEventListener("click", async function() {
     const querySnapshot = await getDocs(q);
     const flappyBatScores = [];
     querySnapshot.forEach((doc) => {
-      var newLine = (doc.data()["username"]).concat(": ", doc.data()["flappyBat"]); 
-      flappyBatScores.push(newLine);
+      if (doc.data()["flappyBat"] > 0){
+        var newLine = (doc.data()["username"]).concat(": ", doc.data()["flappyBat"]); 
+        flappyBatScores.push(newLine);
+      }
     });
 
     leaderboard.style.display = "block";
