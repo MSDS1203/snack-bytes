@@ -45,7 +45,7 @@ onAuthStateChanged(auth, async (user) => {
 
         //Same thing but for the game's leaderboard 
         //FOR EVERYONE TO CHANGE - "snakeLeaderboard" to whatever your game's leaderboard is
-        const docRef1 = doc(db, "MineSweepLeaderboard", uid);
+        const docRef1 = doc(db, "donutLeaderboard", uid);
         console.log("getting the doc reference for flappy bat leaderboard: ", !!docRef1);
 
         //Getting the document

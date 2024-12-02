@@ -109,9 +109,9 @@ donutLBButton.addEventListener("click", async function() {
   if (donutLBButton.innerHTML == "Leaderboard") {
     donutLBButton.innerHTML = "Hide";
     renameButtons("Donut");
-    const q1 = query(collection(db, "donutLeaderboard"), orderBy("donutEasy", "desc"), limit(10));
-    const q2 = query(collection(db, "donutLeaderboard"), orderBy("donutMedium", "desc"), limit(10));
-    const q3 = query(collection(db, "donutLeaderboard"), orderBy("donutHard", "desc"), limit(10));
+    const q1 = query(collection(db, "donutLeaderboard"), orderBy("donutEasy"), limit(10));
+    const q2 = query(collection(db, "donutLeaderboard"), orderBy("donutMedium"), limit(10));
+    const q3 = query(collection(db, "donutLeaderboard"), orderBy("donutHard"), limit(10));
     console.log("query made for donut leader boards");
     const querySnapshot1 = await getDocs(q1);
     const querySnapshot2 = await getDocs(q2);
