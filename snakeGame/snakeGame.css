@@ -43,10 +43,8 @@ button:hover {
 #start-screen{
     background-color: #CDC1FF;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    /* horizontal align */
     width: 30vw;
     margin-left: 33vw;
-    /* vertical align */
     height: 20vh;
     margin-top: 10vh;
     align-items: center;
@@ -72,7 +70,7 @@ button:hover {
     background-color: #BFECFF;
 }
 
-.candy #forCandy, .snakeCupcake #forCandy{
+.candy #speicalCase, .snakeCupcake #speicalCase{
     background-color: white;
     padding: 5px;
     border-radius: 10px;

@@ -4,6 +4,7 @@ let theme = parseTheme(cookie);
 
 setTheme(theme); 
 
+// Parsing the theme from the cookie
 function parseTheme(cookie) {
     let cookieArray = cookie.split(';'); //Split into an array of cookies
 
@@ -18,7 +19,8 @@ function parseTheme(cookie) {
     return "standard";
   }
 
-  function setTheme(theme) {
+// Setting the theme
+function setTheme(theme) {
     console.log("Change to theme " + theme);
     document.body.className = "";
     document.body.classList.add(theme);
@@ -70,6 +72,7 @@ var gameOver = false;
 var start = true;
 var currentScore = 0;
 
+// Start screen 
 var startScreen = document.getElementById("start-screen");
 var screenTitle = document.getElementById("screen-title");
 var screenMessage = document.getElementById("screen-message");
@@ -83,17 +86,14 @@ window.onload = function() {
     //Setting up number of rows and columns
     cols = Math.floor(window.innerHeight/20);
     rows = 18;
-
     while(body.scrollHeight > body.clientHeight)
     {
         rows--;
     }
-
     board.height = rows * blockSize;
     board.width = cols * blockSize;
 
-
-    //Loading up all directions of snake head images
+    //Loading  all directions of snake head images
     snakeHeadPositions = {
         up: new Image(),
         down: new Image(),
@@ -121,21 +121,21 @@ window.onload = function() {
         context.drawImage(obstacleImg, obstX, obstY, obstWidth, obstHeight);
     }
 
-    //Getting the current and highest score
+    //Getting the current and highest score of the user
     score = document.getElementById("score");
     score.innerHTML = currentScore;
     highScore = document.getElementById("highScore");
 
     updateFoodObst();
 
-    //When you press an arrow key, look at changeDirection()
+    //When you press an arrow key, change the snake's direction
     document.addEventListener("keyup", changeDirection);
 
     //Calling the update function 10 times a second
     setInterval(update, 1000/10); 
 }
 
-//Will pass in a key event and then change direction depending on arrow key pressed
+//Change direction depending on arrow key pressed
 function changeDirection(e) {
     //Change direction to go up (but not when currently down) 
     if (e.code == "ArrowUp" && velocityY != 1){
@@ -187,12 +187,9 @@ function update() {
     if (gameOver) 
         return;
 
-    //Displaying the title screen
-    if (start)
+    //Not showing the title screen when the game starts
+    if (start == false)
     {
-        context.fillStyle = "black";
-    }
-    else{
         context.clearRect(0, 0, board.width, board.height);
         startScreen.style.display = "none";
     }
@@ -207,9 +204,9 @@ function update() {
         context.drawImage(obstacleImg, obstX[i], obstY[i], obstWidth, obstHeight);
     }
     
-    //Snake eating food
+    //Growing a segment when the snake eats food
     if (snakeX == foodX && snakeY == foodY){
-        snakeBody.push([foodX, foodY]); //grow segment where food was
+        snakeBody.push([foodX, foodY]); 
         currentScore += 1;
         score.innerHTML = currentScore;
         updateFoodObst();
@@ -221,9 +218,8 @@ function update() {
     }
 
     //Updating first body segment to take the head's place
-    //If there are body parts in the array...
+    //If there are body parts in the array set the segment before the head to the coordinates of the head
     if (snakeBody.length){
-        //Setting the segment before the head to the coordinates of the head
         snakeBody[0] = [snakeX, snakeY];
     }
 
@@ -281,7 +277,7 @@ function updateFoodObst(){
         }
     }
 
-    //Make sure the obstacle is not in the same position as the food nor the snake body
+    //Randomly place obstacle(s) not in the same position as the snake body or the food
     for (let i = 0; i <= numOfObst; i++)
     {
         obstX[i] = Math.floor(Math.random() * cols) * blockSize;
@@ -297,7 +293,7 @@ function updateFoodObst(){
         }
     }
     
-    //Update the number of obstacles to use when 5 more points are reached
+    //Add an obstacle when 5 more points are gained
     if (currentScore % 5 == 0 && currentScore != 0)
     {
         numOfObst++;
@@ -306,13 +302,11 @@ function updateFoodObst(){
 
 //Display game over and updating high score if needed
 function gameIsOver(){
-    console.log("Saving current score to localStorage: ", currentScore); //FOR EVERYONE TO ADD - PUTTING THE CURRENT SCORE INTO LOCAL STORAGE
+    console.log("Saving current score to localStorage: ", currentScore); 
     localStorage.setItem("currentScoreSnake", currentScore);
     startScreen.style.display = "flex";
     screenTitle.innerHTML = "GAME OVER";
     screenMessage.innerHTML = "Press the space bar to begin again";
-
-
 
     return true;
 }
