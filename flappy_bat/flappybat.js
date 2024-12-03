@@ -166,8 +166,8 @@ function placePipes() {
     pipeArray.push(topPipe);
     if (otherdiv!=11){
         if(score!=0 && score%10==0){
-            otherdiv = division+2;
-            division+=2;
+            otherdiv = division+1;
+            division+=1;
             openingSpace = board.height/division;
         }
         else{
