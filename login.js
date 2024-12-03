@@ -5,7 +5,6 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import { doc, setDoc, getFirestore, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDcTqPERyxlIKB3CCDY6BgX3tsr6S8UIzU",
     authDomain: "snack-bytes.firebaseapp.com",
@@ -15,21 +14,16 @@ const firebaseConfig = {
     appId: "1:149505884441:web:6aff0e6f5b65d453350588"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-console.log("firebase app initialized: ", app.name);
-console.log("firestore initialized: ", !!db);
-
-
 const submitButton = document.getElementById("submit");
 const signupButton = document.getElementById("sign-up");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
-const main = document.getElementById("main");
+const loggingIn = document.getElementById("logging-in");
 const createacct = document.getElementById("create-acct")
 
 const signUpUserNameIn = document.getElementById("user-name");
@@ -49,20 +43,20 @@ createacctbtn.addEventListener("click", async function() {
   signupEmail = signupEmailIn.value;
   confirmSignupEmail = confirmSignupEmailIn.value;
   if(signupEmail != confirmSignupEmail) {
-      window.alert("Email fields do not match. Try again.")
+      window.alert("The email fields do not match. Try again.")
       isVerified = false;
   }
 
   signupPassword = signupPasswordIn.value;
   confirmSignUpPassword = confirmSignUpPasswordIn.value;
   if(signupPassword != confirmSignUpPassword) {
-      window.alert("Password fields do not match. Try again.")
+      window.alert("The password fields do not match. Try again.")
       isVerified = false;
   }
   
   signUpUserName = signUpUserNameIn.value;
   if(signUpUserName == null || signupEmail == null || confirmSignupEmail == null || signupPassword == null || confirmSignUpPassword == null) {
-    window.alert("Please fill out all required fields.");
+    window.alert("Please fill out all fields required.");
     isVerified = false;
   }
   
@@ -73,9 +67,6 @@ createacctbtn.addEventListener("click", async function() {
       window.alert("Success! Account created.");
       localStorage.setItem("userEmail", user.email);
       localStorage.setItem("userName", signUpUserName);
-
-      console.log("User ID:", user.uid);
-      console.log(auth.currentUser);
 
       console.log("Attemptying to add user data to firestore:");
       // Add user data to Firestore with user ID
@@ -115,8 +106,7 @@ createacctbtn.addEventListener("click", async function() {
       window.location.href = "home.html";
 
     } catch (error) {
-      console.error("Error occurred:", error);
-      window.alert("Error occurred. Try again.");
+      window.alert(error);
     }
   }
 
@@ -131,9 +121,7 @@ submitButton.addEventListener("click", async function() {
   try{
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      console.log("Success! Welcome back!");
-      window.alert("Success! Welcome back!");
-      localStorage.setItem("userEmail", user.email);      
+      window.alert("Successfully logged in!");     
 
       const docRef = doc(db, "userScores", user.uid)
       const docSnap = await getDoc(docRef);
@@ -149,19 +137,16 @@ submitButton.addEventListener("click", async function() {
       window.location.href = "home.html";
     }
     catch(error){
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log("Error occurred. Try again.");
-      window.alert("Error occurred. Try again.");
+      window.alert(error);
     }
 });
 
 signupButton.addEventListener("click", function() {
-    main.style.display = "none";
+    loggingIn.style.display = "none";
     createacct.style.display = "flex";
 });
 
 returnBtn.addEventListener("click", function() {
-    main.style.display = "flex";
+    loggingIn.style.display = "flex";
     createacct.style.display = "none";
 });
