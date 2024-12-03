@@ -473,6 +473,11 @@
         flagOn = false; 
         bombArray.length = 0;
 
+        secCnt = 0;
+        minCnt = 0;
+        min.innerHTML = "0";
+        sec.innerHTML = "00";
+
         gameOverMessage.style.display = "none";
         winMessage.style.display = "none";
         board.style.display = "none";

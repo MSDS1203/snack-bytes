@@ -178,10 +178,12 @@ a {
     padding: 15px;
 }
 
+/*
 #leaderboard-scores:nth-child(even) {
     line-height: 1rem;
     background-color: #f2cea9;
 }
+*/
 
 /* Page-Specific Theme Handling */
 .dark-mode #header, .dark-mode .game, .dark-mode #leaderboard {
