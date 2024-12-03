@@ -117,7 +117,7 @@ donutLBButton.addEventListener("click", async function() {
       if (doc.data()["donutEasy"] > 0)
       {
         var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutEasy"]); 
-        donutScoresEasy.push(newLine);
+        donutScoresEasy.push("<span>" + newLine + "</span>");
       }
     });
 
