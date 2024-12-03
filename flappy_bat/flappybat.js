@@ -188,20 +188,23 @@ function placePipes() {
 }
 
 
+let birdImages = ["./flappybat.png", "./Flyingbat.png"];
+let birdImgIndex = 0;
+
 function moveBird(e) {
     if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX") {
-        //jump
+        // jump
         velocityY = -6;
-        setInterval(function(){
-            var i = 0; 
-            var pics = ["./flappybat.png", "./Flyingbat.png"];
-            birdImg.src = pics[i];
-            //i = (i+1) % pics.length;
-            //birdImg.src = pics[i];
-        }
-        ,750);
-        birdImg.src =  "./Flyingbat.png";
-        //reset game
+        birdImgIndex = 1;  // Set to flying bat
+        birdImg.src = birdImages[birdImgIndex];
+
+        // After a delay, change back to original bird
+        setTimeout(function() {
+            birdImgIndex = 0;
+            birdImg.src = birdImages[birdImgIndex];
+        }, 200); // 200ms delay, adjust as needed
+        
+        // Reset the game if it's over
         if (gameOver) {
             bird.y = birdY;
             pipeArray = [];
@@ -210,6 +213,7 @@ function moveBird(e) {
         }
     }
 }
+
 
 function detectCollision(a, b) {
     return a.x < b.x + b.width &&   //a's top left corner doesn't reach b's top right corner
