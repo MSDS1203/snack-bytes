@@ -116,7 +116,14 @@ donutLBButton.addEventListener("click", async function() {
     querySnapshot1.forEach((doc) => {
       if (doc.data()["donutEasy"] > 0)
       {
-        var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutEasy"]); 
+        var totalSeconds = doc.data()["donutEasy"];
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = totalSeconds % 60;
+        if (seconds < 10){
+          seconds = "0" + seconds;
+        }
+
+        var newLine = (doc.data()["username"]).concat(" - ", minutes, ":", seconds); 
         donutScoresEasy.push("<span>" + newLine + "</span>");
       }
     });
@@ -124,14 +131,28 @@ donutLBButton.addEventListener("click", async function() {
     querySnapshot2.forEach((doc) => {
       if (doc.data()["donutMedium"] > 0)
       {
-        var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutMedium"]); 
+        var totalSeconds = doc.data()["donutMedium"];
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = totalSeconds % 60;
+        if (seconds < 10){
+          seconds = "0" + seconds;
+        }
+
+        var newLine = (doc.data()["username"]).concat(" - ", minutes, ":", seconds); 
         donutScoresMedium.push(newLine);
       }
     });
 
     querySnapshot3.forEach((doc) => {
       if (doc.data()["donutHard"] > 0){
-        var newLine = (doc.data()["username"]).concat(": ", doc.data()["donutHard"]); 
+        var totalSeconds = doc.data()["donutHard"];
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = totalSeconds % 60;
+        if (seconds < 10){
+          seconds = "0" + seconds;
+        }
+
+        var newLine = (doc.data()["username"]).concat(" - ", minutes, ":", seconds); 
         donutScoresHard.push(newLine);
       }
     });
