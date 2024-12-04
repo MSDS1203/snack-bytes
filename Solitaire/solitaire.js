@@ -151,7 +151,17 @@ window.onresize = function (event) {
     sizeCards();
 };
 
+const home = d.getElementById("home");
+const replay = d.getElementById("replay");
+home.addEventListener("click", goHome);
+
 // ### FUNCTIONS ###
+
+//home
+function goHome() {
+    console.log("home");
+    window.location.href = "../home.html";
+}
 
 // create deck
 function create(deck, suits) {

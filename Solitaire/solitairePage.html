@@ -25,7 +25,11 @@
                 <label>Moves:</label>
                 <span>0</span>
             </div>
-            <button id="submit-score">Submit Score</button>
+            <div id="buttons">
+                <button id="home">Home</button>
+                <button id="replay" onclick="window.location.reload()">Replay</button>
+                <button id="submit-score">Submit Score</button>
+            </div>
             <div class="curr-hs">
                 <label>Current High Score:</label>
                 <span id="high-score">0</span>
@@ -311,7 +315,7 @@
         </li>
     </ul><!-- /.templates -->
     <script src="./solitaire.js"></script>
-    <!--<script src="./solitaireDB.js" type="module"></script>-->
+    <script src="./solitaireDB.js" type="module"></script>
 </body>
 
 </html>

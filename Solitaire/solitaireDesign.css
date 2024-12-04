@@ -120,14 +120,12 @@ body {
     content: '';
 }
 
-#submit-score {
+#submit-score,
+#home,
+#replay {
     background-color: black;
     color: yellow;
     border: none;
-}
-
-#high-score {
-    color: yellow;
 }
 
 [data-gameplay="active"] #score,
@@ -504,7 +502,7 @@ body {
 
 .card .suit.middle_top {
     left: 50%;
-    top: 0;
+    top: 5%;
     margin-left: -0.35em;
     margin-top: 1.25em;
 }
