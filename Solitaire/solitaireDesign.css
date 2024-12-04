@@ -285,7 +285,7 @@ body {
 }
 
 .card .suit {
-    font-size: 5.8em;
+    font-size: 5em;
     font-weight: normal;
     width: 0.6896551724137931em;
     height: 0.786206896551724em;
@@ -367,6 +367,10 @@ body {
 
 .card .king .rank::before {
     content: '\e91f';
+}
+
+.card .ace .rank::before {
+    content: '\e915';
 }
 
 .card .corner {
@@ -471,22 +475,22 @@ body {
 }
 
 .card .suit.top_center {
-    left: 50%;
-    top: 0;
+    left: 45%;
+    top: 10%;
     margin-left: -0.35em;
     margin-top: 0.65em;
 }
 
 .card .suit.top_left {
-    left: 0;
-    top: 0;
+    left: 5%;
+    top: 5%;
     margin-left: 0.65em;
     margin-top: 0.65em;
 }
 
 .card .suit.top_right {
-    right: 0;
-    top: 0;
+    right: 5%;
+    top: 5%;
     margin-right: 0.65em;
     margin-top: 0.65em;
 }
@@ -517,14 +521,14 @@ body {
 }
 
 .card .suit.middle_left {
-    left: 0;
+    left: 5%;
     top: 50%;
     margin-left: 0.65em;
     margin-top: -0.5em;
 }
 
 .card .suit.middle_right {
-    right: 0;
+    right: 5%;
     top: 50%;
     margin-right: 0.65em;
     margin-top: -0.5em;
@@ -538,22 +542,22 @@ body {
 }
 
 .card .suit.middle_top_left {
-    left: 0;
-    top: 50%;
+    left: 5%;
+    top: 52%;
     margin-left: 0.65em;
     margin-top: -1em;
 }
 
 .card .suit.middle_top_right {
-    right: 0;
-    top: 50%;
+    right: 5%;
+    top: 52%;
     margin-right: 0.65em;
     margin-top: -1em;
 }
 
 .card .suit.middle_bottom_left {
     bottom: 50%;
-    left: 0;
+    left: 12%;
     margin-left: 0.65em;
     margin-bottom: -1em;
     -ms-transform: rotate(180deg);
@@ -566,7 +570,7 @@ body {
     bottom: 50%;
     right: 0;
     margin-bottom: -1em;
-    margin-right: 0.65em;
+    margin-right: 0.6em;
     -ms-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
@@ -574,8 +578,8 @@ body {
 }
 
 .card .suit.middle_bottom_center {
-    bottom: 50%;
-    left: 50%;
+    bottom: 47%;
+    left: 57%;
     margin-bottom: -1.35em;
     margin-left: -0.35em;
     -ms-transform: rotate(180deg);
@@ -586,7 +590,7 @@ body {
 
 .card .suit.bottom_center {
     bottom: 0;
-    left: 50%;
+    left: 52%;
     margin-bottom: 0.65em;
     margin-left: -0.35em;
     -ms-transform: rotate(180deg);
@@ -596,8 +600,8 @@ body {
 }
 
 .card .suit.bottom_left {
-    bottom: 0;
-    left: 0;
+    bottom: 3%;
+    left: 12%;
     margin-bottom: 0.65em;
     margin-left: 0.65em;
     -ms-transform: rotate(180deg);
@@ -607,7 +611,7 @@ body {
 }
 
 .card .suit.bottom_right {
-    bottom: 0;
+    bottom: 3%;
     right: 0;
     margin-bottom: 0.65em;
     margin-right: 0.65em;
