@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Suit-Regular';
+    src: url("icomoon/fonts/icomoon.eot");
+    src: url("icomoon/fonts/icomoon.eot") format('embedded-opentype'), url("icomoon/fonts/icomoon.woff") format('woff'), url("icomoon/fonts/icomoon.ttf") format('truetype'), url("icomoon/fonts/icomoon.svg") format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html,
 body {
     width: 100%;
@@ -6,7 +14,7 @@ body {
 
 body {
     position: relative;
-    color: #f3f5f7;
+    color: yellow;
     background: #0e8b44 url('https://bfa.github.io/solitaire-js/img/green_felt.jpg');
     background-size: cover;
     background-position: center;
@@ -17,7 +25,7 @@ body {
 }
 
 .navbar a {
-    color: #fff;
+    color: yellow;
 }
 
 .navbar li[data-active="false"] {
@@ -93,13 +101,13 @@ body {
 
 #score .timer button i#play::before {
     border-top: 8px solid transparent;
-    border-left: 12px solid #fff;
+    border-left: 12px solid yellow;
     border-bottom: 8px solid transparent;
 }
 
 #score .timer button i#pause::before {
-    border-right: 4px solid #fff;
-    border-left: 4px solid #fff;
+    border-right: 4px solid yellow;
+    border-left: 4px solid yellow;
 }
 
 [data-gameplay="active"] #score .timer button,
@@ -110,6 +118,16 @@ body {
 [data-gameplay="active"] #score .timer button i#pause::before,
 [data-gameplay="paused"] #score .timer button i#play::before {
     content: '';
+}
+
+#submit-score {
+    background-color: black;
+    color: yellow;
+    border: none;
+}
+
+#high-score {
+    color: yellow;
 }
 
 [data-gameplay="active"] #score,
@@ -169,7 +187,7 @@ body {
     position: relative;
     float: left;
     width: 13%;
-    margin-right: 10px;
+    margin-right: 1.5%;
     margin-bottom: 10px;
     padding: 5px;
 }
@@ -186,21 +204,23 @@ body {
     width: 100%;
     height: 100%;
     border: 2px dotted rgba(0, 0, 0, .25);
-    border-radius: 5px;
+    border-radius: 0px;
 }
 
 .card {
     display: block;
+    position: absolute;
     top: 0;
     left: 0;
-    background-image: url('./redBack.png');
-    background-size: contain;
+    background-color: #ddd;
+    background-image: url('redBack.png');
+    background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
     height: 100%;
-    font-family: 'Suit-Regular', sans-serif;
+    font-family: 'Suit-Regular';
     font-size: 0.6vw;
-    border-radius: 5px;
+    border-radius: 0px;
     z-index: -1;
 }
 
@@ -215,7 +235,7 @@ body {
 
     .pile::after,
     .card {
-        border-radius: 10px;
+        border-radius: 0px;
     }
 }
 
@@ -236,7 +256,7 @@ body {
 }
 
 .card.up {
-    background-image: url('https://bfa.github.io/solitaire-js/img/card_face_bg.png');
+    background-image: url("white.png");
     background-repeat: repeat;
     color: #111;
 }
@@ -251,7 +271,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 5px;
+    border-radius: 0px;
 }
 
 .card[data-selected="true"]::before {
@@ -260,14 +280,341 @@ body {
 
 @media screen and (min-width: 768px) {
     .card::before {
-        border-radius: 10px;
+        border-radius: 0px;
     }
 }
 
-li.pile img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.card .suit {
+    font-size: 5.8em;
+    font-weight: normal;
+    width: 0.6896551724137931em;
+    height: 0.786206896551724em;
+    line-height: 0.786206896551724em;
+    position: absolute;
+    text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+    .card>div>.suit {
+        display: none;
+    }
+}
+
+.card .heart,
+.card .diamond {
+    color: #cc0000;
+}
+
+.card .spade .suit::before {
+    content: '\e908';
+}
+
+.card .heart .suit::before {
+    content: '\e907';
+}
+
+.card .diamond .suit::before {
+    content: '\e906';
+}
+
+.card .club .suit::before {
+    content: '\e905';
+}
+
+.card .two .rank::before {
+    content: '\e900';
+}
+
+.card .three .rank::before {
+    content: '\e901';
+}
+
+.card .four .rank::before {
+    content: '\e902';
+}
+
+.card .five .rank::before {
+    content: '\e903';
+}
+
+.card .six .rank::before {
+    content: '\e904';
+}
+
+.card .seven .rank::before {
+    content: '\e911';
+}
+
+.card .eight .rank::before {
+    content: '\e912';
+}
+
+.card .nine .rank::before {
+    content: '\e913';
+}
+
+.card .ten .rank::before {
+    content: '\e914';
+}
+
+.card .jack .rank::before {
+    content: '\e91e';
+}
+
+.card .queen .rank::before {
+    content: '\e920';
+}
+
+.card .king .rank::before {
+    content: '\e91f';
+}
+
+.card .corner {
+    line-height: 1;
+    position: absolute;
+    text-align: center;
+}
+
+.card .corner span {
+    display: block;
+    font-size: 9em;
+    font-weight: bold;
+    width: 1em;
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .card .corner span {
+        font-size: 3em;
+    }
+}
+
+.card .corner .suit {
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.card .corner.top {
+    left: 0.64em;
+    top: 0.96em;
+}
+
+.card .corner.bottom {
+    bottom: 0.96em;
+    right: 0.64em;
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.card .ace span.suit.middle_center {
+    font-size: 10.24em;
+    left: 50%;
+    top: 50%;
+    margin-top: -0.4em;
+    margin-left: -0.5em;
+}
+
+.card .face::before {
+    display: none;
+    content: '';
+    position: absolute;
+    top: 15.25%;
+    left: 19%;
+    width: 62%;
+    height: 70.5%;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+@media screen and (min-width: 768px) {
+    .card .face::before {
+        display: block;
+    }
+}
+
+.card .spade.king .face::before,
+.card .club.king .face::before {
+    background-image: url('./kingb.png');
+    background-position: center;
+}
+
+.card .spade.queen .face::before,
+.card .club.queen .face::before {
+    background-image: url('./queenB.png');
+    background-position: center;
+}
+
+.card .spade.jack .face::before,
+.card .club.jack .face::before {
+    background-image: url('./jackB.png');
+    background-position: center;
+}
+
+.card .heart.king .face::before,
+.card .diamond.king .face::before {
+    background-image: url('./kingR.png');
+    background-position: center;
+}
+
+.card .heart.queen .face::before,
+.card .diamond.queen .face::before {
+    background-image: url('./queenR.png');
+    background-position: center;
+}
+
+.card .heart.jack .face::before,
+.card .diamond.jack .face::before {
+    background-image: url('./jackR.png');
+    background-position: center;
+}
+
+.card .suit.top_center {
+    left: 50%;
+    top: 0;
+    margin-left: -0.35em;
+    margin-top: 0.65em;
+}
+
+.card .suit.top_left {
+    left: 0;
+    top: 0;
+    margin-left: 0.65em;
+    margin-top: 0.65em;
+}
+
+.card .suit.top_right {
+    right: 0;
+    top: 0;
+    margin-right: 0.65em;
+    margin-top: 0.65em;
+}
+
+.card .suit.middle_center {
+    left: 50%;
+    top: 50%;
+    margin-left: -0.35em;
+    margin-top: -0.5em;
+}
+
+.card .suit.middle_top {
+    left: 50%;
+    top: 0;
+    margin-left: -0.35em;
+    margin-top: 1.25em;
+}
+
+.card .suit.middle_bottom {
+    bottom: 0;
+    left: 50%;
+    margin-bottom: 0.65em;
+    margin-left: -0.35em;
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.card .suit.middle_left {
+    left: 0;
+    top: 50%;
+    margin-left: 0.65em;
+    margin-top: -0.5em;
+}
+
+.card .suit.middle_right {
+    right: 0;
+    top: 50%;
+    margin-right: 0.65em;
+    margin-top: -0.5em;
+}
+
+.card .suit.middle_top_center {
+    left: 50%;
+    top: 50%;
+    margin-left: -0.35em;
+    margin-top: -1.35em;
+}
+
+.card .suit.middle_top_left {
+    left: 0;
+    top: 50%;
+    margin-left: 0.65em;
+    margin-top: -1em;
+}
+
+.card .suit.middle_top_right {
+    right: 0;
+    top: 50%;
+    margin-right: 0.65em;
+    margin-top: -1em;
+}
+
+.card .suit.middle_bottom_left {
+    bottom: 50%;
+    left: 0;
+    margin-left: 0.65em;
+    margin-bottom: -1em;
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.card .suit.middle_bottom_right {
+    bottom: 50%;
+    right: 0;
+    margin-bottom: -1em;
+    margin-right: 0.65em;
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.card .suit.middle_bottom_center {
+    bottom: 50%;
+    left: 50%;
+    margin-bottom: -1.35em;
+    margin-left: -0.35em;
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.card .suit.bottom_center {
+    bottom: 0;
+    left: 50%;
+    margin-bottom: 0.65em;
+    margin-left: -0.35em;
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.card .suit.bottom_left {
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0.65em;
+    margin-left: 0.65em;
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.card .suit.bottom_right {
+    bottom: 0;
+    right: 0;
+    margin-bottom: 0.65em;
+    margin-right: 0.65em;
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 .card:nth-child(1),
@@ -304,12 +651,12 @@ li.pile img {
     z-index: 1;
 }
 
-/* deck pile */
-.deck-pile {
+/* stock */
+.stock {
     z-index: 1;
 }
 
-.deck-pile .reload-icon {
+.stock .reload-icon {
     position: absolute;
     top: 0;
     left: 0;
@@ -323,12 +670,12 @@ li.pile img {
 }
 
 @media screen and (max-width: 767px) {
-    .deck-pile .reload-icon {
+    .stock .reload-icon {
         font-size: 5vw;
     }
 }
 
-.deck-pile .reload-icon span {
+.stock .reload-icon span {
     display: block;
     position: absolute;
     top: 50%;
@@ -340,14 +687,14 @@ li.pile img {
     pointer-events: none;
 }
 
-.deck-pile .reload-icon span::before,
-.deck-pile .reload-icon span::after {
+.stock .reload-icon span::before,
+.stock .reload-icon span::after {
     content: '';
     display: inline-block;
     border-style: solid;
 }
 
-.deck-pile .reload-icon span::before {
+.stock .reload-icon span::before {
     width: 1.25em;
     height: 1.25em;
     border-color: transparent black black black;
@@ -357,7 +704,7 @@ li.pile img {
     transform: rotate(45deg);
 }
 
-.deck-pile .reload-icon span::after {
+.stock .reload-icon span::after {
     position: absolute;
     top: 0;
     left: 50%;
@@ -368,24 +715,24 @@ li.pile img {
 }
 
 
-/* discard */
-.discard {
+/* waste */
+.waste {
     z-index: 1;
 }
 
-/* suit slots */
-.suit-slots .pile {
+/* foundation */
+.fnd .pile {
     left: 43.5%;
 }
 
-.suit-slots .pile::before {
+.fnd .pile::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 0;
     width: 100%;
     color: #000;
-    font-family: 'Suit-Regular', sans-serif;
+    font-family: 'Suit-Regular';
     font-size: 10vw;
     margin-top: -0.6em;
     line-height: 1;
@@ -394,432 +741,437 @@ li.pile img {
 }
 
 @media screen and (min-width: 768px) {
-    .suit-slots .pile::before {
+    .fnd .pile::before {
         font-size: 6em;
     }
 }
 
 @media screen and (min-width: 992px) {
-    .suit-slots .pile::before {
+    .fnd .pile::before {
         font-size: 7em;
     }
 }
 
 @media screen and (min-width: 1200px) {
-    .suit-slots .pile::before {
+    .fnd .pile::before {
         font-size: 8em;
     }
 }
 
-.suit-slots .pile.spades::before {
-    content: '♠'
+.fnd .pile.spades::before {
+    content: '\e908';
 }
 
-.suit-slots .pile.hearts::before {
-    content: '♥'
+.fnd .pile.hearts::before {
+    content: '\e907';
 }
 
-.suit-slots .pile.diamonds::before {
-    content: '♦'
+.fnd .pile.diamonds::before {
+    content: '\e906';
 }
 
-.suit-slots .pile.clubs::before {
-    content: '♣'
+.fnd .pile.clubs::before {
+    content: '\e905';
 }
 
-/* pile slots */
-.pile-slots .card {
+/* tableau */
+.tab .card {
     box-shadow: 0 0 5px rgba(0, 0, 0, .5);
     z-index: 1;
     margin-bottom: 10em;
 }
 
 /* face up */
-.pile-slots .card:nth-child(2) {
+.tab .card:nth-child(2) {
     top: 6em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(3) {
+.tab .card:nth-child(3) {
     top: 12em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(4) {
+.tab .card:nth-child(4) {
     top: 18em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(5) {
+.tab .card:nth-child(5) {
     top: 24em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(6) {
+.tab .card:nth-child(6) {
     top: 30em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(7) {
+.tab .card:nth-child(7) {
     top: 36em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(8) {
+.tab .card:nth-child(8) {
     top: 42em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(9) {
+.tab .card:nth-child(9) {
     top: 48em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(10) {
+.tab .card:nth-child(10) {
     top: 54em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(11) {
+.tab .card:nth-child(11) {
     top: 60em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(12) {
+.tab .card:nth-child(12) {
     top: 66em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(13) {
+.tab .card:nth-child(13) {
     top: 72em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(14) {
+.tab .card:nth-child(14) {
     top: 78em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(15) {
+.tab .card:nth-child(15) {
     top: 84em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(16) {
+.tab .card:nth-child(16) {
     top: 90em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(17) {
+.tab .card:nth-child(17) {
     top: 96em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(18) {
+.tab .card:nth-child(18) {
     top: 102em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(19) {
+.tab .card:nth-child(19) {
     top: 108em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(20) {
+.tab .card:nth-child(20) {
     top: 114em;
     left: 0;
 }
 
-.pile-slots .card:nth-child(21) {
+.tab .card:nth-child(21) {
     top: 120em;
     left: 0;
 }
 
 /* face down */
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(2),
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(2),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(2),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(2),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(2),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(2) {
+.tab .pile[data-unplayed='1'] .card:nth-child(2),
+.tab .pile[data-unplayed='2'] .card:nth-child(2),
+.tab .pile[data-unplayed='3'] .card:nth-child(2),
+.tab .pile[data-unplayed='4'] .card:nth-child(2),
+.tab .pile[data-unplayed='5'] .card:nth-child(2),
+.tab .pile[data-unplayed='6'] .card:nth-child(2) {
     top: 3em;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(3),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(3),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(3),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(3),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(3) {
+.tab .pile[data-unplayed='2'] .card:nth-child(3),
+.tab .pile[data-unplayed='3'] .card:nth-child(3),
+.tab .pile[data-unplayed='4'] .card:nth-child(3),
+.tab .pile[data-unplayed='5'] .card:nth-child(3),
+.tab .pile[data-unplayed='6'] .card:nth-child(3) {
     top: 6em;
 }
 
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(4),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(4),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(4),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(4) {
+.tab .pile[data-unplayed='3'] .card:nth-child(4),
+.tab .pile[data-unplayed='4'] .card:nth-child(4),
+.tab .pile[data-unplayed='5'] .card:nth-child(4),
+.tab .pile[data-unplayed='6'] .card:nth-child(4) {
     top: 9em;
 }
 
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(5),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(5),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(5) {
+.tab .pile[data-unplayed='4'] .card:nth-child(5),
+.tab .pile[data-unplayed='5'] .card:nth-child(5),
+.tab .pile[data-unplayed='6'] .card:nth-child(5) {
     top: 12em;
 }
 
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(6),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(6) {
+.tab .pile[data-unplayed='5'] .card:nth-child(6),
+.tab .pile[data-unplayed='6'] .card:nth-child(6) {
     top: 15em;
 }
 
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(7) {
+.tab .pile[data-unplayed='6'] .card:nth-child(7) {
     top: 18em;
 }
 
 /* piles with odd # of face down cards */
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(3) {
+.tab .pile[data-unplayed='1'] .card:nth-child(3) {
     top: 9em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(4),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(5) {
+.tab .pile[data-unplayed='1'] .card:nth-child(4),
+.tab .pile[data-unplayed='3'] .card:nth-child(5) {
     top: 15em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(5),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(6),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(7) {
+.tab .pile[data-unplayed='1'] .card:nth-child(5),
+.tab .pile[data-unplayed='3'] .card:nth-child(6),
+.tab .pile[data-unplayed='5'] .card:nth-child(7) {
     top: 21em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(6),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(7),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(8) {
+.tab .pile[data-unplayed='1'] .card:nth-child(6),
+.tab .pile[data-unplayed='3'] .card:nth-child(7),
+.tab .pile[data-unplayed='5'] .card:nth-child(8) {
     top: 27em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(7),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(8),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(9) {
+.tab .pile[data-unplayed='1'] .card:nth-child(7),
+.tab .pile[data-unplayed='3'] .card:nth-child(8),
+.tab .pile[data-unplayed='5'] .card:nth-child(9) {
     top: 33em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(8),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(9),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(10) {
+.tab .pile[data-unplayed='1'] .card:nth-child(8),
+.tab .pile[data-unplayed='3'] .card:nth-child(9),
+.tab .pile[data-unplayed='5'] .card:nth-child(10) {
     top: 39em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(9),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(10),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(11) {
+.tab .pile[data-unplayed='1'] .card:nth-child(9),
+.tab .pile[data-unplayed='3'] .card:nth-child(10),
+.tab .pile[data-unplayed='5'] .card:nth-child(11) {
     top: 45em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(10),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(11),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(12) {
+.tab .pile[data-unplayed='1'] .card:nth-child(10),
+.tab .pile[data-unplayed='3'] .card:nth-child(11),
+.tab .pile[data-unplayed='5'] .card:nth-child(12) {
     top: 51em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(11),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(12),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(13) {
+.tab .pile[data-unplayed='1'] .card:nth-child(11),
+.tab .pile[data-unplayed='3'] .card:nth-child(12),
+.tab .pile[data-unplayed='5'] .card:nth-child(13) {
     top: 57em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(12),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(13),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(14) {
+.tab .pile[data-unplayed='1'] .card:nth-child(12),
+.tab .pile[data-unplayed='3'] .card:nth-child(13),
+.tab .pile[data-unplayed='5'] .card:nth-child(14) {
     top: 63em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(13),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(14),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(15) {
+.tab .pile[data-unplayed='1'] .card:nth-child(13),
+.tab .pile[data-unplayed='3'] .card:nth-child(14),
+.tab .pile[data-unplayed='5'] .card:nth-child(15) {
     top: 69em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(14),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(15),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(16) {
+.tab .pile[data-unplayed='1'] .card:nth-child(14),
+.tab .pile[data-unplayed='3'] .card:nth-child(15),
+.tab .pile[data-unplayed='5'] .card:nth-child(16) {
     top: 75em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(15),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(16),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(17) {
+.tab .pile[data-unplayed='1'] .card:nth-child(15),
+.tab .pile[data-unplayed='3'] .card:nth-child(16),
+.tab .pile[data-unplayed='5'] .card:nth-child(17) {
     top: 81em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(16),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(17),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(18) {
+.tab .pile[data-unplayed='1'] .card:nth-child(16),
+.tab .pile[data-unplayed='3'] .card:nth-child(17),
+.tab .pile[data-unplayed='5'] .card:nth-child(18) {
     top: 87em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(17),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(18),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(19) {
+.tab .pile[data-unplayed='1'] .card:nth-child(17),
+.tab .pile[data-unplayed='3'] .card:nth-child(18),
+.tab .pile[data-unplayed='5'] .card:nth-child(19) {
     top: 93em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(18),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(19),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(20) {
+.tab .pile[data-unplayed='1'] .card:nth-child(18),
+.tab .pile[data-unplayed='3'] .card:nth-child(19),
+.tab .pile[data-unplayed='5'] .card:nth-child(20) {
     top: 99em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(19),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(20),
-.pile-slots .pile[data-unplayed='5'] .card:nth-child(21) {
+.tab .pile[data-unplayed='1'] .card:nth-child(19),
+.tab .pile[data-unplayed='3'] .card:nth-child(20),
+.tab .pile[data-unplayed='5'] .card:nth-child(21) {
     top: 105em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(20),
-.pile-slots .pile[data-unplayed='3'] .card:nth-child(21) {
+.tab .pile[data-unplayed='1'] .card:nth-child(20),
+.tab .pile[data-unplayed='3'] .card:nth-child(21) {
     top: 111em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='1'] .card:nth-child(21) {
+.tab .pile[data-unplayed='1'] .card:nth-child(21) {
     top: 117em;
     left: 0;
 }
 
 /* piles with even # of face down cards */
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(4) {
+.tab .pile[data-unplayed='2'] .card:nth-child(4) {
     top: 12em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(5),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(6) {
+.tab .pile[data-unplayed='2'] .card:nth-child(5),
+.tab .pile[data-unplayed='4'] .card:nth-child(6) {
     top: 18em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(6),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(7),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(8) {
+.tab .pile[data-unplayed='2'] .card:nth-child(6),
+.tab .pile[data-unplayed='4'] .card:nth-child(7),
+.tab .pile[data-unplayed='6'] .card:nth-child(8) {
     top: 24em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(7),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(8),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(9) {
+.tab .pile[data-unplayed='2'] .card:nth-child(7),
+.tab .pile[data-unplayed='4'] .card:nth-child(8),
+.tab .pile[data-unplayed='6'] .card:nth-child(9) {
     top: 30em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(8),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(9),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(10) {
+.tab .pile[data-unplayed='2'] .card:nth-child(8),
+.tab .pile[data-unplayed='4'] .card:nth-child(9),
+.tab .pile[data-unplayed='6'] .card:nth-child(10) {
     top: 36em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(9),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(10),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(11) {
+.tab .pile[data-unplayed='2'] .card:nth-child(9),
+.tab .pile[data-unplayed='4'] .card:nth-child(10),
+.tab .pile[data-unplayed='6'] .card:nth-child(11) {
     top: 42em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(10),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(11),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(12) {
+.tab .pile[data-unplayed='2'] .card:nth-child(10),
+.tab .pile[data-unplayed='4'] .card:nth-child(11),
+.tab .pile[data-unplayed='6'] .card:nth-child(12) {
     top: 48em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(11),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(12),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(13) {
+.tab .pile[data-unplayed='2'] .card:nth-child(11),
+.tab .pile[data-unplayed='4'] .card:nth-child(12),
+.tab .pile[data-unplayed='6'] .card:nth-child(13) {
     top: 54em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(12),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(13),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(14) {
+.tab .pile[data-unplayed='2'] .card:nth-child(12),
+.tab .pile[data-unplayed='4'] .card:nth-child(13),
+.tab .pile[data-unplayed='6'] .card:nth-child(14) {
     top: 60em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(13),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(14),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(15) {
+.tab .pile[data-unplayed='2'] .card:nth-child(13),
+.tab .pile[data-unplayed='4'] .card:nth-child(14),
+.tab .pile[data-unplayed='6'] .card:nth-child(15) {
     top: 66em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(14),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(15),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(16) {
+.tab .pile[data-unplayed='2'] .card:nth-child(14),
+.tab .pile[data-unplayed='4'] .card:nth-child(15),
+.tab .pile[data-unplayed='6'] .card:nth-child(16) {
     top: 72em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(15),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(16),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(17) {
+.tab .pile[data-unplayed='2'] .card:nth-child(15),
+.tab .pile[data-unplayed='4'] .card:nth-child(16),
+.tab .pile[data-unplayed='6'] .card:nth-child(17) {
     top: 78em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(16),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(17),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(18) {
+.tab .pile[data-unplayed='2'] .card:nth-child(16),
+.tab .pile[data-unplayed='4'] .card:nth-child(17),
+.tab .pile[data-unplayed='6'] .card:nth-child(18) {
     top: 84em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(17),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(18),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(19) {
+.tab .pile[data-unplayed='2'] .card:nth-child(17),
+.tab .pile[data-unplayed='4'] .card:nth-child(18),
+.tab .pile[data-unplayed='6'] .card:nth-child(19) {
     top: 90em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(18),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(19),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(20) {
+.tab .pile[data-unplayed='2'] .card:nth-child(18),
+.tab .pile[data-unplayed='4'] .card:nth-child(19),
+.tab .pile[data-unplayed='6'] .card:nth-child(20) {
     top: 96em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(19),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(20),
-.pile-slots .pile[data-unplayed='6'] .card:nth-child(21) {
+.tab .pile[data-unplayed='2'] .card:nth-child(19),
+.tab .pile[data-unplayed='4'] .card:nth-child(20),
+.tab .pile[data-unplayed='6'] .card:nth-child(21) {
     top: 102em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(20),
-.pile-slots .pile[data-unplayed='4'] .card:nth-child(21) {
+.tab .pile[data-unplayed='2'] .card:nth-child(20),
+.tab .pile[data-unplayed='4'] .card:nth-child(21) {
     top: 108em;
     left: 0;
 }
 
-.pile-slots .pile[data-unplayed='2'] .card:nth-child(21) {
+.tab .pile[data-unplayed='2'] .card:nth-child(21) {
     top: 114em;
     left: 0;
+}
+
+/* Disable Grammarly */
+grammarly-card {
+    display: none;
 }
