@@ -44,7 +44,6 @@ onAuthStateChanged(auth, async (user) => {
         console.log("getting the collection reference to display current high score: ", !!docRef);
 
         //Same thing but for the game's leaderboard 
-        //FOR EVERYONE TO CHANGE - "snakeLeaderboard" to whatever your game's leaderboard is
         const docRef1 = doc(db, "flappyBatLeaderboard", uid);
         console.log("getting the doc reference for flappy bat leaderboard: ", !!docRef1);
 
@@ -64,7 +63,6 @@ onAuthStateChanged(auth, async (user) => {
             console.log("User requested to submit score");
             
             //Getting the current score the user has from local storage
-            //FOR EVERYONE - CHANGE "currentScoreSnake" TO WHAT YOU HAVE YOUR CURRENT SCORE SAVED IN STORAGE AS
             newHighScore = Number(localStorage.getItem("currentScoreFlappyBat"));
             console.log("New score to be added: ", newHighScore);
         
@@ -72,7 +70,6 @@ onAuthStateChanged(auth, async (user) => {
                 if (docSnap.exists()) {
                     console.log("Document data:", docSnap.data()["flappyBat"]);
                     //Getting the current high score in the database
-                    //FOR EVERYONE - change "snake" to your game as written in the userScores collection
                     currHighScore = docSnap.data()["flappyBat"]; 
         
                     //Updatting and displaying the new high score if the one currently in the database is lower
@@ -81,7 +78,6 @@ onAuthStateChanged(auth, async (user) => {
                         console.log("High score is being updated");
 
                         //Using "merge" to add the new data to the respective documents; not doing so would overwrite everything
-                        //FOR EVERYONE TO CHANGE - change snake to your game name as written in the document
                         await setDoc(docRef, { flappyBat: newHighScore }, { merge: true }); 
                         await setDoc(docRef1, { flappyBat: newHighScore }, { merge: true });
                         window.alert("New high score!");
