@@ -31,6 +31,7 @@ console.log("firestore initialized: ", !!db);
 
 var currHighScore;
 var newHighScore;
+var difficulty;
 
 //Checking the current state of the current user
 onAuthStateChanged(auth, async (user) => {
@@ -46,7 +47,7 @@ onAuthStateChanged(auth, async (user) => {
         //Same thing but for the game's leaderboard 
         //FOR EVERYONE TO CHANGE - "snakeLeaderboard" to whatever your game's leaderboard is
         const docRef1 = doc(db, "donutLeaderboard", uid);
-        console.log("getting the doc reference for flappy bat leaderboard: ", !!docRef1);
+        console.log("getting the doc reference for donut leaderboard: ", !!docRef1);
 
         //Getting the document
         const docSnap = await getDoc(docRef);
@@ -55,9 +56,21 @@ onAuthStateChanged(auth, async (user) => {
         //If the document exists, when the user first logs in, show their current high score
         if (docSnap.exists()) {
             console.log("Current score for", uid, ":", docSnap.data()["donutEasy"]);
-            currHighScore = docSnap.data()["donutEasy"];
-            highScore.innerHTML = currHighScore;
+            difficulty = Number(localStorage.getItem("MineSweepDifficulty"));
+
+            if (difficulty === 0) {
+                currHighScore = docSnap.data()["donutEasy"];
+            }
+            else if (difficulty === 1) {
+                currHighScore = docSnap.data()["donutMedium"];
+            }
+            else {
+                currHighScore = docSnap.data()["donutHard"];
+            }
+            
+            highScore.innerHTML = Math.floor(currHighScore / 60) + ":" + String(currHighScore % 60).padStart(2, '0');
         }
+    
     
         //When the user presses the submit score button...
         submitScore.addEventListener("click", async function() {
@@ -66,6 +79,7 @@ onAuthStateChanged(auth, async (user) => {
             //Getting the current score the user has from local storage
             //FOR EVERYONE - CHANGE "currentScoreSnake" TO WHAT YOU HAVE YOUR CURRENT SCORE SAVED IN STORAGE AS
             newHighScore = Number(localStorage.getItem("currentScoreMineSweep"));
+            difficulty = Number(localStorage.getItem("MineSweepDifficulty"));
             console.log("New score to be added: ", newHighScore);
         
             try{
@@ -73,8 +87,15 @@ onAuthStateChanged(auth, async (user) => {
                     console.log("Document data:", docSnap.data()["donutEasy"]);
                     //Getting the current high score in the database
                     //FOR EVERYONE - change "snake" to your game as written in the userScores collection
-                    currHighScore = docSnap.data()["donutEasy"]; 
-        
+                    if (difficulty === 0) {
+                        currHighScore = docSnap.data()["donutEasy"];
+                    }
+                    else if (difficulty === 1) {
+                        currHighScore = docSnap.data()["donutMedium"];
+                    }
+                    else {
+                        currHighScore = docSnap.data()["donutHard"];
+                    }        
                     //Updatting and displaying the new high score if the one currently in the database is lower
                     if(newHighScore < currHighScore || currHighScore === 0)
                     {
@@ -82,9 +103,17 @@ onAuthStateChanged(auth, async (user) => {
 
                         //Using "merge" to add the new data to the respective documents; not doing so would overwrite everything
                         //FOR EVERYONE TO CHANGE - change snake to your game name as written in the document
-                        await setDoc(docRef, { donutEasy: newHighScore }, { merge: true }); 
-                        await setDoc(docRef1, { donutEasy: newHighScore }, { merge: true });
-                        highScore.innerHTML = newHighScore;
+                        if (difficulty === 0) {
+                            await setDoc(docRef, { donutEasy: newHighScore }, { merge: true }); 
+                            await setDoc(docRef1, { donutEasy: newHighScore }, { merge: true });                        }
+                        else if (difficulty === 1) {
+                            await setDoc(docRef, { donutMedium: newHighScore }, { merge: true }); 
+                            await setDoc(docRef1, { donutMedium: newHighScore }, { merge: true });                        }
+                        else {
+                            await setDoc(docRef, { donutHard: newHighScore }, { merge: true }); 
+                            await setDoc(docRef1, { donutHard: newHighScore }, { merge: true });                        } 
+                        
+                        highScore.innerHTML = Math.floor(newHighScore / 60) + ":" + String(newHighScore % 60).padStart(2, '0');
                     }
                     else{
                         window.alert("Score isn't high enough");

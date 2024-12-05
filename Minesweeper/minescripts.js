@@ -1,4 +1,4 @@
-    /***********Handle Themes**********/
+  /***********Handle Themes**********/
     let cookie = document.cookie;
     console.log(cookie);
 
@@ -34,6 +34,7 @@
     let menuToggle = true; // Is the menu showing?
     let flagOn = false; // Does the user have flags turned on?
     let clearCount = 0; // Counts squares clicked
+    let diffInt = 0; // 0 for easy, 1 for medium, 2 for hard
 
     const sec = document.getElementById("seconds");
     const min = document.getElementById("minutes");
@@ -147,6 +148,7 @@
     // Menu button functions
     function easyBoard() {
         console.log("Easy clicked");
+        diffInt = 0;
         rows = 10;
         cols = 10;
         bombCount = 10;
@@ -160,6 +162,7 @@
 
     function medBoard() {
         console.log("Medium clicked");
+        diffInt = 1;
         rows = 16;
         cols = 16;
         bombCount = 32;
@@ -173,6 +176,7 @@
 
     function hardBoard() {
         console.log("Hard clicked");
+        diffInt = 2;
         rows = 20;
         cols = 20;
         bombCount = 60;
@@ -446,6 +450,7 @@
 
     function win() {
         localStorage.setItem("currentScoreMineSweep", minCnt * 60 + secCnt); /* Store score */
+        localStorage.setItem("MineSweepDifficulty", diffInt); /* Store difficulty */
         clearInterval(intervalId);
         winMessage.style.display = "flex";
         finalTime.innerHTML = minCnt + ":" + String(secCnt).padStart(2, '0');
