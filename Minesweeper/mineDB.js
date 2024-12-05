@@ -24,6 +24,9 @@ const auth = getAuth();
 //Getting the HTML elements that contain the button and showing the high score respectively
 const submitScore = document.getElementById("submit-score");
 const highScore = document.getElementById("high-score");
+const easyButton = document.getElementById("easy");
+const medButton = document.getElementById("medium");
+const hardButton = document.getElementById("hard");
 
 //Checking if the firebase application and the firestore database has been gotten
 console.log("firebase app initialized: ", app.name);
@@ -71,6 +74,20 @@ onAuthStateChanged(auth, async (user) => {
             highScore.innerHTML = Math.floor(currHighScore / 60) + ":" + String(currHighScore % 60).padStart(2, '0');
         }
     
+        easyButton.addEventListener("click", async function() {
+            currHighScore = docSnap.data()["donutEasy"];
+            highScore.innerHTML = Math.floor(currHighScore / 60) + ":" + String(currHighScore % 60).padStart(2, '0');
+        });
+
+        medButton.addEventListener("click", async function() {
+            currHighScore = docSnap.data()["donutMedium"];
+            highScore.innerHTML = Math.floor(currHighScore / 60) + ":" + String(currHighScore % 60).padStart(2, '0');
+        });
+
+        hardButton.addEventListener("click", async function() {
+            currHighScore = docSnap.data()["donutHard"];
+            highScore.innerHTML = Math.floor(currHighScore / 60) + ":" + String(currHighScore % 60).padStart(2, '0');
+        });
     
         //When the user presses the submit score button...
         submitScore.addEventListener("click", async function() {
