@@ -8,8 +8,8 @@
 5. If you like your score, you can hit the "submit score" button on the game to save your new high score.
 6. You can navigate between the home page to check the leaderboards as well as the other games. 
 
-Here is a test user account if you don't want to create your own account: 
-email: test@gmail.com
+Here is a test user account if you don't want to create your own account: <br />
+email: test@gmail.com <br />
 password: hithere!
 
 You can also change the theme of the website by hovering over the cog in the top right corner of the application. The theme changes will be carried over as well to the other games (with the exception of Solitaire).
