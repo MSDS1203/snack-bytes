@@ -1,6 +1,6 @@
 # Snack Bytes 
 
-Steps to Run the Application
+### Steps to Run the Application
 1. Open the login.html file with Live Server or Five Server extension in VS code (or an equivalent for other IDEs)
 2. Log in/create an account on the login page. If you create an account, you will automatically be logged in.
 3. Click on a leaderboard for any game to see the current high scores (and see if your high score is up there)
