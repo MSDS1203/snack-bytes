@@ -122,7 +122,8 @@ body {
 
 #submit-score,
 #home,
-#replay {
+#replay,
+#theme {
     background-color: black;
     color: yellow;
     border: none;
