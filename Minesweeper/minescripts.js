@@ -443,9 +443,13 @@
             
         }
 
+        // delay menu for one second
+        setTimeout(gameOverDisplay, 1000);
+    }
+
+    function gameOverDisplay() {
         gameOverMessage.style.display = "flex";
         finalBombs.innerHTML = bombCount;
-
     }
 
     function win() {
