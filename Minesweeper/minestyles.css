@@ -273,3 +273,45 @@ h1 {
 .dark-mode #flag-text {
     color: #BFECFF;
 }
+
+.candy #main-h1 {
+    background-color: lightgreen;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.candy #flag-text {
+    background-color: #f691af;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.candy #timer {
+    background-color: lightgreen;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.snakeCupcake #main-h1 {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.snakeCupcake #flag-text {
+    background-color: #f691af;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.snakeCupcake #timer {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.snakeCupcake #home3,
+.snakeCupcake #replay3 {
+    background-color: #fff;
+}
+
