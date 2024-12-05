@@ -174,12 +174,19 @@ solitaireLBButton.addEventListener("click", async function() {
   if (solitaireLBButton.innerHTML == "Leaderboard") {
     solitaireLBButton.innerHTML = "Hide";
     renameButtons("Solitaire");
-    const q = query(collection(db, "solitaireLeaderboard"), orderBy("solitaire", "desc"), limit(10));
+    const q = query(collection(db, "solitaireLeaderboard"), orderBy("solitaire"), limit(10));
     const querySnapshot = await getDocs(q);
     const solitaireScores = [];
     querySnapshot.forEach((doc) => {
       if (doc.data()["solitaire"] > 0) {
-        var newLine = (doc.data()["username"]).concat(": ", doc.data()["solitaire"]); 
+        var totalSeconds = doc.data()["solitaire"];
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = totalSeconds % 60;
+        if (seconds < 10){
+          seconds = "0" + seconds;
+        }
+
+        var newLine = (doc.data()["username"]).concat(" - ", minutes, ":", seconds); 
         solitaireScores.push(newLine);
       }
     });
