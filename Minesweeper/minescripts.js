@@ -266,7 +266,7 @@
         square.style.width = "calc(" + 80 / cols + "vh - 5px)";
         square.style.height = "calc(" + 80 / rows + "vh - 5px)";
         square.style.lineHeight = "calc(" + 80 / rows + "vh - 5px)";
-        square.style.fontSize = "calc(" + 80 / rows + "vh - 20px)";
+        square.style.fontSize = "calc(" + 80 / rows + "vh - 5px)";
 
         // First square
         square.addEventListener("click", clickSquare);
