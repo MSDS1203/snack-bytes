@@ -153,7 +153,9 @@ window.onresize = function (event) {
 
 const home = d.getElementById("home");
 const replay = d.getElementById("replay");
+const theme = d.getElementById("theme");
 home.addEventListener("click", goHome);
+theme.addEventListener("click", changeTheme);
 
 // ### FUNCTIONS ###
 
@@ -161,6 +163,10 @@ home.addEventListener("click", goHome);
 function goHome() {
     console.log("home");
     window.location.href = "../home.html";
+}
+
+function changeTheme() {
+    d.getElementById("card").style.backgroundImage = "url('blueBack.png')";
 }
 
 // create deck
